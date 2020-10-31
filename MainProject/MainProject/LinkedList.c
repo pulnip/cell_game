@@ -14,7 +14,7 @@ int appendCell(const Cell* const _pCell){
     tail=newNode;
 
     if(head==NULL){
-        head=newNode;
+        head=tail;
     }
 }
 
@@ -22,17 +22,20 @@ int destroyCell(const Cell* const _pCell){
     Node* aheadNode=NULL;
     Node* rmNode=head;
 
-    while(_pCell==rmNode->pCell){
-        aheadNode=rmNode;
-        rmNode=rmNode->next;
-        if(rmNode==NULL) break;
-    }
+    if(head==NULL){
+        while(_pCell!=rmNode->pCell){
+            aheadNode=rmNode;
+            rmNode=rmNode->next;
+            if(rmNode==NULL) break;
+        }
 
-    if(rmNode!=NULL){
-        aheadNode->next=rmNode->next;
-        free(rmNode);
+        if(rmNode!=NULL){
+            aheadNode->next=rmNode->next;
+            free(rmNode);
 
-        return 0;
+            return 0;
+        }
+        else return 1;
     }
     else return 1;
 }
