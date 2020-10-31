@@ -1,7 +1,7 @@
 #include "header.h"
 
 int OnStart() {
-	for (int i = 0; i < ProtoCellNumber; i++) {
+	for (int i = 0; i < PROTO_CELL_NUMBER; i++) {
 		UserAppend(CreateCell()); //유저리스트추가(셀생성())
 		ComputerAppend(CreateCell()); // 컴퓨터리스트추가((셀생성))
 	}

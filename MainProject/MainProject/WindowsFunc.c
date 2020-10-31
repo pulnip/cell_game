@@ -3,7 +3,7 @@
 int setConsoleDefault(){
     hStdOut=GetStdHandle(STD_OUTPUT_HANDLE);
     SMALL_RECT rectWindowSize={
-        0, 0, ConsoleWidth, ConsoleHeight
+        0, 0, CONSOLE_WIDTH, CONSOLE_HEIGHT
     };
 
     COORD coord={1, 1};
@@ -24,7 +24,7 @@ void getKBInput(){
 }
 
 void drawMap(){
-    CHAR_INFO screen[ConsoleWidth*ConsoleHeight];
+    CHAR_INFO screen[CONSOLE_WIDTH*CONSOLE_HEIGHT];
     
-    const size_t screenSize=ConsoleWidth*ConsoleHeight;
+    const size_t screenSize=CONSOLE_WIDTH*CONSOLE_HEIGHT;
 }

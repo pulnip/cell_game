@@ -53,12 +53,12 @@ typedef struct _Pixel{
 // <Global Var>
 const int defaultHP=10;
 
-#define ProtoCellNumber 20
-#define ConsoleWidth 120
-#define ConsoleHeight 40
+#define PROTO_CELL_NUMBER 20
+#define CONSOLE_WIDTH 120
+#define CONSOLE_HEIGHT 40
 HANDLE hStdOut;
 CONSOLE_SCREEN_BUFFER_INFO csbi;
-Pixel map[ConsoleWidth][ConsoleHeight];
+Pixel map[CONSOLE_WIDTH][CONSOLE_HEIGHT];
 
 List userCell, comCell;
 
