@@ -1,5 +1,10 @@
 {
-    "files.associations": {
-        "*.rh": "cpp"
+    "files.autoGuessEncoding": true,
+    "C_Cpp.default.cStandard": "c11",
+    
+    "[c]": {
+        "editor.wordBasedSuggestions": false,
+        "editor.suggest.insertMode": "replace",
+        "editor.semanticHighlighting.enabled": true,
     }
 }
