@@ -55,6 +55,8 @@ const int defaultHP=10;
 
 #define ConsoleWidth 120
 #define ConsoleHeight 40
+HANDLE hStdOut;
+CONSOLE_SCREEN_BUFFER_INFO csbi;
 Pixel map[ConsoleWidth][ConsoleHeight];
 
 List userCell, comCell;
