@@ -140,8 +140,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="base.c" />
-    <ClCompile Include="getData.c" />
+    <ClCompile Include="Game.c" />
     <ClCompile Include="source.c" />
+    <ClCompile Include="WindowsFunc.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header.h" />

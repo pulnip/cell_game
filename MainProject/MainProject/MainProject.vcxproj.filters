@@ -21,7 +21,10 @@
     <ClCompile Include="source.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="getData.c">
+    <ClCompile Include="WindowsFunc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
