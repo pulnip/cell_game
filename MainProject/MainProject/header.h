@@ -31,10 +31,15 @@ typedef struct _Node{
     Cell* pCell;
 } Node;
 
-int initList();
-int appendNode(Cell*);
-int destroyNode(Cell*);
-size_t getListLen();
+typedef struct _List{
+    Node* head;
+    Node* tail;
+} List;
+
+int initList(List*);
+int appendNode(Cell*, List*);
+int destroyNode(Cell*, List*);
+size_t getListLen(List*);
 // </Linked List>
 
 typedef unsigned char SmallSize_t;
@@ -52,7 +57,7 @@ const int defaultHP=10;
 #define ConsoleHeight 40
 Pixel map[ConsoleWidth][ConsoleHeight];
 
-Node *head, *tail;
+List userCell, comCell;
 
 KeyState keys[0x100];
 

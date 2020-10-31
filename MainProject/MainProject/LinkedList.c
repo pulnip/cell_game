@@ -1,28 +1,28 @@
 #include "header.h"
 
-int initList(){
-    head=NULL;
-    tail=NULL;
+int initList(List* list){
+    list->head=NULL;
+    list->tail=NULL;
 }
 
-int appendCell(const Cell* const _pCell){
+int appendCell(const Cell* const _pCell, List* list){
     Node* newNode=(Node*)malloc(sizeof(Node));
     newNode->pCell=_pCell;
     newNode->next=NULL;
 
-    tail->next=newNode;
-    tail=newNode;
+    list->tail->next=newNode;
+    list->tail=newNode;
 
-    if(head==NULL){
-        head=tail;
+    if(list->head==NULL){
+        list->head=list->tail;
     }
 }
 
-int destroyCell(const Cell* const _pCell){
+int destroyCell(const Cell* const _pCell, List* list){
     Node* aheadNode=NULL;
-    Node* rmNode=head;
+    Node* rmNode=list->head;
 
-    if(head==NULL){
+    if(list->head==NULL){
         while(_pCell!=rmNode->pCell){
             aheadNode=rmNode;
             rmNode=rmNode->next;
@@ -40,14 +40,14 @@ int destroyCell(const Cell* const _pCell){
     else return 1;
 }
 
-size_t getListLen(){
-    if(head==NULL){
+size_t getListLen(List* list){
+    if(list->head==NULL){
         return 0;
     }
     else {
         size_t len=1;
-        Node* temp=head;
-        while(temp!=tail){
+        Node* temp=list->head;
+        while(temp!=list->tail){
             temp=temp->next;
             len+=1;
         }
