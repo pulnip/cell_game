@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 #include <Windows.h>
 
 typedef unsigned char Bool;
@@ -52,10 +53,16 @@ const int defaultHP=10;
 Pixel map[ConsoleWidth][ConsoleHeight];
 
 Node *head, *tail;
+
+KeyState keys[0x100];
+
+Bool game_over;
 // </Global Var>
 
 
 int OnStart();
-int OnUpdate();
+int OnUpdate(time_t ElapsedTime);
 int OnDestroy();
+
 void getKBInput();
+void drawMap();
