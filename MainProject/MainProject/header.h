@@ -53,6 +53,7 @@ typedef struct _Pixel{
 // <Global Var>
 const int defaultHP=10;
 
+#define ProtoCellNumber 20
 #define ConsoleWidth 120
 #define ConsoleHeight 40
 Pixel map[ConsoleWidth][ConsoleHeight];
