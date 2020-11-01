@@ -31,18 +31,20 @@ int OnStart(){
         setInfra() &
         initUser() &
         initComputer()
+        // add ...
     ) ){
         return 1;
     }
     return 0;
 }
 
-int OnUpdate(){
+int OnUpdate(size_t ElapsedTime){
     if( !(
         FastEscape() &
         updateUser() &
         updateComputer() &
         updateConsole()
+        // add ...
     ) ){
         return 1;
     }
@@ -53,4 +55,5 @@ int Destroy(){
     showResult();
     deleteData();
     waitUntilQuit();
+    // add ...
 }

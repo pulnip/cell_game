@@ -42,6 +42,7 @@ int initList(List*);
 int appendNode(Cell*, List*);
 int destroyNode(Cell*, List*);
 size_t getListLen(List*);
+void destroyList(List*);
 // </Linked List>
 
 typedef unsigned char SmallSize_t;

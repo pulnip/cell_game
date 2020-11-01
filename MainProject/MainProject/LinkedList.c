@@ -55,3 +55,18 @@ size_t getListLen(List* list){
         return len;
     }
 }
+
+void destroyList(List* list){
+    while( (list->head)==(list->tail) ){
+        Node* temp=list->head->next;
+        free(list->head->pCell);
+        free(list->head);
+        list->head=temp;
+    }
+
+    list->tail==NULL;
+    free(list->head->pCell);
+    free(list->head);
+
+    free(list);
+}
