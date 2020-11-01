@@ -105,6 +105,22 @@ int OnStart();
 int OnUpdate(time_t ElapsedTime);
 int OnDestroy();
 
+int initUser();
+int initComputer();
+
+int updateUser();
+int updateComputer();
+int updateConsole();
+
+int showResult();
+int deleteData();
+int waitUntilQuit();
+
+// <infra.c>
+int setInfra();
+int FastEscape();
+int setConsoleDefault();
 void getKBInput();
 void filterPixelToCI();
 void drawMap();
+// </infra.c>

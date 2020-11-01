@@ -1,5 +1,14 @@
 #include "header.h"
 
+int setInfra(){
+    setConsoleDefault();
+}
+
+int FastEscape(){
+    if( GetKeyState(VK_ESCAPE)&0x8000 ) return 1;
+    return 0;
+}
+
 int setConsoleDefault(){
     hStdOut=GetStdHandle(STD_OUTPUT_HANDLE);
     SMALL_RECT rectWindowSize={
