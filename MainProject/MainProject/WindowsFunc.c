@@ -24,9 +24,10 @@ void getKBInput(){
         keys[i].bToggled=tmpKey&0x1;
 
         keys[i].bPressing=
-            keys[i].bPressed&(!keys[i].bToggled^lastState.bToggled);
-        // pressed & toggled not changing 
-
+            keys[i].bPressed & ( !keys[i].bToggled ^ lastState.bToggled );
+        // pressing = pressed & toggled not changing
+        
+        // all A, B; !(A^B) == (!A)^B
     }
 }
 
