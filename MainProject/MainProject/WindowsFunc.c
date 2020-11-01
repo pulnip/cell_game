@@ -23,8 +23,47 @@ void getKBInput(){
     }
 }
 
+void filterPixelToCI(){
+    for(int i=0; i<CONSOLE_HEIGHT; ++i){
+        for(int j=0; j<CONSOLE_WIDTH; ++i){
+
+            Pixel const unit=map[i][j];
+            CHAR_INFO* const pMapPoint=&ciMap[CONSOLE_WIDTH*i+j];
+
+            if(unit.Point){
+                pMapPoint->Char.AsciiChar='P';
+                pMapPoint->Attributes=FG_BLUE|BG_WHITE;
+            }
+
+            if(unit.Food){
+                pMapPoint->Char.AsciiChar='+';
+                pMapPoint->Attributes=FG_GREEN|BG_BLACK;
+            }
+
+            if(unit.Cell){
+                pMapPoint->Char.AsciiChar='@';
+                if(unit.Cell==UserCell) {
+                    pMapPoint->Attributes=FG_WHITE|BG_BLACK;
+                } else if(unit.Cell==EnemyCell) {
+                    pMapPoint->Attributes=FG_RED|BG_BLACK;
+                }
+            }
+        }
+    }
+}
+
 void drawMap(){
-    CHAR_INFO screen[CONSOLE_WIDTH*CONSOLE_HEIGHT];
-    
-    const size_t screenSize=CONSOLE_WIDTH*CONSOLE_HEIGHT;
+    COORD mapSize={CONSOLE_WIDTH, CONSOLE_HEIGHT};
+    COORD coord={0, 0};
+    SMALL_RECT WriteRegion={ //Left, Top. Right, Bottom
+        0, 0,
+        CONSOLE_WIDTH-1,
+        CONSOLE_HEIGHT-1
+    };
+
+    WriteConsoleOutputA(
+        hStdOut,
+        ciMap, mapSize, coord,
+        &WriteRegion
+    );
 }
