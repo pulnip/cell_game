@@ -51,9 +51,9 @@ int OnUpdate(size_t ElapsedTime){
     return 0;
 }
 
-int Destroy(){
+int OnDestroy(){
     showResult();
     deleteData();
-    waitUntilQuit();
+    waitUntilKeyInput();
     // add ...
 }

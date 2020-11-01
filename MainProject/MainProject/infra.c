@@ -2,6 +2,12 @@
 
 int setInfra(){
     setConsoleDefault();
+
+    initMapToStartScreen();
+    drawScreen();
+    // add ...
+
+    waitUntilKeyInput();
 }
 
 int FastEscape(){
@@ -40,6 +46,18 @@ void getKBInput(){
     }
 }
 
+int waitUntilKeyInput(){
+    Bool isAnyKeyPressed=False;
+    do{
+        getKBInput();
+        isAnyKeyPressed=False;
+
+        for(int i=0; i<0xff; ++i){
+            isAnyKeyPressed |= keys[i].bPressed;
+        }
+    } while(!isAnyKeyPressed);
+}
+
 void filterPixelToCI(){
     for(int i=0; i<CONSOLE_HEIGHT; ++i){
         for(int j=0; j<CONSOLE_WIDTH; ++i){
@@ -69,7 +87,7 @@ void filterPixelToCI(){
     }
 }
 
-void drawMap(){
+void drawScreen(){
     COORD mapSize={CONSOLE_WIDTH, CONSOLE_HEIGHT};
     COORD coord={0, 0};
     SMALL_RECT WriteRegion={ //Left, Top. Right, Bottom

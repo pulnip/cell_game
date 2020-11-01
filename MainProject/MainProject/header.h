@@ -115,7 +115,7 @@ int updateConsole();
 
 int showResult();
 int deleteData();
-int waitUntilQuit();
+int waitUntilKeyInput();
 
 // <infra.c>
 int setInfra();
@@ -123,5 +123,5 @@ int FastEscape();
 int setConsoleDefault();
 void getKBInput();
 void filterPixelToCI();
-void drawMap();
+void drawScreen();
 // </infra.c>
