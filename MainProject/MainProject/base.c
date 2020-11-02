@@ -28,8 +28,8 @@ int main(void){
 
 int OnStart(){
     if( !(
-        setInfra() &
-        initUser() &
+        setInfra() ||
+        initUser() ||
         initComputer()
         // add ...
     ) ){
@@ -40,9 +40,9 @@ int OnStart(){
 
 int OnUpdate(size_t ElapsedTime){
     if( !(
-        FastEscape() &
-        updateUser() &
-        updateComputer() &
+        FastEscape() ||
+        updateUser() ||
+        updateComputer() ||
         updateConsole()
         // add ...
     ) ){
