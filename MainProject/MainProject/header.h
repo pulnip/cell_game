@@ -9,9 +9,10 @@ typedef unsigned char Bool;
 #endif
 
 typedef struct _KeyState{
-    Bool bPressed;
-    Bool bPressing;
+    Bool bKeyDown;
+    Bool bKeyUp;
 
+    Bool bPressed;
     Bool bToggled;
 } KeyState;
 
