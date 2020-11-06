@@ -1,4 +1,7 @@
-#include "header.h"
+#include "base.h"
+
+Pixel map[CONSOLE_HEIGHT][CONSOLE_WIDTH];
+Bool game_over;
 
 int main(void){
     if( !OnStart() ){
