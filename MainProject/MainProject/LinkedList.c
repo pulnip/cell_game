@@ -1,4 +1,5 @@
-#include "header.h"
+#include "base.h"
+#include "LinkedList.h"
 
 int initList(List* list){
     list->head=NULL;

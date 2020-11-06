@@ -1,4 +1,5 @@
-#include "header.h"
+#include "base.h"
+#include "Infra.h"
 
 int setInfra(){
     setConsoleDefault();
