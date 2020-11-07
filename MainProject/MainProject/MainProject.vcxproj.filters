@@ -18,18 +18,24 @@
     <ClCompile Include="base.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WindowsFunc.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="infra.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LinkedList.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="header.h">
+    <ClInclude Include="base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Infra.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
