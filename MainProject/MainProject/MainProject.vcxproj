@@ -141,11 +141,13 @@
   <ItemGroup>
     <ClCompile Include="base.c" />
     <ClCompile Include="Game.c" />
-    <ClCompile Include="source.c" />
-    <ClCompile Include="WindowsFunc.c" />
+    <ClCompile Include="infra.c" />
+    <ClCompile Include="LinkedList.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="header.h" />
+    <ClInclude Include="base.h" />
+    <ClInclude Include="Infra.h" />
+    <ClInclude Include="LinkedList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
