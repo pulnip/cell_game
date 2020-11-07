@@ -143,6 +143,7 @@
     <ClCompile Include="Game.c" />
     <ClCompile Include="infra.c" />
     <ClCompile Include="LinkedList.c" />
+    <ClCompile Include="user.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base.h" />
