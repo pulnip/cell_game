@@ -1,6 +1,11 @@
 #include "base.h"
 #include "Infra.h"
 
+HANDLE hStdOut;
+CONSOLE_SCREEN_BUFFER_INFO csbi;
+CHAR_INFO ciMap[CONSOLE_HEIGHT*CONSOLE_WIDTH];
+KeyState keys[0x100];
+
 int setInfra(){
     setConsoleDefault();
 
@@ -36,8 +41,8 @@ void getKBInput(){
         KeyState lastState=keys[i];
         
         short tmpKey=GetKeyState(i);
-        keys[i].bPressed=(tmpKey&0x1000)>>(sizeof(short)-1);
-        keys[i].bToggled=tmpKey&0x1;
+        keys[i].bPressed = (tmpKey&0x1000)>>(sizeof(short)-1);
+        keys[i].bToggled = tmpKey&0x1;
 
         Bool isChanged=
             (lastState.bPressed^keys[i].bPressed) |
