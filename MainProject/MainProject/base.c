@@ -45,7 +45,7 @@ int OnUpdate(size_t ElapsedTime){
     if( !(
         FastEscape() ||
         updateUser() ||
-        updateComputer() ||
+        updateComputer() || 
         updateConsole()
         // add ...
     ) ){
@@ -59,4 +59,9 @@ int OnDestroy(){
     deleteData();
     waitUntilKeyInput();
     // add ...
+}
+
+int updateComputer() {
+    updateMap();
+    //À½...
 }
