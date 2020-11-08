@@ -10,7 +10,10 @@
 
 int initMap(void);
 int updateMap(void);
-int spreadFoodOnMap(void);
-int spreadPointOnMap(void);
+int spreadFood(void);
+int getFoodAmount(void);
+int spreadPoint(void);
+int getPointAmount(void);
+
 
 #endif // __INC_GAME

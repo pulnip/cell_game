@@ -24,13 +24,13 @@ int updateMap(){
     if(getFoodAmount() < MaxFoodRegen){
         spreadFoodOnMap();
     }
-    
+
     if(getPointAmount() < MaxPointRegen){
         spreadPointOnMap();
     }
 }
 
-int spreadFoodOnMap(void){
+int spreadFood(void){
     for(int i=0; i<CONSOLE_HEIGHT; ++i){
         for(int j=0; j<CONSOLE_WIDTH; ++j){
             if(map[i][j].Food + 1 != 0){
@@ -51,9 +51,11 @@ int getFoodAmount(void){
             res += map[i][j].Food;
         }
     }
+
+    return res;
 }
 
-int spreadPointOnMap(void){
+int spreadPoint(void){
     for(int i=0; i<CONSOLE_HEIGHT; ++i){
         for(int j=0; j<CONSOLE_WIDTH; ++j){
             if(map[i][j].Point + 1 != 0){
@@ -74,4 +76,6 @@ int getPointAmount(void){
             res += map[i][j].Point;
         }
     }
+
+    return res;
 }
