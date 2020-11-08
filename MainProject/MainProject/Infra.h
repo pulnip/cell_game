@@ -5,8 +5,6 @@
 #include "base.h"
 #endif
 
-#include <Windows.h>
-
 typedef struct _KeyState{
     Bool bKeyDown;
     Bool bKeyUp;

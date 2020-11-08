@@ -6,9 +6,9 @@ int initList(List* list){
     list->tail=NULL;
 }
 
-int appendCell(const Cell* const _pCell, List* list){
+int appendNode(const pObject const _pObject, List* list){
     Node* newNode=(Node*)malloc(sizeof(Node));
-    newNode->pCell=_pCell;
+    newNode->pData=_pObject;
     newNode->next=NULL;
 
     list->tail->next=newNode;
@@ -19,12 +19,12 @@ int appendCell(const Cell* const _pCell, List* list){
     }
 }
 
-int destroyCell(const Cell* const _pCell, List* list){
+int destroyNode(const pObject const _pObject, List* list){
     Node* aheadNode=NULL;
     Node* rmNode=list->head;
 
     if(list->head==NULL){
-        while(_pCell!=rmNode->pCell){
+        while(_pObject!=rmNode->pData){
             aheadNode=rmNode;
             rmNode=rmNode->next;
             if(rmNode==NULL) break;
@@ -60,13 +60,13 @@ size_t getListLen(List* list){
 void destroyList(List* list){
     while( (list->head)==(list->tail) ){
         Node* temp=list->head->next;
-        free(list->head->pCell);
+        free(list->head->pData);
         free(list->head);
         list->head=temp;
     }
 
     list->tail==NULL;
-    free(list->head->pCell);
+    free(list->head->pData);
     free(list->head);
 
     free(list);

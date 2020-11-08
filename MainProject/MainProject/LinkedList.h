@@ -5,9 +5,11 @@
 #include "base.h"
 #endif
 
+typedef void* pObject;
+
 typedef struct _Node{
     Node* next;
-    Cell* pCell;
+    pObject pData;
 } Node;
 
 typedef struct _List{
@@ -18,8 +20,8 @@ typedef struct _List{
 extern List userCell, comCell;
 
 int initList(List*);
-int appendNode(Cell*, List*);
-int destroyNode(Cell*, List*);
+int appendNode(pObject, List*);
+int destroyNode(pObject, List*);
 size_t getListLen(List*);
 void destroyList(List*);
 
