@@ -53,17 +53,23 @@ extern Pixel map[CONSOLE_HEIGHT][CONSOLE_WIDTH];
 extern Bool game_over;
 // </Global Var>
 
+#define GetRandom(min, max) ( \
+    (rand() % (int)((max)-(min))) + (min) \
+)
+
 int OnStart();
 int OnUpdate(time_t ElapsedTime);
 int OnDestroy();
 
 int setInfra();
+int initGame();
 int initUser();
 int initComputer();
 
 int FastEscape();
 int updateUser();
 int updateComputer();
+int updateGame();
 int updateConsole();
 
 int showResult();

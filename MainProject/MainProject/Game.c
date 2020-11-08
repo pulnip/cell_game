@@ -1,28 +1,77 @@
 #include "base.h"
+#include "Game.h"
 
-int OnStart() {
-	for (int i = 0; i < PROTO_CELL_NUMBER; i++) {
-		UserAppend(CreateCell()); //유저리스트추가(셀생성())
-		ComputerAppend(CreateCell()); // 컴퓨터리스트추가((셀생성))
-	}
+#include <stdlib.h>
+#include <time.h>
+
+int initGame(void){
+    srand(time(NULL));
+    initMap();
+    spreadFoodOnMap();
 }
 
-int OnUpdate(time_t ElapsedTime) {
-	Cycle(); //한사이클
-	CheckFinish(); // 종료조건체크
+int updateGame(void){
+    if(getFoodAmount() < MaxFoodRegen){
+        spreadFoodOnMap();
+    }
 }
 
-int OnDestroy() {
-
+int initMap(){
+    memset(map, 0, sizeof(Pixel)*CONSOLE_HEIGHT*CONSOLE_WIDTH);
 }
 
-int Cylcle() {
-	Basic(); // 가장 기본이 되는 행동 default;
-	if (MeetEnemy == 1) { // 적을 네명이서 둘러쌓았다
-		Destroy(); //cell파괴(삭제할셀,리스트)
-		IncreaseHP(); // 셀의 HP증가(*셀)
-	}
-	if (SelfDivide() == 1) { //분열하기위한 포지션체크, 분열이가능한가
-		Append(CreateCell()); // userAppend or ComputerAppend
-	}
+int updateMap(){
+    if(getFoodAmount() < MaxFoodRegen){
+        spreadFoodOnMap();
+    }
+    
+    if(getPointAmount() < MaxPointRegen){
+        spreadPointOnMap();
+    }
+}
+
+int spreadFoodOnMap(void){
+    for(int i=0; i<CONSOLE_HEIGHT; ++i){
+        for(int j=0; j<CONSOLE_WIDTH; ++j){
+            if(map[i][j].Food + 1 != 0){
+                int p=GetRandom(0, 100);
+                map[i][j].Food+=(
+                    p < FoodGenerateProbability ?
+                    1 : 0
+                );
+            }
+        }
+    }
+}
+
+int getFoodAmount(void){
+    int res=0;
+    for(int i=0; i<CONSOLE_HEIGHT; ++i){
+        for(int j=0; j<CONSOLE_WIDTH; ++j){
+            res += map[i][j].Food;
+        }
+    }
+}
+
+int spreadPointOnMap(void){
+    for(int i=0; i<CONSOLE_HEIGHT; ++i){
+        for(int j=0; j<CONSOLE_WIDTH; ++j){
+            if(map[i][j].Point + 1 != 0){
+                int p=GetRandom(0, 100);
+                map[i][j].Point+=(
+                    p < PointGenerateProbability ?
+                    1 : 0
+                );
+            }
+        }
+    }
+}
+
+int getPointAmount(void){
+    int res=0;
+    for(int i=0; i<CONSOLE_HEIGHT; ++i){
+        for(int j=0; j<CONSOLE_WIDTH; ++j){
+            res += map[i][j].Point;
+        }
+    }
 }
