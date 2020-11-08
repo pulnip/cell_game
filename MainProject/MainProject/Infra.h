@@ -1,3 +1,4 @@
+#ifndef __INC_INFRA
 #define __INC_INFRA
 
 #ifndef __INC_BASE
@@ -51,3 +52,5 @@ int setConsoleDefault();
 void getKBInput();
 void filterPixelToCI();
 void drawScreen();
+
+#endif // __INC_INFRA

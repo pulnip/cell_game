@@ -1,9 +1,12 @@
+#include <Windows.h>
+
 #include "base.h"
 #include "Infra.h"
 
 HANDLE hStdOut;
 CONSOLE_SCREEN_BUFFER_INFO csbi;
 CHAR_INFO ciMap[CONSOLE_HEIGHT*CONSOLE_WIDTH];
+
 KeyState keys[0x100];
 
 int setInfra(){

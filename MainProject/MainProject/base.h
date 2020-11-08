@@ -1,3 +1,4 @@
+#ifndef __INC_BASE
 #define __INC_BASE
 
 #include <stdio.h>
@@ -24,8 +25,12 @@ typedef struct _Pixel{
     SmallSize_t Food;
 } Pixel;
 
+typedef void BEHAVIOUR_t(void);
+typedef void (*pBEHAVIOUR_t)(void);
+typedef void (**DNA_t)(void);
+
 typedef struct _Cell{
-    void (**DNA)(void);
+    DNA_t DNA;
     Coord pos;
     int hp;
     Coord forward;
@@ -64,3 +69,5 @@ int updateConsole();
 int showResult();
 int deleteData();
 int waitUntilKeyInput();
+
+#endif // __INC_BASE

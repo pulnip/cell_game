@@ -1,3 +1,4 @@
+#ifndef __INC_LINKED_LIST
 #define __INC_LINKED_LIST
 
 #ifndef __INC_BASE
@@ -21,4 +22,5 @@ int appendNode(Cell*, List*);
 int destroyNode(Cell*, List*);
 size_t getListLen(List*);
 void destroyList(List*);
-// </Linked List>
+
+#endif //__INC_LINKED_LIST
