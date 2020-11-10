@@ -1,6 +1,7 @@
 #include "CellBehaviours.h"
 
 // <Sensoring>
+
 void seeEnemy(Cell* const pCell){
     Coord const _pos=pCell->pos;
     isCell const EnemyId=3-pCell->id;
@@ -72,6 +73,8 @@ void seeFood(Cell* const pCell){
 }
 
 // </Sensoring>
+
+
 
 BEHAVIOUR_t moveCloser;
 BEHAVIOUR_t moveFurther;

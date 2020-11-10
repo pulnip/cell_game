@@ -25,9 +25,7 @@ typedef struct _Pixel{
     SmallSize_t Food;
 } Pixel;
 
-typedef void BEHAVIOUR_t(Cell*);
-typedef BEHAVIOUR_t* pBEHAVIOUR_t;
-typedef pBEHAVIOUR_t* DNA_t;
+
 
 typedef struct _Cell{
     isCell id;
@@ -36,6 +34,10 @@ typedef struct _Cell{
     int hp;
     Coord forward;
 } Cell;
+
+typedef void (BEHAVIOUR_t)(Cell*);
+typedef BEHAVIOUR_t* pBEHAVIOUR_t;
+typedef pBEHAVIOUR_t* DNA_t; //DNA is Array of pBEHAVIOUR
 
 typedef enum _isCell{
     NoCell   =0,
