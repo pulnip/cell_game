@@ -30,17 +30,18 @@ typedef void (*pBEHAVIOUR_t)(void);
 typedef void (**DNA_t)(void);
 
 typedef struct _Cell{
+    isCell id;
     DNA_t DNA;
     Coord pos;
     int hp;
     Coord forward;
 } Cell;
 
-enum isCell{
+typedef enum _isCell{
     NoCell   =0,
     UserCell =1,
     EnemyCell=2
-};
+}isCell;
 
 // <Global Var>
 #define PROTO_CELL_NUMBER 20
