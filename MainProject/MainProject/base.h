@@ -20,7 +20,7 @@ typedef struct _Coord{
 
 typedef struct _Pixel{
     Bool Cell;
-    // 0: no cell, 1: User cell, 2: Enemy cell
+    // 0: no cell, 1: User cell, 2: CPU cell
     SmallSize_t Point;
     SmallSize_t Food;
 } Pixel;
@@ -40,7 +40,7 @@ typedef struct _Cell{
 typedef enum _isCell{
     NoCell   =0,
     UserCell =1,
-    EnemyCell=2
+    CPUCell=2
 }isCell;
 
 // <Global Var>
