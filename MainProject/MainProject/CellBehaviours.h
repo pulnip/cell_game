@@ -5,24 +5,29 @@
 #include "base.h"
 #endif
 
-typedef void BEHAVIOUR(void);
-
 #define MAX_SIGHT 5
 
-BEHAVIOUR seeEnemy;
-BEHAVIOUR seeFriend;
-BEHAVIOUR seeFood;
+BEHAVIOUR_t seeEnemy;
+BEHAVIOUR_t seeFriend;
+BEHAVIOUR_t seeFood;
 // modify Sight and Distance
 
-BEHAVIOUR moveCloser;
-BEHAVIOUR moveFurther;
+BEHAVIOUR_t moveCloser;
+BEHAVIOUR_t moveFurther;
 // it is about the Sight.
 
-BEHAVIOUR getFoodFromMap;
-BEHAVIOUR getPointFromMap;
-BEHAVIOUR doCannibal;
+BEHAVIOUR_t getFoodFromMap;
+BEHAVIOUR_t getPointFromMap;
+BEHAVIOUR_t doCannibal;
 
-BEHAVIOUR divide;
+BEHAVIOUR_t divide;
 
+#define BEHAVIOUR_NUMBER 8
+pBEHAVIOUR_t const BehaviourList[BEHAVIOUR_NUMBER]={
+    seeEnemy, seeFriend, seeFood,
+    moveCloser, moveFurther,
+    getFoodFromMap, getPointFromMap,
+    doCannibal
+};
 
 #endif // __INC_CELL_BEHAVIOURS

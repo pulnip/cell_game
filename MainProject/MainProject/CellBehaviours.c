@@ -70,14 +70,15 @@ void seeFood(Cell* const pCell){
     pCell->forward.x=FoodPos.x;
     pCell->forward.y=FoodPos.y;
 }
+
 // </Sensoring>
 
-BEHAVIOUR moveCloser;
-BEHAVIOUR moveFurther;
+BEHAVIOUR_t moveCloser;
+BEHAVIOUR_t moveFurther;
 // it is about the Sight.
 
-BEHAVIOUR getFoodFromMap;
-BEHAVIOUR getPointFromMap;
-BEHAVIOUR doCannibal;
+BEHAVIOUR_t getFoodFromMap;
+BEHAVIOUR_t getPointFromMap;
+BEHAVIOUR_t doCannibal;
 
-BEHAVIOUR divide;
+BEHAVIOUR_t divide;

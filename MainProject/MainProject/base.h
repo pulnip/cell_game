@@ -25,9 +25,9 @@ typedef struct _Pixel{
     SmallSize_t Food;
 } Pixel;
 
-typedef void BEHAVIOUR_t(void);
-typedef void (*pBEHAVIOUR_t)(void);
-typedef void (**DNA_t)(void);
+typedef void BEHAVIOUR_t(Cell*);
+typedef BEHAVIOUR_t* pBEHAVIOUR_t;
+typedef pBEHAVIOUR_t* DNA_t;
 
 typedef struct _Cell{
     isCell id;
