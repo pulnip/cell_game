@@ -7,6 +7,8 @@ int initList(List* list){
 }
 
 int appendNode(const pObject const _pObject, List* list){
+    if(_pObject==NULL) return 1;
+
     Node* newNode=(Node*)malloc(sizeof(Node));
     newNode->pData=_pObject;
     newNode->next=NULL;
@@ -17,13 +19,15 @@ int appendNode(const pObject const _pObject, List* list){
     if(list->head==NULL){
         list->head=list->tail;
     }
+
+    return 0;
 }
 
 int destroyNode(const pObject const _pObject, List* list){
     Node* aheadNode=NULL;
     Node* rmNode=list->head;
 
-    if(list->head==NULL){
+    if(list->head!=NULL){
         while(_pObject!=rmNode->pData){
             aheadNode=rmNode;
             rmNode=rmNode->next;
@@ -32,6 +36,7 @@ int destroyNode(const pObject const _pObject, List* list){
 
         if(rmNode!=NULL){
             aheadNode->next=rmNode->next;
+            free(rmNode->pData);
             free(rmNode);
 
             return 0;
