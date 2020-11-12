@@ -22,12 +22,13 @@ BEHAVIOUR_t doCannibal;
 
 BEHAVIOUR_t divide;
 
-#define BEHAVIOUR_NUMBER 8
-pBEHAVIOUR_t const BehaviourList[BEHAVIOUR_NUMBER]={
+#define BEHAVIOUR_NUMBER 9
+pBEHAVIOUR_t const BehaviourList[]={
     seeEnemy, seeFriend, seeFood,
     moveCloser, moveFurther,
     getFoodFromMap, getPointFromMap,
-    doCannibal
+    doCannibal,
+    divide
 };
 
 #endif // __INC_CELL_BEHAVIOURS

@@ -9,7 +9,7 @@ void seeEnemy(Cell* const pCell){
     for(int _y=_pos.y-MAX_SIGHT, _x=0; _y<=_pos.y-MAX_SIGHT; ++_y){
         if( (0<=_y) && (_y<CONSOLE_HEIGHT) )
         {
-            for(_x=_pos.x-MAX_SIGHT      ; _x<=_pos.x-MAX_SIGHT; ++_x){
+            for(_x=_pos.x-MAX_SIGHT  ; _x<=_pos.x-MAX_SIGHT; ++_x){
                 if( (_x<0)||(_x>=CONSOLE_WIDTH) )
                 {
                     if(map[_y][_x].Cell==EnemyId){
@@ -75,6 +75,11 @@ void seeFood(Cell* const pCell){
 // </Sensoring>
 
 
+// <movement>
+
+void moveCloser(Cell* const pCell){
+
+}
 
 BEHAVIOUR_t moveCloser;
 BEHAVIOUR_t moveFurther;
