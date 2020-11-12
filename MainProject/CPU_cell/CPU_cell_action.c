@@ -1,10 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "base.h"
+#include "Infra.h"
+#include "CellBehaviours.h"
+#include "LinkedList.h"
+#include "Game.h"
+#include "CPU_cell_notice"
 
 //질문은 맨 위에 써 놓을께
 //#####아 그리고 생각이 난 건데 우리 맵에 대한 공통적인 파일도 만들어야 하지 않을까#####
-//### 만들어야 한다고 생각하긴 해 난 아직도 이 게임이 어떻게 돌아갈지 예상을 못하겠어 ###
+//공통 맵 파일 하나에 각자 업데이트 할 중간 단계의 맵 파일을 하나 씩 달고 있는 게 좋을 듯
+//그러니까
+//유저세포 맵 -- 통합 맵 -- CPU세포 맵 이런 식으로 말이지
+
 
 
 
@@ -27,5 +36,40 @@
 
 //이렇게 세트에 따라서 이제 실제로 행동을 해야겠지
 //컴퓨터세포의 행동 함수를 만들어야지
-//컴퓨터가 [이동]하는 것을 담당하는 행동함수
-//컴퓨터가 
+//컴퓨터세포가 [이동]하는 것을 담당하는 행동함수
+//컴퓨터세포가 유전 알고리즘에 관해 행동하는 함수(자세하게는 모르겠다)
+
+struct Coord;
+struct Pixel;
+struct Cell;
+
+
+void Get_User_Cell_information(int )
+{
+	//유저세포에서 정보를 가져온다
+	//상대 유저 세포의 
+	int Distinguish_Pixel;
+
+	if (Pixel.no_cell == True)
+	{
+		Distinguish_Pixel = 0;
+	}
+	else if (Pixel.User_cell == True)
+	{
+		Distinguish_Pixel = 1
+	}
+	else if (Pixel.CPU_cell == True)
+	{
+		Distinguish_Pixel = 2
+	}
+	//여기까지는 불린형으로 받는것이 조금 불편할 것 같아 int형으로 바꿈
+
+	Cell.id
+
+	
+}
+
+int main(void)
+{
+
+}
