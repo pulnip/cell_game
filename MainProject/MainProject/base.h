@@ -25,7 +25,11 @@ typedef struct _Pixel{
     SmallSize_t Food;
 } Pixel;
 
-
+typedef enum _isCell{
+    NoCell   =0,
+    UserCell =1,
+    CPUCell  =2
+} isCell;
 
 typedef struct _Cell{
     isCell id;
@@ -33,17 +37,13 @@ typedef struct _Cell{
     Coord pos;
     int hp;
     Coord forward;
+    // 탐색한 것의 위치 좌표
 } Cell;
 
 typedef void (BEHAVIOUR_t)(Cell*);
 typedef BEHAVIOUR_t* pBEHAVIOUR_t;
 typedef pBEHAVIOUR_t* DNA_t; //DNA is Array of pBEHAVIOUR
 
-typedef enum _isCell{
-    NoCell   =0,
-    UserCell =1,
-    CPUCell=2
-}isCell;
 
 // <Global Var>
 #define PROTO_CELL_NUMBER 20
@@ -59,6 +59,8 @@ extern Bool game_over;
 #define GetRandom(min, max) ( \
     (rand() % (int)((max)-(min))) + (min) \
 )
+// GetRandom(-5, 10) = -5 ~ 9 integer
+
 
 int OnStart();
 int OnUpdate(time_t ElapsedTime);

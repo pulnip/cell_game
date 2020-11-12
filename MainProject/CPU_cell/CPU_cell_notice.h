@@ -25,10 +25,10 @@ typedef struct Send_Cpucell_result {
 
 void Send_Cpucell_result();	//CPU세포의 상황을 보내는 함수
 
-typedef sturct _informateCpuCellScore{  //이렇게 이름 길 필요는 없는데 이름만으론 못알아볼까봐 어차피 임시이름이니 길게 지었어
+typedef struct _informateCpuCellScore{  //이렇게 이름 길 필요는 없는데 이름만으론 못알아볼까봐 어차피 임시이름이니 길게 지었어
 	Cell informationCell;				// 이 구조체는 원래 있는 Cell 구조체에다 컴퓨터만이 가지고있는 "유전점수"를 위한 구조체
 	int score;
-}
+} informateCpuCellScore;
 
 
 typedef struct Get_Set_Information {
