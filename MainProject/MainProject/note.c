@@ -30,7 +30,7 @@ enum Color{
     BG_INTENSE=0x80
 };
 
-CHAR_INFO screen[CONSOLE_HEIGHT*CONSOLE_WIDTH];
+CHAR_INFO screen[CONSOLE_WIDTH*CONSOLE_HEIGHT];
 HANDLE hStdOut;
 
 int setConsoleDefault(){
@@ -49,19 +49,21 @@ int setConsoleDefault(){
 }
 
 int readScreenFromFile(){
-    char buffer[CONSOLE_WIDTH];
 
     FILE* map_in=fopen(MAP_FILE_PATH, "rt");
     FILE* log=fopen(".\\log.txt", "wt");
 
+    char buffer[CONSOLE_WIDTH];
+
     for(int i=0; i<CONSOLE_HEIGHT; ++i){
         size_t bytes=fread(buffer, sizeof(char), sizeof(buffer)/sizeof(char), map_in);
+        while(fgetc(map_in) != '\n');
 
         fprintf(log, "[%d Bytes]: %s\n", bytes, buffer);
 
         for(int j=0; j<CONSOLE_WIDTH; ++j){
-            screen[i*CONSOLE_HEIGHT+j].Char.AsciiChar=buffer[i];
-            screen[i*CONSOLE_HEIGHT+j].Attributes=BG_BLACK|FG_WHITE;
+            screen[i*CONSOLE_WIDTH+j].Char.AsciiChar=buffer[j];
+            screen[i*CONSOLE_WIDTH+j].Attributes=BG_BLACK|FG_WHITE;
         }
     }
 
