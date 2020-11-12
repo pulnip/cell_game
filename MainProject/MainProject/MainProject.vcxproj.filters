@@ -27,9 +27,6 @@
     <ClCompile Include="LinkedList.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="user.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="__old_Game.c">
       <Filter>Source Files</Filter>
     </ClCompile>

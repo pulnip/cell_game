@@ -146,7 +146,6 @@
     <ClCompile Include="LinkedList.c" />
     <ClCompile Include="Map.c" />
     <ClCompile Include="note.c" />
-    <ClCompile Include="user.c" />
     <ClCompile Include="__old_Game.c" />
   </ItemGroup>
   <ItemGroup>
