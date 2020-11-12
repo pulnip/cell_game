@@ -140,15 +140,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="base.c" />
+    <ClCompile Include="CellBehaviours.c" />
     <ClCompile Include="Game.c" />
     <ClCompile Include="infra.c" />
     <ClCompile Include="LinkedList.c" />
+    <ClCompile Include="Map.c" />
+    <ClCompile Include="note.c" />
     <ClCompile Include="user.c" />
+    <ClCompile Include="__old_Game.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base.h" />
+    <ClInclude Include="CellBehaviours.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="Infra.h" />
     <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="Map.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="log.txt" />
+    <Text Include="map.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
