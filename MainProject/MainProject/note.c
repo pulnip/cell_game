@@ -35,15 +35,22 @@ HANDLE hStdOut;
 
 int setConsoleDefault(){
     hStdOut=GetStdHandle(STD_OUTPUT_HANDLE);
-    SMALL_RECT rectWindowSize={
-        0, 0, CONSOLE_WIDTH, CONSOLE_HEIGHT
-    };
+    if(hStdOut==NULL) return 1;
+    
+    SMALL_RECT rectWindowSize;
+    rectWindowSize.Left=rectWindowSize.Top=0;
+    rectWindowSize.Right=CONSOLE_WIDTH-1;
+    rectWindowSize.Bottom=CONSOLE_HEIGHT-1;
 
-    COORD coord={1, 1};
+    COORD coord;
+    coord.X=CONSOLE_WIDTH;
+    coord.Y=CONSOLE_HEIGHT;
 
-    SetConsoleWindowInfo(hStdOut, TRUE, &rectWindowSize);
+    if( (SetConsoleScreenBufferSize(hStdOut, coord)) ||
+        (SetConsoleWindowInfo(hStdOut, TRUE, &rectWindowSize))
+    ) return 1;
 
-    SetConsoleScreenBufferSize(hStdOut, coord);
+    //system(f"mode con cols=${CONSOLE_WIDTH} lines=${CONSOLE_HEIGHT}")
 
     return 0;
 }
