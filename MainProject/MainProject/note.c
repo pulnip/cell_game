@@ -6,6 +6,8 @@
 
 #define MAP_FILE_PATH ".\\map.txt"
 
+#define _CRT_SECURE_NO_WARNINGS
+
 enum Color{
     FG_BLACK  =0x00,
     FG_BLUE   =0x01,
@@ -57,8 +59,16 @@ int setConsoleDefault(){
 
 int readScreenFromFile(){
 
+#ifdef _MSC_VER
+    FILE* map_in = NULL;
+    FILE* log = NULL;
+    fopen_s(&map_in, MAP_FILE_PATH, "rt");
+    fopen_s(&log, ".\\log.txt", "wt");
+#else
     FILE* map_in=fopen(MAP_FILE_PATH, "rt");
     FILE* log=fopen(".\\log.txt", "wt");
+#endif
+    if ((map_in == NULL) || (log == NULL)) return 1;
 
     char buffer[CONSOLE_WIDTH];
 
@@ -76,12 +86,16 @@ int readScreenFromFile(){
 
     fclose(map_in);
     fclose(log);
+
+    return 0;
 }
 
 int main(void){
-    setConsoleDefault();
-
-    readScreenFromFile();
+    if (setConsoleDefault() ||
+        readScreenFromFile()
+        ) {
+        return 1;
+    }
 
     COORD mapSize={CONSOLE_WIDTH, CONSOLE_HEIGHT};
     COORD coord={0, 0};
