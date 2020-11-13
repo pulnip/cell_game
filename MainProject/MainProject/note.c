@@ -68,7 +68,10 @@ int readScreenFromFile(){
     FILE* map_in=fopen(MAP_FILE_PATH, "rt");
     FILE* log=fopen(".\\log.txt", "wt");
 #endif
-    if ((map_in == NULL) || (log == NULL)) return 1;
+    if((map_in==NULL)||(log==NULL)){
+        puts("Couldn\'t open file.");
+        return 1;
+    }
 
     char buffer[CONSOLE_WIDTH];
 
@@ -94,6 +97,8 @@ int main(void){
     if (setConsoleDefault() ||
         readScreenFromFile()
         ) {
+        
+        fgetc(stdin);
         return 1;
     }
 
@@ -112,4 +117,5 @@ int main(void){
     );
 
     fgetc(stdin);
+    return 0;
 }
