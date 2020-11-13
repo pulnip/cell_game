@@ -37,8 +37,8 @@ int setConsoleDefault(){
     coord.X=CONSOLE_WIDTH;
     coord.Y=CONSOLE_HEIGHT;
 
-    if( (SetConsoleScreenBufferSize(hStdOut, coord)) ||
-        (SetConsoleWindowInfo(hStdOut, TRUE, &rectWindowSize))
+    if( (!(SetConsoleScreenBufferSize(hStdOut, coord))) ||
+        (!(SetConsoleWindowInfo(hStdOut, TRUE, &rectWindowSize)))
     ) return 1;
 
     return 0;
