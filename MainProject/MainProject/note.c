@@ -32,7 +32,7 @@ enum Color{
     BG_INTENSE=0x80
 };
 
-CHAR_INFO screen[CONSOLE_WIDTH*CONSOLE_HEIGHT];
+CHAR_INFO screen[CONSOLE_HEIGHT][CONSOLE_WIDTH];
 HANDLE hStdOut;
 
 int setConsoleDefault(){
@@ -82,8 +82,8 @@ int readScreenFromFile(){
         fprintf(log, "[%d Bytes]: %s\n", bytes, buffer);
 
         for(int j=0; j<CONSOLE_WIDTH; ++j){
-            screen[i*CONSOLE_WIDTH+j].Char.AsciiChar=buffer[j];
-            screen[i*CONSOLE_WIDTH+j].Attributes=BG_BLACK|FG_WHITE;
+            screen[i][j].Char.AsciiChar=buffer[j];
+            screen[i][j].Attributes=BG_BLACK|FG_WHITE;
         }
     }
 
@@ -112,7 +112,7 @@ int main(void){
 
     WriteConsoleOutputA(
         hStdOut,
-        screen, mapSize, coord,
+        (CHAR_INFO*)screen, mapSize, coord,
         &WriteRegion
     );
 

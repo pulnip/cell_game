@@ -10,7 +10,7 @@
 [120 Bytes]: #|                                                                                                                    |#
 [120 Bytes]: 1|                                                                                                                    |1
 [120 Bytes]: #|                                                                                                                    |#
-[120 Bytes]: #|                                                                                                                    |#
+[120 Bytes]: #|                                          Hello                                                                     |#
 [120 Bytes]: #|                                                                                                                    |#
 [120 Bytes]: #|                                                                                                                    |#
 [120 Bytes]: #|                                             GAME_START!                                                            |#

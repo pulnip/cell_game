@@ -18,6 +18,13 @@ typedef struct _Coord{
     int y;
 } Coord;
 
+typedef struct _Rect{
+    int Left;
+    int Top;
+    int Right;
+    int Bottom;
+} Rect;
+
 typedef struct _Pixel{
     Bool Cell;
     // 0: no cell, 1: User cell, 2: CPU cell

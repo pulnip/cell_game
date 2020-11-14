@@ -29,8 +29,8 @@ int readScreenFromFile(){
         fprintf(log, "[%d Bytes]: %s\n", bytes, buffer);
 
         for(int j=0; j<CONSOLE_WIDTH; ++j){
-            screen[i*CONSOLE_WIDTH+j].Char.AsciiChar=buffer[j];
-            screen[i*CONSOLE_WIDTH+j].Attributes=BG_BLACK|FG_WHITE;
+            screen[i][j].Char.AsciiChar=buffer[j];
+            screen[i][j].Attributes=BG_BLACK|FG_WHITE;
         }
     }
 
