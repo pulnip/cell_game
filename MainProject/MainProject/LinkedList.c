@@ -23,6 +23,27 @@ int appendNode(const pObject const _pObject, List* list){
     return 0;
 }
 
+int deleteNode(const pObject const _pObject, List* list){
+    Node* aheadNode=NULL;
+    Node* rmNode=list->head;
+
+    if(list->head!=NULL){
+        while(_pObject!=rmNode->pData){
+            aheadNode=rmNode;
+            rmNode=rmNode->next;
+            if(rmNode==NULL) break;
+        }
+
+        if(rmNode!=NULL){
+            aheadNode->next=rmNode->next;
+
+            return 0;
+        }
+        else return 1;
+    }
+    else return 1;
+}
+
 int destroyNode(const pObject const _pObject, List* list){
     Node* aheadNode=NULL;
     Node* rmNode=list->head;

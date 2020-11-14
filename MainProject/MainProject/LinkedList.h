@@ -23,10 +23,12 @@ int initList(List*);
 int appendNode(pObject, List*);
 // Append Object(cell, ..) at Tail
 
+int deleteNode(pObject, List*);
+// just delete Object from the List.
+
 int destroyNode(pObject, List*);
-// Destroy specific Object from List
 // if the Object is in List,
-// destroy from the List and, destroy Object itself.
+// delete Object from the List and, destroy Object itself.
 
 size_t getListLen(List*);
 // Get the Number of List Element

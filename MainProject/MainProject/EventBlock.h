@@ -29,6 +29,7 @@ typedef enum _KeyMask{
 } KeyMask;
 
 typedef struct _Trigger{
+    TriggerType triggerType;
     int id;
     Bool isHidden;
     Rect pos;
@@ -37,9 +38,28 @@ typedef struct _Trigger{
 } Trigger;
 
 typedef Trigger Button;
+// Min Size: 1*1
+
 typedef Trigger Switch;
+// Min Size: 2*1
+
 typedef Trigger VerticalScrollBar;
+// Min Size: 1*2
+
 typedef Trigger HorizontalScrollBar;
+// Min Size: 2*1
+
+// Button is-a Trigger.
+// Switch is-a Trigger.
+// VerticalScrollBar is-a Trigger.
+// HorizontalScrollBar is-a Trigger.
+
+typedef enum _TriggerType{
+    tButton,
+    tSwitch,
+    tVerticalScrollBar,
+    tHorizontalScrollBar
+} TriggerType;
 
 typedef void (*Event)(void);
 
@@ -47,10 +67,20 @@ extern List eventTrigger;
 
 int initEventTriggerList(void);
 
+Trigger* createTrigger(Rect, int);
+// createButton calls createTrigger.
+// Others too.
+
+// if createTrigger succeed, return pointer(non-zero);
+// else return Zero.
+
 int createButton(Rect, int vkey);
 int createSwitch(Rect, int vkey);
 int createVerticalScrollBar(Rect, int upward_vkey, int downward_vkey);
 int createHorizontalScrollBar(Rect, int leftward_vkey, int rightward_vkey);
+
+// EventTrigger spec func
+Trigger* searchTrigger(int id);
 
 int showTrigger(int _id);
 int hideTrigger(int _id);
