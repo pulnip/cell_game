@@ -10,14 +10,18 @@ int appendNode(const pObject const _pObject, List* list){
     if(_pObject==NULL) return 1;
 
     Node* newNode=(Node*)malloc(sizeof(Node));
+    if(newNode==NULL){
+        return 1;
+    }
     newNode->pData=_pObject;
     newNode->next=NULL;
 
-    list->tail->next=newNode;
-    list->tail=newNode;
-
-    if(list->head==NULL){
-        list->head=list->tail;
+    if(list->tail==NULL){
+        list->head=list->tail=newNode;
+    }
+    else{
+        list->tail->next=newNode;
+        list->tail=newNode;
     }
 
     return 0;

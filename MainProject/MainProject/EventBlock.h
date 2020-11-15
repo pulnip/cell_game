@@ -26,6 +26,8 @@ int initTriggerList(void);
 
 int checkToggleButtonArg(Rect, int _vkey);
 int createToggleButton(Rect, int _vkey);
+// if success, return id of ToggleButton (Non-zero),
+// else return 0
 
 // EventBlock spec func
 ToggleButton* searchTrigger(int id);

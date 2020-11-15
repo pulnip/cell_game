@@ -8,6 +8,8 @@ int initEventTriggerList(void){
     ToggleButtons.head=NULL;
     ToggleButtons.tail=NULL;
 }
+ #error
+ // Change name
 
 int checkToggleButtonArg(Rect rect, int _vkey){
     if( (CONSOLE_LEFT  > rect.Left  ) ||
@@ -25,15 +27,17 @@ int checkToggleButtonArg(Rect rect, int _vkey){
     ) {
         return 1;
     }
+
+    return 0;
 }
 
 int createToggleButton(Rect rect, int _vkey){
     if (checkToggleButtonArg(rect, _vkey)){
-        return 1;
+        return 0;
     }
 
     ToggleButton* tb=(ToggleButton*)malloc(sizeof(ToggleButton));
-    if(tb==NULL) return 1;
+    if(tb==NULL) return 0;
 
     if(ToggleButtons.tail==NULL){
         tb->id=1;
@@ -57,7 +61,7 @@ int createToggleButton(Rect rect, int _vkey){
 
     appendNode(tb, &ToggleButtons);
 
-    return 0;
+    return tb->id;
 }
 
 // EventBlock spec func
@@ -66,7 +70,7 @@ ToggleButton* searchTrigger(int _id){
     
     Node* pNode=ToggleButtons.head;
 
-    while(pNode==NULL){
+    while(pNode!=NULL){
         if(((ToggleButton*)(pNode->pData))->id == _id){
             return (ToggleButton*)(pNode->pData);
         }
@@ -95,7 +99,7 @@ int hideTrigger(int _id){
 
 int getIsHidden(int _id){
     ToggleButton* tb=searchTrigger(_id);
-    if(tb==NULL) return 1;
+    if(tb==NULL) return -1;
 
     return tb->isHidden;
 }
@@ -129,7 +133,7 @@ int setKey(int _id, int _vkey){
 
 int getKey(int _id){
     ToggleButton* tb=searchTrigger(_id);
-    if(tb==NULL) return -1;
+    if(tb==NULL) return 0;
 
     return tb->key;
 }
@@ -138,7 +142,7 @@ int appendEvent(int _id, ToggleButtonEvent func){
     ToggleButton* tb=searchTrigger(_id);
     if(tb==NULL) return 1;
 
-    appendNode(func, &(tb->OnClickEvent));
+    return appendNode(func, &(tb->OnClickEvent));
 }
 
 int deleteEvent(int _id, ToggleButtonEvent func){
@@ -214,8 +218,14 @@ int runToggleButtonEvent(ToggleButton* tb){
         ToggleButtonEvent tbe=en->pData;
         tbe(tb);
 
-        en=en->pData;
+        en=en->next;
     }
 
     return 0;
 }
+
+#error
+
+// To Do
+// id->pointer ?
+// pointer->id ?
