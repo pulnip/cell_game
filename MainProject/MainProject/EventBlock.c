@@ -1,133 +1,74 @@
 #include "EventBlock.h"
 #include "Map.h"
+#include "Infra.h"
 
-List EventTrigger;
+List ToggleButtons;
 
 int initEventTriggerList(void){
-    EventTrigger.head=NULL;
-    EventTrigger.tail=NULL;
+    ToggleButtons.head=NULL;
+    ToggleButtons.tail=NULL;
 }
 
-Trigger* createTrigger(Rect rect, int vkey){
-    Trigger* trigger=(Trigger*)malloc(sizeof(Trigger));
-    if(trigger==NULL) return 0;
+int checkToggleButtonArg(Rect rect, int _vkey){
+    if( (CONSOLE_LEFT  > rect.Left  ) ||
+        (CONSOLE_RIGHT <=rect.Right ) ||
+        (CONSOLE_TOP   > rect.Top   ) ||
+        (CONSOLE_BOTTOM<=rect.Bottom) ||
+        (rect.Right -rect.Left< 1   ) ||
+        (rect.Bottom-rect.Top < 1   )
+    ) {
+        return 1;
+    }
 
-    if(EventTrigger.tail==NULL){
-        trigger->id=1;
+    if( (0    > _vkey) ||
+        (0xff < _vkey)
+    ) {
+        return 1;
+    }
+}
+
+int createToggleButton(Rect rect, int _vkey){
+    if (checkToggleButtonArg(rect, _vkey)){
+        return 1;
+    }
+
+    ToggleButton* tb=(ToggleButton*)malloc(sizeof(ToggleButton));
+    if(tb==NULL) return 1;
+
+    if(ToggleButtons.tail==NULL){
+        tb->id=1;
     } else{
-        trigger->id=((Trigger*)(EventTrigger.tail->pData))->id+1;
+        tb->id=((ToggleButton*)(ToggleButtons.tail->pData))->id+1;
     }
 
-    trigger->isHidden=True;
+    tb->isHidden=True;
 
-    trigger->pos.Left=rect.Left;
-    trigger->pos.Top=rect.Top;
-    trigger->pos.Right=rect.Right;
-    trigger->pos.Bottom=rect.Bottom;
+    tb->pos.Left=rect.Left;
+    tb->pos.Top=rect.Top;
+    tb->pos.Right=rect.Right;
+    tb->pos.Bottom=rect.Bottom;
 
-    trigger->control.iKey=vkey;
+    tb->key=_vkey;
 
-    trigger->OnClickEvent.head=NULL;
-    trigger->OnClickEvent.tail=NULL;
+    tb->OnClickEvent.head=NULL;
+    tb->OnClickEvent.tail=NULL;
 
-    appendNode(trigger, &EventTrigger);
+    tb->isToggled=False;
 
-    return trigger;
-}
-
-int createButton(Rect rect, int vkey){
-    if( (CONSOLE_LEFT  > rect.Left  ) ||
-        (CONSOLE_RIGHT <=rect.Right ) ||
-        (CONSOLE_TOP   > rect.Top   ) ||
-        (CONSOLE_BOTTOM<=rect.Bottom) ||
-        (rect.Right -rect.Left< 1   ) ||
-        (rect.Bottom-rect.Top < 1   )
-    ) {
-        return 1;
-    }
-
-    Trigger* trigger=createTrigger(rect, vkey);
-    if(trigger==NULL) return 1;
-
-    trigger->triggerType=tButton;
+    appendNode(tb, &ToggleButtons);
 
     return 0;
 }
 
-int createSwitch(Rect rect, int vkey){
-    if( (CONSOLE_LEFT  > rect.Left  ) ||
-        (CONSOLE_RIGHT <=rect.Right ) ||
-        (CONSOLE_TOP   > rect.Top   ) ||
-        (CONSOLE_BOTTOM<=rect.Bottom) ||
-        (rect.Right -rect.Left< 2   ) ||
-        (rect.Bottom-rect.Top < 1   )
-    ) {
-        return 1;
-    }
-
-    Trigger* trigger=createTrigger(rect, vkey);
-    if(trigger==NULL) return 1;
-
-    trigger->triggerType=tSwitch;
-
-    return 0;
-}
-
-int createVerticalScrollBar(Rect rect, int upward_vkey, int downward_vkey){
-    if( (CONSOLE_LEFT  > rect.Left  ) ||
-        (CONSOLE_RIGHT <=rect.Right ) ||
-        (CONSOLE_TOP   > rect.Top   ) ||
-        (CONSOLE_BOTTOM<=rect.Bottom) ||
-        (rect.Right -rect.Left< 1   ) ||
-        (rect.Bottom-rect.Top < 2   )
-    ) {
-        return 1;
-    }
-
-    ControlKey _ckey;
-    _ckey.rKey.upward=upward_vkey;
-    _ckey.rKey.downward=downward_vkey;
-
-    Trigger* trigger=createTrigger(rect, _ckey.iKey);
-    if(trigger==NULL) return 1;
-
-    trigger->triggerType=tVerticalScrollBar;
-
-    return 0;
-}
-
-int createHorizontalScrollBar(Rect rect, int leftward_vkey, int rightward_vkey){
-    if( (CONSOLE_LEFT  > rect.Left  ) ||
-        (CONSOLE_RIGHT <=rect.Right ) ||
-        (CONSOLE_TOP   > rect.Top   ) ||
-        (CONSOLE_BOTTOM<=rect.Bottom) ||
-        (rect.Right -rect.Left< 2   ) ||
-        (rect.Bottom-rect.Top < 1   )
-    ) {
-        return 1;
-    }
-
-    ControlKey _ckey;
-    _ckey.rKey.leftward=leftward_vkey;
-    _ckey.rKey.rightward=rightward_vkey;
-
-    Trigger* trigger=createTrigger(rect, _ckey.iKey);
-    if(trigger==NULL) return 1;
-
-    trigger->triggerType=tHorizontalScrollBar;
-
-    return 0;
-}
-
-// EventTrigger spec func
-Trigger* searchTrigger(int _id){
-    if(EventTrigger.head==NULL) return NULL;
+// EventBlock spec func
+ToggleButton* searchTrigger(int _id){
+    if(ToggleButtons.head==NULL) return NULL;
     
-    Node* pNode=EventTrigger.head;
+    Node* pNode=ToggleButtons.head;
 
     while(pNode==NULL){
-        if(((Trigger*)(pNode->pData))->id == _id){
-            return (Trigger*)(pNode->pData);
+        if(((ToggleButton*)(pNode->pData))->id == _id){
+            return (ToggleButton*)(pNode->pData);
         }
 
         pNode=pNode->next;
@@ -137,72 +78,144 @@ Trigger* searchTrigger(int _id){
 }
 
 int showTrigger(int _id){
-    Trigger* t=searchTrigger(_id);
-    if(t==NULL) return 1;
+    ToggleButton* tb=searchTrigger(_id);
+    if(tb==NULL) return 1;
 
-    t->isHidden=False;
+    tb->isHidden=False;
     return 0;
 }
 
 int hideTrigger(int _id){
-    Trigger* t=searchTrigger(_id);
-    if(t==NULL) return 1;
+    ToggleButton* tb=searchTrigger(_id);
+    if(tb==NULL) return 1;
 
-    t->isHidden=True;
+    tb->isHidden=True;
     return 0;
 }
 
 int getIsHidden(int _id){
-    Trigger* t=searchTrigger(_id);
-    if(t==NULL) return 1;
+    ToggleButton* tb=searchTrigger(_id);
+    if(tb==NULL) return 1;
 
-    return t->isHidden;
+    return tb->isHidden;
 }
 
 int setPos(int _id, Rect pos){
-    Trigger* t=searchTrigger(_id);
-    if(t==NULL) return 1;
+    ToggleButton* tb=searchTrigger(_id);
+    if(tb==NULL) return 1;
 
-    t->pos.Left=pos.Left;
-    t->pos.Left=pos.Left;
-    t->pos.Left=pos.Left;
-    t->pos.Left=pos.Left;
+    tb->pos.Left  =pos.Left;
+    tb->pos.Top   =pos.Top;
+    tb->pos.Right =pos.Right;
+    tb->pos.Bottom=pos.Bottom;
 
     return 0;
 }
 
 Rect getPos(int _id){
-    Trigger* t=searchTrigger(_id);
-    if(t==NULL) return (Rect){0, 0, 0, 0}; // return null Rect
+    ToggleButton* tb=searchTrigger(_id);
+    if(tb==NULL) return (Rect){0, 0, 0, 0}; // return null Rect
 
-    return t->pos;
+    return tb->pos;
 }
 
-int setKey(int _id, ControlKey key){
-    Trigger* t=searchTrigger(_id);
-    if(t==NULL) return 1;
+int setKey(int _id, int _vkey){
+    ToggleButton* tb=searchTrigger(_id);
+    if(tb==NULL) return 1;
 
-    t->control=key;
+    tb->key=_vkey;
     return 0;
 }
 
-ControlKey getKey(int _id){
-    Trigger* t=searchTrigger(_id);
-    if(t==NULL) return (ControlKey)0;
+int getKey(int _id){
+    ToggleButton* tb=searchTrigger(_id);
+    if(tb==NULL) return -1;
 
-    return t->control;
+    return tb->key;
 }
 
-int appendEvent(int _id, Event func){
-    Trigger* t=searchTrigger(_id);
-    if(t==NULL) return 1;
+int appendEvent(int _id, ToggleButtonEvent func){
+    ToggleButton* tb=searchTrigger(_id);
+    if(tb==NULL) return 1;
 
-    appendNode(func, &(t->OnClickEvent));
+    appendNode(func, &(tb->OnClickEvent));
 }
 
-int deleteEvent(int _id, Event func){
-    Trigger* t=searchTrigger(_id);
-    if(t==NULL) return 1;
+int deleteEvent(int _id, ToggleButtonEvent func){
+    ToggleButton* tb=searchTrigger(_id);
+    if(tb==NULL) return 1;
 
-    deleteNode(func, &(t->OnClickEvent));
+    return deleteNode(func, &(tb->OnClickEvent));
+}
+
+int drawToggleButtons(void){
+    Node* n=ToggleButtons.head;
+    if(n==NULL) return 1;
+
+    while(n!=NULL){
+        ToggleButton* tb=n->pData;
+
+        SMALL_RECT rect;
+        rect.Left  =tb->pos.Left;
+        rect.Top   =tb->pos.Top;
+        rect.Right =tb->pos.Right;
+        rect.Bottom=tb->pos.Bottom;
+
+        COORD ciSize;
+        ciSize.X=rect.Right-rect.Left;
+        ciSize.Y=rect.Bottom-rect.Top;
+        CHAR_INFO ciToggleButton[ciSize.Y][ciSize.X];
+
+        COORD bufferCoord={0, 0};
+
+        for(int i=0, j=0; i<ciSize.Y; ++i){
+            for(j=0; j<ciSize.X; ++j){
+                ciToggleButton[i][j].Char.AsciiChar=' ';
+                ciToggleButton[i][j].Attributes
+                =(tb->isToggled ?
+                    FG_WHITE|BG_WHITE:
+                    FG_BLACK|BG_BLACK
+                );
+            }
+        }
+
+        WriteConsoleOutputA(
+            hStdOut,
+            (CHAR_INFO*)ciToggleButton, ciSize, bufferCoord,
+            &rect
+        );
+
+        n=n->next;
+    }
+
+    return 0;
+}
+
+int checkTriggered(void){
+    Node* n=ToggleButtons.head;
+    if(n==NULL) return 1;
+
+    while(n!=NULL){
+        ToggleButton* tb=n->pData;
+        if(keys[tb->key].bPressed){
+            runToggleButtonEvent(tb);
+        }
+
+        n=n->next;
+    }
+
+    return 0;
+}
+
+int runToggleButtonEvent(ToggleButton* tb){
+    Node* en=tb->OnClickEvent.head; // ToggleButtonEvent Node
+
+    while(en!=NULL){
+        ToggleButtonEvent tbe=en->pData;
+        tbe(tb);
+
+        en=en->pData;
+    }
+
+    return 0;
 }
