@@ -46,4 +46,7 @@ int drawTriggers(void);
 int checkTriggered(void);
 int runTriggerEvent(Trigger*);
 
+int deleteTrigger(Trigger*);
+int deleteTriggers(void);
+
 #endif // __INC_EVENT_BLOCK

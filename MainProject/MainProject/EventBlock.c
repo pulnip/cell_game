@@ -192,6 +192,26 @@ int runTriggerEvent(Trigger* t){
     return 0;
 }
 
-#error "To DO"
+int deleteTrigger(Trigger* t){
+    Node* en=t->OnClickEvent.head;
 
-// free memory
+    while(en!=NULL){
+        en=en->next;
+        free(en);
+    }
+
+    free(t);
+}
+
+int deleteTriggers(void){
+    Node* n=Triggers.head;
+
+    while(n!=NULL){
+        deleteTrigger(n->pData);
+
+        n=n->next;
+        free(n);
+    }
+
+    return 0;
+}

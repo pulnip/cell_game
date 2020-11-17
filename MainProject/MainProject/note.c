@@ -375,7 +375,29 @@ int checkTriggered(void){
     return 0;
 }
 
+int deleteTrigger(Trigger* t){
+    Node* en=t->OnClickEvent.head;
 
+    while(en!=NULL){
+        en=en->next;
+        free(en);
+    }
+
+    free(t);
+}
+
+int deleteTriggers(void){
+    Node* n=Triggers.head;
+
+    while(n!=NULL){
+        deleteTrigger(n->pData);
+
+        n=n->next;
+        free(n);
+    }
+
+    return 0;
+}
 
 
 
@@ -443,6 +465,10 @@ int main(void){
         checkTriggered();
         drawTriggers();
     }
+
+    deleteTriggers();
+
+    fgetc(stdin);
 
     return 0;
 }
