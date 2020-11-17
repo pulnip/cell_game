@@ -149,7 +149,7 @@ int checkTriggered(void){
 
     while(n!=NULL){
         Trigger* t=n->pData;
-        if(keys[t->key].bPressed){
+        if(keys[t->key].bKeyDown){
             runTriggerEvent(t);
         }
 

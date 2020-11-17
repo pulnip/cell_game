@@ -336,25 +336,40 @@ int runTriggerEvent(Trigger* t){
     return 0;
 }
 
+typedef struct _KeyState{
+    Bool bKeyDown;
+    Bool bKeyUp;
+
+    Bool bPressed;
+    Bool bToggled;
+} KeyState;
+
+KeyState keys[0x100];
+
+void getKBInput(){
+    for(int i=0; i<0x100; ++i){
+        KeyState lastState=keys[i];
+        
+        // #error "CHECK VALUE"
+        short tmpKey=GetKeyState(i);
+        keys[i].bPressed = (tmpKey&0x8000)>>(8*sizeof(short)-1)&0x1;
+        keys[i].bToggled = tmpKey&0x1;
+
+        Bool isChanged=lastState.bPressed^keys[i].bPressed;
+        
+        keys[i].bKeyDown = keys[i].bPressed & isChanged;
+        keys[i].bKeyUp   = !keys[i].bPressed & isChanged;
+    }
+}
+
 int checkTriggered(void){
     Node* n=Triggers.head;
     if(n==NULL) return 1;
 
-    // Don\'t Copy
-    static Bool lastIsPressed=False;
-    //
-
     while(n!=NULL){
-        Trigger* t=n->pData;
-        
-        Bool isPressed=GetKeyState(t->key)>>(8*sizeof(short)-1)&0x1;
+        Trigger* t=n->pData;        
 
-        Bool isChanged=lastIsPressed^isPressed;
-        Bool isKeyDown=isChanged&isPressed;
-
-        lastIsPressed=isPressed;        
-
-        if(isKeyDown){
+        if(keys[t->key].bKeyDown){
             runTriggerEvent(t);
         }
 
@@ -465,6 +480,8 @@ int main(void){
 
         if(ks) break;
         copyScreenFromBG();
+
+        getKBInput();
 
         checkTriggered();
         drawTriggers();

@@ -44,6 +44,7 @@ int deleteEvent(Trigger*, TriggerEvent func);
 int drawTriggers(void);
 
 int checkTriggered(void);
+// check by bKeyDown (call Event once).
 int runTriggerEvent(Trigger*);
 
 int deleteTrigger(Trigger*);
