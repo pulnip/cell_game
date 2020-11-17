@@ -32,6 +32,7 @@ enum Color{
     BG_INTENSE=0x80
 };
 
+CHAR_INFO background[CONSOLE_HEIGHT][CONSOLE_WIDTH];
 CHAR_INFO screen[CONSOLE_HEIGHT][CONSOLE_WIDTH];
 HANDLE hStdOut;
 
@@ -82,8 +83,8 @@ int readScreenFromFile(){
         fprintf(log, "[%d Bytes]: %s\n", bytes, buffer);
 
         for(int j=0; j<CONSOLE_WIDTH; ++j){
-            screen[i][j].Char.AsciiChar=buffer[j];
-            screen[i][j].Attributes=BG_BLACK|FG_WHITE;
+            background[i][j].Char.AsciiChar=buffer[j];
+            background[i][j].Attributes=BG_BLACK|FG_WHITE;
         }
     }
 
@@ -303,39 +304,18 @@ int drawTriggers(void){
     while(n!=NULL){
         Trigger* t=n->pData;
 
-        SMALL_RECT rect;
-        rect.Left  =t->pos.Left;
-        rect.Top   =t->pos.Top;
-        rect.Right =t->pos.Right;
-        rect.Bottom=t->pos.Bottom;
+        if( !(t->isHidden) ){
 
-        COORD ciSize;
-        ciSize.X=rect.Right-rect.Left;
-        ciSize.Y=rect.Bottom-rect.Top;
-        CHAR_INFO* ciTrigger=(CHAR_INFO*)malloc(sizeof(CHAR_INFO)*(ciSize.X)*(ciSize.Y));
-        if(ciTrigger==NULL) return 1;
+            Rect rect=t->pos;
 
-        COORD bufferCoord={0, 0};
-
-        for(int i=0, j=0; i<ciSize.Y; ++i){
-            for(j=0; j<ciSize.X; ++j){
-                CHAR_INFO* ij=ciTrigger + i * ciSize.X + j;
-                ij->Char.AsciiChar=' ';
-                ij->Attributes
-                =(t->isHidden ? 
-                    FG_BLACK|BG_BLACK :
-                    FG_WHITE|BG_WHITE
-                );               
+            for(    int i=rect.Top ; i<rect.Bottom; ++i){
+                for(int j=rect.Left; j<rect.Right ; ++j){
+                    CHAR_INFO* pci=&screen[i][j];
+                    pci->Char.AsciiChar=' ';
+                    pci->Attributes=FG_WHITE|BG_WHITE;   
+                }
             }
         }
-
-        WriteConsoleOutputA(
-            hStdOut,
-            ciTrigger, ciSize, bufferCoord,
-            &rect
-        );
-
-        free(ciTrigger);
 
         n=n->next;
     }
@@ -408,7 +388,33 @@ int deleteTriggers(void){
 
 
 
+int copyScreenFromBG(void){
+    for(    int i=0; i<CONSOLE_HEIGHT; ++i){
+        for(int j=0; j<CONSOLE_WIDTH;  ++j){
+            screen[i][j]=background[i][j];
+        }
+    }
 
+    return 0;
+}
+
+int drawScreen(void){
+    COORD screenSize={CONSOLE_WIDTH, CONSOLE_HEIGHT};
+    COORD coord={0, 0};
+    SMALL_RECT WriteRegion={ //Left, Top. Right, Bottom
+        0, 0,
+        CONSOLE_WIDTH-1,
+        CONSOLE_HEIGHT-1
+    };
+
+    WriteConsoleOutputA(
+        hStdOut,
+        (CHAR_INFO*)screen, screenSize, coord,
+        &WriteRegion
+    );
+
+    return 0;
+}
 
 void lambda1(Trigger* t){
     if(GetKeyState('M')&0x8000){
@@ -447,8 +453,8 @@ int main(void){
     initEventTriggerList();
 
     Rect rect;
-    rect.Left=5;
-    rect.Right=10;
+    rect.Left=4;
+    rect.Right=12;
     rect.Top=3;
     rect.Bottom=6;
 
@@ -462,13 +468,14 @@ int main(void){
         ks&=0x8000;
 
         if(ks) break;
+        copyScreenFromBG();
+
         checkTriggered();
         drawTriggers();
+        drawScreen();
     }
 
     deleteTriggers();
-
-    fgetc(stdin);
 
     return 0;
 }

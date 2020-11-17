@@ -1,5 +1,5 @@
 #include "EventBlock.h"
-#include "Map.h"
+#include "Screen.h"
 #include "Infra.h"
 
 List Triggers;
@@ -124,38 +124,18 @@ int drawTriggers(void){
     while(n!=NULL){
         Trigger* t=n->pData;
 
-        SMALL_RECT rect;
-        rect.Left  =t->pos.Left;
-        rect.Top   =t->pos.Top;
-        rect.Right =t->pos.Right;
-        rect.Bottom=t->pos.Bottom;
+        if( !(t->isHidden) ){
 
-        COORD ciSize;
-        ciSize.X=rect.Right-rect.Left;
-        ciSize.Y=rect.Bottom-rect.Top;
-        CHAR_INFO* ciTrigger=(CHAR_INFO*)malloc(sizeof(CHAR_INFO)*ciSize.X*ciSize.Y);
+            Rect rect=t->pos;
 
-        COORD bufferCoord={0, 0};
-
-        for(int i=0, j=0; i<ciSize.Y; ++i){
-            for(j=0; j<ciSize.X; ++j){
-                CHAR_INFO* ij=ciTrigger + i * ciSize.X + j;
-                ij->Char.AsciiChar=' ';
-                ij->Attributes
-                =(t->isHidden ? 
-                    FG_BLACK|BG_BLACK :
-                    FG_WHITE|BG_WHITE
-                );               
+            for(    int i=rect.Top ; i<rect.Bottom; ++i){
+                for(int j=rect.Left; j<rect.Right ; ++j){
+                    CHAR_INFO* pci=&screen[i][j];
+                    pci->Char.AsciiChar=' ';
+                    pci->Attributes=FG_WHITE|BG_WHITE;   
+                }
             }
         }
-
-        WriteConsoleOutputA(
-            hStdOut,
-            ciTrigger, ciSize, bufferCoord,
-            &rect
-        );
-
-        free(ciTrigger);
 
         n=n->next;
     }

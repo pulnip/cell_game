@@ -2,10 +2,10 @@
 
 #include "base.h"
 #include "Infra.h"
+#include "Screen.h"
 
 HANDLE hStdOut;
 CONSOLE_SCREEN_BUFFER_INFO csbi;
-CHAR_INFO ciMap[CONSOLE_HEIGHT*CONSOLE_WIDTH];
 
 KeyState keys[0x100];
 
@@ -74,11 +74,10 @@ int waitUntilKeyInput(){
 }
 
 void filterPixelToCI(){
-    for(int i=0; i<CONSOLE_HEIGHT; ++i){
+    for(    int i=0; i<CONSOLE_HEIGHT; ++i){
         for(int j=0; j<CONSOLE_WIDTH; ++i){
-
             Pixel const unit=map[i][j];
-            CHAR_INFO* const pMapPoint=&ciMap[CONSOLE_WIDTH*i+j];
+            CHAR_INFO* const pMapPoint=&screen[i][j];
 
             if(unit.Point){
                 pMapPoint->Char.AsciiChar='P';
@@ -100,20 +99,4 @@ void filterPixelToCI(){
             }
         }
     }
-}
-
-void drawScreen(){
-    COORD mapSize={CONSOLE_WIDTH, CONSOLE_HEIGHT};
-    COORD coord={0, 0};
-    SMALL_RECT WriteRegion={ //Left, Top. Right, Bottom
-        0, 0,
-        CONSOLE_WIDTH-1,
-        CONSOLE_HEIGHT-1
-    };
-
-    WriteConsoleOutputA(
-        hStdOut,
-        ciMap, mapSize, coord,
-        &WriteRegion
-    );
 }
