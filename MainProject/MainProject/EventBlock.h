@@ -9,45 +9,44 @@
 #include "LinkedList.h"
 #endif
 
-typedef struct _ToggleButton{
-    int id;
+typedef struct _Trigger{
     Bool isHidden;
     Rect pos;
     int key;
     List OnClickEvent;
     Bool isToggled;
-} ToggleButton;
+} Trigger;
 
-typedef void (*ToggleButtonEvent)(ToggleButton*);
+typedef void (*TriggerEvent)(Trigger*);
 
-extern List ToggleButtons;
+extern List Triggers;
 
 int initTriggerList(void);
 
-int checkToggleButtonArg(Rect, int _vkey);
-int createToggleButton(Rect, int _vkey);
-// if success, return id of ToggleButton (Non-zero),
+int checkTriggerArg(Rect, int _vkey);
+Trigger* createTrigger(Rect, int _vkey);
+// if success, return id of Trigger (Non-zero),
 // else return 0
 
-// EventBlock spec func
-ToggleButton* searchTrigger(int id);
+int showTrigger(Trigger*);
+int hideTrigger(Trigger*);
+int getIsHidden(Trigger*);
 
-int showTrigger(int _id);
-int hideTrigger(int _id);
-int getIsHidden(int _id);
+int setPos(Trigger*, Rect pos);
+Rect getPos(Trigger*);
 
-int setPos(int _id, Rect pos);
-Rect getPos(int _id);
+int setKey(Trigger*, int _vkey);
+int getKey(Trigger*);
 
-int setKey(int _id, int _vkey);
-int getKey(int _id);
+int appendEvent(Trigger*, TriggerEvent func);
+int deleteEvent(Trigger*, TriggerEvent func);
 
-int appendEvent(int _id, ToggleButtonEvent func);
-int deleteEvent(int _id, ToggleButtonEvent func);
-
-int drawToggleButtons(void);
+int drawTriggers(void);
 
 int checkTriggered(void);
-int runToggleButtonEvent(ToggleButton*);
+int runTriggerEvent(Trigger*);
+
+int deleteTrigger(Trigger*);
+int deleteTriggers(void);
 
 #endif // __INC_EVENT_BLOCK

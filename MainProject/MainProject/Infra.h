@@ -39,7 +39,6 @@ enum Color{
 
 extern HANDLE hStdOut;
 extern CONSOLE_SCREEN_BUFFER_INFO csbi;
-extern CHAR_INFO ciMap[CONSOLE_HEIGHT*CONSOLE_WIDTH];
 
 extern KeyState keys[0x100];
 
@@ -49,6 +48,5 @@ int FastEscape();
 int setConsoleDefault();
 void getKBInput();
 void filterPixelToCI();
-void drawScreen();
 
 #endif // __INC_INFRA
