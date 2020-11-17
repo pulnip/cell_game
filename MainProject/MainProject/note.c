@@ -336,39 +336,25 @@ int runTriggerEvent(Trigger* t){
     return 0;
 }
 
-typedef struct _KeyState{
-    Bool bKeyDown;
-    Bool bKeyUp;
-
-    Bool bPressed;
-    Bool bToggled;
-} KeyState;
-
 int checkTriggered(void){
     Node* n=Triggers.head;
     if(n==NULL) return 1;
 
     // Don\'t Copy
-    KeyState lastState={0, 0, 0, 0};
+    static Bool lastIsPressed=False;
     //
 
     while(n!=NULL){
         Trigger* t=n->pData;
         
-        short tmpKey=GetKeyState(t->key);
-        Bool Pressed=0;
-        if(tmpKey&0x8000){
-            Pressed=1;
-        }
-        Bool Toggled=tmpKey&0x1;
+        Bool isPressed=GetKeyState(t->key)>>(8*sizeof(short)-1)&0x1;
 
-        Bool isChanged=
-            ((lastState.bPressed)^Pressed);
-        
-        lastState.bPressed=Pressed;
-        lastState.bToggled=Toggled;
+        Bool isChanged=lastIsPressed^isPressed;
+        Bool isKeyDown=isChanged&isPressed;
 
-        if(isChanged){
+        lastIsPressed=isPressed;        
+
+        if(isKeyDown){
             runTriggerEvent(t);
         }
 
