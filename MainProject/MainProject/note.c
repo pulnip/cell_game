@@ -336,16 +336,39 @@ int runTriggerEvent(Trigger* t){
     return 0;
 }
 
+typedef struct _KeyState{
+    Bool bKeyDown;
+    Bool bKeyUp;
+
+    Bool bPressed;
+    Bool bToggled;
+} KeyState;
+
 int checkTriggered(void){
     Node* n=Triggers.head;
     if(n==NULL) return 1;
 
+    // Don\'t Copy
+    KeyState lastState={0, 0, 0, 0};
+    //
+
     while(n!=NULL){
         Trigger* t=n->pData;
+        
+        short tmpKey=GetKeyState(t->key);
+        Bool Pressed=0;
+        if(tmpKey&0x8000){
+            Pressed=1;
+        }
+        Bool Toggled=tmpKey&0x1;
 
-        int ks=GetKeyState(t->key);
-        ks&=0x8000;
-        if(ks){
+        Bool isChanged=
+            ((lastState.bPressed)^Pressed);
+        
+        lastState.bPressed=Pressed;
+        lastState.bToggled=Toggled;
+
+        if(isChanged){
             runTriggerEvent(t);
         }
 
@@ -417,11 +440,14 @@ int drawScreen(void){
 }
 
 void lambda1(Trigger* t){
-    if(GetKeyState('M')&0x8000){
-        hideTrigger(t);
+    static int log=0;
+    if(log==0){
+        showTrigger(t);
+        log=1;
     }
     else {
-        showTrigger(t);
+        hideTrigger(t);
+        log=0;
     }
 }
 
@@ -429,26 +455,10 @@ int main(void){
     // <write screen>
     if (setConsoleDefault() ||
         readScreenFromFile()
-        ) {
-        
-        fgetc(stdin);
+    ) {   
         return 1;
     }
-
-    COORD mapSize={CONSOLE_WIDTH, CONSOLE_HEIGHT};
-    COORD coord={0, 0};
-    SMALL_RECT WriteRegion={ //Left, Top. Right, Bottom
-        0, 0,
-        CONSOLE_WIDTH-1,
-        CONSOLE_HEIGHT-1
-    };
-
-    WriteConsoleOutputA(
-        hStdOut,
-        (CHAR_INFO*)screen, mapSize, coord,
-        &WriteRegion
-    );
-    // </write screen>
+    drawScreen();
 
     initEventTriggerList();
 
