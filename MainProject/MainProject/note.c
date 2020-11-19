@@ -204,6 +204,7 @@ typedef struct _Trigger{
     int key;
     List OnClickEvent;
     Bool isToggled;
+    int log;
 } Trigger;
 
 Trigger* createTrigger(Rect rect, int _vkey){
@@ -227,6 +228,8 @@ Trigger* createTrigger(Rect rect, int _vkey){
     t->OnClickEvent.tail=NULL;
 
     t->isToggled=False;
+
+    t->log=0;
 
     appendNode(t, &Triggers);
 
@@ -383,8 +386,9 @@ int deleteTrigger(Trigger* t){
     Node* en=t->OnClickEvent.head;
 
     while(en!=NULL){
-        en=en->next;
+        Node* temp=en->next;
         free(en);
+        en=temp;
     }
 
     free(t);
@@ -396,8 +400,9 @@ int deleteTriggers(void){
     while(n!=NULL){
         deleteTrigger(n->pData);
 
-        n=n->next;
+        Node* temp=n->next;
         free(n);
+        n=temp;
     }
 
     return 0;
@@ -440,15 +445,24 @@ int drawScreen(void){
     return 0;
 }
 
-void lambda1(Trigger* t){
-    static int log=0;
-    if(log==0){
-        showTrigger(t);
-        log=1;
-    }
-    else {
+
+
+
+
+
+
+
+
+
+
+void buttonAnimation(Trigger* t){
+    if((t->log)&0x1){
         hideTrigger(t);
-        log=0;
+        t->log=((t->log)&(-1U-0x1));
+    }
+    else{
+        showTrigger(t);
+        t->log=(t->log)|0x1;
     }
 }
 
@@ -463,22 +477,25 @@ int main(void){
 
     initEventTriggerList();
 
-    Rect rect;
-    rect.Left=4;
-    rect.Right=12;
-    rect.Top=3;
-    rect.Bottom=6;
+    Rect rectw={5, 3, 6, 4};
+    Rect recta={3, 5, 4, 6};
+    Rect rects={5, 5, 6, 6};
+    Rect rectd={7, 5, 8, 6};
 
-    Trigger* t=createTrigger(rect, VK_SPACE);
+    Trigger* tw=createTrigger(rectw, 'W');
+    Trigger* ta=createTrigger(recta, 'A');
+    Trigger* ts=createTrigger(rects, 'S');
+    Trigger* td=createTrigger(rectd, 'D');
 
     // Appensasdsdaaaaaaa
-    appendEvent(t, lambda1);
+    appendEvent(tw, buttonAnimation);
+    appendEvent(ta, buttonAnimation);
+    appendEvent(ts, buttonAnimation);
+    appendEvent(td, buttonAnimation);
+
 
     while(True){
-        int ks=GetKeyState(VK_ESCAPE);
-        ks&=0x8000;
-
-        if(ks) break;
+        if(GetKeyState(VK_ESCAPE)&0x8000) break;
         copyScreenFromBG();
 
         getKBInput();

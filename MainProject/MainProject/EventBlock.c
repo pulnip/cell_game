@@ -176,8 +176,9 @@ int deleteTrigger(Trigger* t){
     Node* en=t->OnClickEvent.head;
 
     while(en!=NULL){
-        en=en->next;
+        Node* temp=en->next;
         free(en);
+        en=temp;
     }
 
     free(t);
@@ -189,8 +190,9 @@ int deleteTriggers(void){
     while(n!=NULL){
         deleteTrigger(n->pData);
 
-        n=n->next;
+        Node* temp=n->next;
         free(n);
+        n=temp;
     }
 
     return 0;

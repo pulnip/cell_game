@@ -15,6 +15,8 @@ typedef struct _Trigger{
     int key;
     List OnClickEvent;
     Bool isToggled;
+    int log;
+    #error "delete static things"
 } Trigger;
 
 typedef void (*TriggerEvent)(Trigger*);
