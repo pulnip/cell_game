@@ -482,17 +482,21 @@ int main(void){
     Rect rects={5, 5, 6, 6};
     Rect rectd={7, 5, 8, 6};
 
+    Rect rect_button={4, 3, 12, 6};
+
     Trigger* tw=createTrigger(rectw, 'W');
     Trigger* ta=createTrigger(recta, 'A');
     Trigger* ts=createTrigger(rects, 'S');
     Trigger* td=createTrigger(rectd, 'D');
 
-    // Appensasdsdaaaaaaa
+    Trigger* t_button=createTrigger(rect_button, VK_SPACE);
+
     appendEvent(tw, buttonAnimation);
     appendEvent(ta, buttonAnimation);
     appendEvent(ts, buttonAnimation);
     appendEvent(td, buttonAnimation);
-
+    
+    appendEvent(t_button, buttonAnimation);
 
     while(True){
         if(GetKeyState(VK_ESCAPE)&0x8000) break;
