@@ -606,27 +606,17 @@ int main(void){
 
     initEventTriggerList();
 
-    Rect rectw={5, 3, 6, 4};
-    Rect recta={3, 5, 4, 6};
-    Rect rects={5, 5, 6, 6};
-    Rect rectd={7, 5, 8, 6};
+    Rect rectq={3, 34, 19, 35};
+    Rect rectw={22, 34, 31, 35};
 
-    Rect rect_button={4, 3, 12, 6};
 
-    Trigger* t_button=createTrigger(rect_button, VK_SPACE);
-
+    Trigger* tq=createTrigger(rectq, 'Q');
     Trigger* tw=createTrigger(rectw, 'W');
-    Trigger* ta=createTrigger(recta, 'A');
-    Trigger* ts=createTrigger(rects, 'S');
-    Trigger* td=createTrigger(rectd, 'D');
 
-    appendOnKeyDownEvent(tw, ToggleButtonAnimation);
-    appendKeyDownEvent(ta, ToggleButtonAnimation);
-    appendOnKeyUpEvent(ts, ToggleButtonAnimation);
-    appendKeyUpEvent(td, ToggleButtonAnimation);
-    
-    appendOnKeyDownEvent(t_button, ToggleButtonAnimation);
-    
+    appendOnKeyDownEvent(tq, ToggleButtonAnimation);
+    appendOnKeyDownEvent(tw, (TriggerEvent)showTrigger);
+    appendOnKeyUpEvent(tw, (TriggerEvent)hideTrigger);
+        
     while(True){
         if(GetKeyState(VK_ESCAPE)&0x8000) break;
         copyScreenFromBG();
