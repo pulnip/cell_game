@@ -13,7 +13,7 @@ int readScreenFromFile(){
     fopen_s(&map_in, SCREEN_FILE_PATH, "rt");
     fopen_s(&log, ".\\log.txt", "wt");
 #else
-    FILE* map_in=fopen(MAP_FILE_PATH, "rt");
+    FILE* map_in=fopen(SCREEN_FILE_PATH, "rt");
     FILE* log=fopen(".\\log.txt", "wt");
 #endif
     if((map_in==NULL)||(log==NULL)){

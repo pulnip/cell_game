@@ -2,50 +2,63 @@
 #include "LinkedList.h"
 
 int initList(List* list){
+    if(list==NULL) return 1;
+
     list->head=NULL;
     list->tail=NULL;
+
+    return 0;
 }
 
-int appendNode(const pObject const _pObject, List* list){
-    if(_pObject==NULL) return 1;
+int appendNode(const pObject const _pObj, List* list){
+    if((_pObj==NULL)||(list==NULL)) return 1;
 
     Node* newNode=(Node*)malloc(sizeof(Node));
     if(newNode==NULL){
         return 1;
     }
-    newNode->pData=_pObject;
+    newNode->pObject=_pObj;
     newNode->next=NULL;
 
     if(list->tail==NULL){
-        list->head=list->tail=newNode;
+        list->head=newNode;
+        list->tail=newNode;
     }
     else{
         list->tail->next=newNode;
         list->tail=newNode;
     }
-
     return 0;
 }
 
-int deleteNode(const pObject const _pObject, List* list){
+pObject removeNode(const pObject const _pObj, List* list){
+    if((_pObj==NULL)||(list==NULL)) return 1;
+
     Node* aheadNode=NULL;
     Node* rmNode=list->head;
+    pObject res=NULL;
 
-    if(list->head!=NULL){
-        while(_pObject!=rmNode->pData){
-            aheadNode=rmNode;
-            rmNode=rmNode->next;
-            if(rmNode==NULL) break;
-        }
+    while(rmNode!=NULL){
+        if(rmNode->pObject==_pObj) break;
 
-        if(rmNode!=NULL){
-            aheadNode->next=rmNode->next;
-
-            return 0;
-        }
-        else return 1;
+        aheadNode=rmNode;
+        rmNode=rmNode->next;
     }
-    else return 1;
+
+    res=rmNode->pObject;
+    if     (rmNode==list->head) list->head=rmNode->next;
+    else if(rmNode==list->tail) list->tail=aheadNode;
+    else                        aheadNode->next=rmNode->next;
+    free(rmNode);
+
+    return res;
+}
+int deleteNode(const pObject const _pObj, List* list){
+    pObject lastRef=removeNode(_pObj, list);
+    if(lastRef==NULL) return 1;
+
+    free(lastRef);
+    return 0;
 }
 
 int destroyNode(const pObject const _pObject, List* list){
@@ -53,7 +66,7 @@ int destroyNode(const pObject const _pObject, List* list){
     Node* rmNode=list->head;
 
     if(list->head!=NULL){
-        while(_pObject!=rmNode->pData){
+        while(_pObject!=rmNode->pObject){
             aheadNode=rmNode;
             rmNode=rmNode->next;
             if(rmNode==NULL) break;
@@ -61,7 +74,7 @@ int destroyNode(const pObject const _pObject, List* list){
 
         if(rmNode!=NULL){
             aheadNode->next=rmNode->next;
-            free(rmNode->pData);
+            free(rmNode->pObject);
             free(rmNode);
 
             return 0;
@@ -87,17 +100,44 @@ size_t getListLen(List* list){
     }
 }
 
-void destroyList(List* list){
-    while( (list->head)==(list->tail) ){
-        Node* temp=list->head->next;
-        free(list->head->pData);
-        free(list->head);
-        list->head=temp;
+int eraseStaticDataList(List* const list) {
+    if(list==NULL) return 1;
+
+    Node* n=list->head;
+    list->head=NULL;
+
+    while(n!=NULL){
+        Node* temp=n->next;
+        free(n);
+
+        n=temp;
     }
 
-    list->tail==NULL;
-    free(list->head->pData);
-    free(list->head);
+    list->tail=NULL;
+
+    return 0;
+}
+int eraseDynamicDataList(List* const list) {
+    if(list==NULL) return 1;
+
+    Node* n=list->head;
+    list->head=NULL;
+
+    while(n!=NULL){
+        Node* temp=n->next;
+        free(n->pObject);
+        free(n);
+
+        n=temp;
+    }
+
+    list->tail=NULL;
+
+    return 0;
+}
+int deleteList(List* list){
+    if(list==NULL) return 1;
 
     free(list);
+    return 0;
 }

@@ -48,16 +48,13 @@ void getKBInput(){
     for(int i=0; i<0x100; ++i){
         KeyState lastState=keys[i];
         
-        #error "CHECK VALUE"
         short tmpKey=GetKeyState(i);
-        keys[i].bPressed = (tmpKey&0x1000)>>(sizeof(short)-1);
+        keys[i].bPressed = (tmpKey&0x8000)>>(8*sizeof(short)-1)&0x1;
         keys[i].bToggled = tmpKey&0x1;
 
-        Bool isChanged=
-            (lastState.bPressed^keys[i].bPressed) |
-            (lastState.bToggled^keys[i].bToggled);
+        Bool isChanged=(lastState.bPressed)^(keys[i].bPressed);
         
-        keys[i].bKeyDown = keys[i].bPressed & isChanged;
+        keys[i].bKeyDown =  keys[i].bPressed & isChanged;
         keys[i].bKeyUp   = !keys[i].bPressed & isChanged;
     }
 }

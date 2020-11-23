@@ -13,15 +13,17 @@ typedef struct _Trigger{
     Bool isHidden;
     Rect pos;
     int key;
-    List OnClickEvent;
-    Bool isToggled;
+    List OnKeyDownEvent;
+    List KeyDownEvent;
+    List OnKeyUpEvent;
+    List KeyUpEvent;
     int log;
-    #error "delete static things"
 } Trigger;
 
 typedef void (*TriggerEvent)(Trigger*);
 
 extern List Triggers;
+// all Trigger must be in Triggers.
 
 int initTriggerList(void);
 
@@ -40,16 +42,35 @@ Rect getPos(Trigger*);
 int setKey(Trigger*, int _vkey);
 int getKey(Trigger*);
 
-int appendEvent(Trigger*, TriggerEvent func);
-int deleteEvent(Trigger*, TriggerEvent func);
+int appendOnKeyDownEvent(Trigger*, TriggerEvent func);
+int appendKeyDownEvent(Trigger*, TriggerEvent func);
+int appendOnKeyUpEvent(Trigger*, TriggerEvent func);
+int appendKeyUpEvent(Trigger*, TriggerEvent func);
 
+int removeOnKeyDownEvent(Trigger*, TriggerEvent func);
+int removeKeyDownEvent(Trigger*, TriggerEvent func);
+int removeOnKeyUpEvent(Trigger*, TriggerEvent func);
+int removeKeyUpEvent(Trigger*, TriggerEvent func);
+
+int drawTrigger(Trigger*);
 int drawTriggers(void);
 
 int checkTriggered(void);
 // check by bKeyDown (call Event once).
-int runTriggerEvent(Trigger*);
+int runOnKeyDownEvent(Trigger*);
+int runKeyDownEvent(Trigger*);
+int runOnKeyUpEvent(Trigger*);
+int runKeyUpEvent(Trigger*);
 
 int deleteTrigger(Trigger*);
 int deleteTriggers(void);
+
+// <AnimationEvent>
+void ButtonShowAnimation(Trigger*);
+void ButtonHideAnimation(Trigger*);
+// just for type conversion
+void ToggleButtonAnimation(Trigger*);
+// </AnimationEvent>
+
 
 #endif // __INC_EVENT_BLOCK
