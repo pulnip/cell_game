@@ -32,7 +32,7 @@ int appendNode(const pObject const _pObj, List* list){
 }
 
 pObject removeNode(const pObject const _pObj, List* list){
-    if((_pObj==NULL)||(list==NULL)) return 1;
+    if((_pObj==NULL)||(list==NULL)) return NULL;
 
     Node* aheadNode=NULL;
     Node* rmNode=list->head;
