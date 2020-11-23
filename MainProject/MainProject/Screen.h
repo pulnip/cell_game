@@ -1,5 +1,5 @@
-#ifndef __INC_MAP
-#define __INC_MAP
+#ifndef __INC_SCREEN
+#define __INC_SCREEN
 
 #ifndef __INC_BASE
 #include "base.h"
@@ -80,8 +80,16 @@ CONSOLE_WIDTH
 
 #endif // MAP_SIZE
 
+extern CHAR_INFO background[CONSOLE_HEIGHT][CONSOLE_WIDTH];
+extern CHAR_INFO screen[CONSOLE_HEIGHT][CONSOLE_WIDTH];
 
-#define MAP_FILE_PATH ".\\map.txt"
+#define SCREEN_FILE_PATH ".\\screen.txt"
 int readScreenFromFile(void);
+// copy from screen.txt to background
+int copyScreenFromBG(void);
+// copy from background to screen
 
-#endif // __INC_MAP
+int drawScreen(void);
+
+
+#endif // __INC_SCREEN

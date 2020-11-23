@@ -9,45 +9,68 @@
 #include "LinkedList.h"
 #endif
 
-typedef struct _ToggleButton{
-    int id;
+typedef struct _Trigger{
     Bool isHidden;
     Rect pos;
     int key;
-    List OnClickEvent;
-    Bool isToggled;
-} ToggleButton;
+    List OnKeyDownEvent;
+    List KeyDownEvent;
+    List OnKeyUpEvent;
+    List KeyUpEvent;
+    int log;
+} Trigger;
 
-typedef void (*ToggleButtonEvent)(ToggleButton*);
+typedef void (*TriggerEvent)(Trigger*);
 
-extern List ToggleButtons;
+extern List Triggers;
+// all Trigger must be in Triggers.
 
 int initTriggerList(void);
 
-int checkToggleButtonArg(Rect, int _vkey);
-int createToggleButton(Rect, int _vkey);
-// if success, return id of ToggleButton (Non-zero),
+int checkTriggerArg(Rect, int _vkey);
+Trigger* createTrigger(Rect, int _vkey);
+// if success, return id of Trigger (Non-zero),
 // else return 0
 
-// EventBlock spec func
-ToggleButton* searchTrigger(int id);
+int showTrigger(Trigger*);
+int hideTrigger(Trigger*);
+int getIsHidden(Trigger*);
 
-int showTrigger(int _id);
-int hideTrigger(int _id);
-int getIsHidden(int _id);
+int setPos(Trigger*, Rect pos);
+Rect getPos(Trigger*);
 
-int setPos(int _id, Rect pos);
-Rect getPos(int _id);
+int setKey(Trigger*, int _vkey);
+int getKey(Trigger*);
 
-int setKey(int _id, int _vkey);
-int getKey(int _id);
+int appendOnKeyDownEvent(Trigger*, TriggerEvent func);
+int appendKeyDownEvent(Trigger*, TriggerEvent func);
+int appendOnKeyUpEvent(Trigger*, TriggerEvent func);
+int appendKeyUpEvent(Trigger*, TriggerEvent func);
 
-int appendEvent(int _id, ToggleButtonEvent func);
-int deleteEvent(int _id, ToggleButtonEvent func);
+int removeOnKeyDownEvent(Trigger*, TriggerEvent func);
+int removeKeyDownEvent(Trigger*, TriggerEvent func);
+int removeOnKeyUpEvent(Trigger*, TriggerEvent func);
+int removeKeyUpEvent(Trigger*, TriggerEvent func);
 
-int drawToggleButtons(void);
+int drawTrigger(Trigger*);
+int drawTriggers(void);
 
 int checkTriggered(void);
-int runToggleButtonEvent(ToggleButton*);
+// check by bKeyDown (call Event once).
+int runOnKeyDownEvent(Trigger*);
+int runKeyDownEvent(Trigger*);
+int runOnKeyUpEvent(Trigger*);
+int runKeyUpEvent(Trigger*);
+
+int deleteTrigger(Trigger*);
+int deleteTriggers(void);
+
+// <AnimationEvent>
+void ButtonShowAnimation(Trigger*);
+void ButtonHideAnimation(Trigger*);
+// just for type conversion
+void ToggleButtonAnimation(Trigger*);
+// </AnimationEvent>
+
 
 #endif // __INC_EVENT_BLOCK
