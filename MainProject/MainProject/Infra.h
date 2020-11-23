@@ -1,9 +1,9 @@
 #ifndef __INC_INFRA
 #define __INC_INFRA
 
-#ifndef __INC_BASE
-#include "base.h"
-#endif
+#include "SuperHeader.h"
+
+#include <Windows.h>
 
 typedef struct _KeyState{
     Bool bKeyDown;
@@ -47,6 +47,10 @@ int FastEscape();
 
 int setConsoleDefault();
 void getKBInput();
+void waitUntilKeyInput();
+
 void filterPixelToCI();
+
+void makeTrigger();
 
 #endif // __INC_INFRA

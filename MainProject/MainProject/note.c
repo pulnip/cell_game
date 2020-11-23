@@ -4,7 +4,7 @@
 #define CONSOLE_WIDTH 120
 #define CONSOLE_HEIGHT 40
 
-#define MAP_FILE_PATH ".\\map.txt"
+#define MAP_FILE_PATH ".\\screen.txt"
 
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -603,9 +603,7 @@ int main(void){
     // <write screen>
     if (setConsoleDefault() ||
         readScreenFromFile()
-    ) {   
-        return 1;
-    }
+    ) return 1;
     drawScreen();
 
     initEventTriggerList();

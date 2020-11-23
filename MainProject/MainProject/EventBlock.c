@@ -1,10 +1,11 @@
-#include "EventBlock.h"
 #include "Screen.h"
 #include "Infra.h"
 
+#include "EventBlock.h"
+
 List Triggers;
 
-int initEventTriggerList(void){
+int initTriggers(void){
     Triggers.head=NULL;
     Triggers.tail=NULL;
 }
@@ -257,10 +258,10 @@ int runKeyUpEvent(Trigger* t){
 int deleteTrigger(Trigger* t){
     if(t==NULL) return 1;
 
-    eraseStaticDataList(&(t->OnKeyDownEvent));
-    eraseStaticDataList(&(t->  KeyDownEvent));
-    eraseStaticDataList(&(t->OnKeyUpEvent  ));
-    eraseStaticDataList(&(t->  KeyUpEvent  ));
+    eraseStaticObjectList(&(t->OnKeyDownEvent));
+    eraseStaticObjectList(&(t->  KeyDownEvent));
+    eraseStaticObjectList(&(t->OnKeyUpEvent  ));
+    eraseStaticObjectList(&(t->  KeyUpEvent  ));
 
     return deleteNode(t, &Triggers);
 }

@@ -1,14 +1,14 @@
 #ifndef __INC_LINKED_LIST
 #define __INC_LINKED_LIST
 
-#ifndef __INC_BASE
-#include "base.h"
-#endif
+#include "SuperHeader.h"
+
+#include <stdlib.h>
 
 typedef void* pObject;
 
 typedef struct _Node{
-    Node* next;
+    struct _Node* next;
     pObject pObject;
 } Node;
 

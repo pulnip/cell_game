@@ -1,10 +1,9 @@
 #ifndef __INC_SCREEN
 #define __INC_SCREEN
 
-#ifndef __INC_BASE
-#include "base.h"
-#endif
+#include "SuperHeader.h"
 
+#include <Windows.h>
 /* Preview
 
 CONSOLE_WIDTH
@@ -53,20 +52,6 @@ CONSOLE_WIDTH
 
 // range expression standard: [a, b)
 
-#ifndef CONSOLE_SIZE
-#define CONSOLE_SIZE
-
-#define CONSOLE_TOP 0
-#define CONSOLE_BOTTOM 40
-#define CONSOLE_LEFT 0
-#define CONSOLE_RIGHT 120
-
-#define CONSOLE_WIDTH CONSOLE_RIGHT-CONSOLE_LEFT
-#define CONSOLE_HEIGHT CONSOLE_BOTTOM-CONSOLE_TOP
-
-#endif // CONSOLE_SIZE
-
-
 #ifndef MAP_SIZE
 #define MAP_SIZE
 
@@ -82,6 +67,9 @@ CONSOLE_WIDTH
 
 extern CHAR_INFO background[CONSOLE_HEIGHT][CONSOLE_WIDTH];
 extern CHAR_INFO screen[CONSOLE_HEIGHT][CONSOLE_WIDTH];
+
+int initScreen();
+int updateScreen();
 
 #define SCREEN_FILE_PATH ".\\screen.txt"
 int readScreenFromFile(void);

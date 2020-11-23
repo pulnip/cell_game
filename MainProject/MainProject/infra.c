@@ -1,8 +1,10 @@
-#include <Windows.h>
-
-#include "base.h"
-#include "Infra.h"
 #include "Screen.h"
+#include "Game.h"
+#include "EventBlock.h"
+
+#include "Infra.h"
+
+#include <Windows.h>
 
 HANDLE hStdOut;
 CONSOLE_SCREEN_BUFFER_INFO csbi;
@@ -10,13 +12,32 @@ CONSOLE_SCREEN_BUFFER_INFO csbi;
 KeyState keys[0x100];
 
 int setInfra(){
-    setConsoleDefault();
-
-    initMapToStartScreen();
+    if (setConsoleDefault() ||
+        readScreenFromFile()
+    ) return 1;
     drawScreen();
+
+    initTriggers();
+    makeTrigger();
     // add ...
 
     waitUntilKeyInput();
+
+    return 0;
+}
+
+int updateSystem(){
+    getKBInput();
+    checkTriggered();
+    drawTriggers();
+
+    return 0;
+}
+
+int deleteData(){
+    deleteTriggers();
+
+    return 0;
 }
 
 int FastEscape(){
@@ -59,7 +80,7 @@ void getKBInput(){
     }
 }
 
-int waitUntilKeyInput(){
+void waitUntilKeyInput(){
     Bool isAnyKeyPressed=False;
     do{
         getKBInput();
@@ -97,4 +118,16 @@ void filterPixelToCI(){
             }
         }
     }
+}
+
+void makeTrigger(){
+    Rect rectq={3, 34, 19, 35};
+    Rect rectw={22, 34, 31, 35};
+
+    Trigger* tq=createTrigger(rectq, 'Q');
+    Trigger* tw=createTrigger(rectw, 'W');
+
+    appendOnKeyDownEvent(tq, ToggleButtonAnimation);
+    appendOnKeyDownEvent(tw, ButtonShowAnimation);
+    appendOnKeyUpEvent(tw, ButtonHideAnimation);
 }

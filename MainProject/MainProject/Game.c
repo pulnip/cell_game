@@ -1,19 +1,28 @@
-#include "base.h"
 #include "Game.h"
 
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
+
+const int defaultHP=10;
+
+Pixel map[CONSOLE_HEIGHT][CONSOLE_WIDTH];
+Bool game_over;
 
 int initGame(void){
     srand(time(NULL));
     initMap();
-    spreadFoodOnMap();
+    spreadFood();
+
+    return 0;
 }
 
 int updateGame(void){
-    if(getFoodAmount() < MaxFoodRegen){
-        spreadFoodOnMap();
-    }
+    // if(getFoodAmount() < MaxFoodRegen){
+    //     spreadFood();
+    // }
+
+    return 0;
 }
 
 int initMap(){
@@ -22,11 +31,11 @@ int initMap(){
 
 int updateMap(){
     if(getFoodAmount() < MaxFoodRegen){
-        spreadFoodOnMap();
+        spreadFood();
     }
 
     if(getPointAmount() < MaxPointRegen){
-        spreadPointOnMap();
+        spreadPoint();
     }
 }
 

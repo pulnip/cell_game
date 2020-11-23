@@ -1,4 +1,3 @@
-#include "base.h"
 #include "LinkedList.h"
 
 int initList(List* list){
@@ -100,7 +99,7 @@ size_t getListLen(List* list){
     }
 }
 
-int eraseStaticDataList(List* const list) {
+int eraseStaticObjectList(List* const list) {
     if(list==NULL) return 1;
 
     Node* n=list->head;
@@ -117,7 +116,7 @@ int eraseStaticDataList(List* const list) {
 
     return 0;
 }
-int eraseDynamicDataList(List* const list) {
+int eraseDynamicObjectList(List* const list) {
     if(list==NULL) return 1;
 
     Node* n=list->head;

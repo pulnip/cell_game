@@ -1,13 +1,8 @@
 #ifndef __INC_EVENT_BLOCK
 #define __INC_EVENT_BLOCK
 
-#ifndef __INC_BASE
-#include "base.h"
-#endif
-
-#ifndef __INC_LINKED_LIST
+#include "SuperHeader.h"
 #include "LinkedList.h"
-#endif
 
 typedef struct _Trigger{
     Bool isHidden;
@@ -25,7 +20,7 @@ typedef void (*TriggerEvent)(Trigger*);
 extern List Triggers;
 // all Trigger must be in Triggers.
 
-int initTriggerList(void);
+int initTriggers(void);
 
 int checkTriggerArg(Rect, int _vkey);
 Trigger* createTrigger(Rect, int _vkey);
