@@ -4,6 +4,8 @@
 #include "SuperHeader.h"
 
 #include <time.h>
+#include <stdio.h>
+#include <Windows.h>
 
 int OnStart();
 int OnUpdate(time_t ElapsedTime);

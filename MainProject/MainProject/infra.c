@@ -1,10 +1,9 @@
-#include "Screen.h"
 #include "Game.h"
+
+#include "Screen.h"
 #include "EventBlock.h"
 
 #include "Infra.h"
-
-#include <Windows.h>
 
 HANDLE hStdOut;
 CONSOLE_SCREEN_BUFFER_INFO csbi;

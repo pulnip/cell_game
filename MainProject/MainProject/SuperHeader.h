@@ -1,6 +1,10 @@
 #ifndef __SUPER_HEADER
 #define __SUPER_HEADER
 
+#define _INT_FUNC_NOT_IMPLEMENT { return 0; }
+#define _VOID_FUNC_NOT_IMPLEMENT { }
+
+
 #ifndef True
 #define True 1
 #define False 0

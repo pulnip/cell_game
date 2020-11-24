@@ -1,4 +1,12 @@
-#include "CellBehaviours.h"
+#include "Cell.h"
+
+pBEHAVIOUR_t const BehaviourList[]={
+    seeEnemy, seeFriend, seeFood,
+    moveCloser, moveFurther,
+    getFood, getPoint,
+    doCannibal,
+    divide
+};
 
 // <Sensoring>
 
@@ -76,17 +84,14 @@ void seeFood(Cell* const pCell){
 
 
 // <movement>
-
-void moveCloser(Cell* const pCell){
-
-}
-
-BEHAVIOUR_t moveCloser;
-BEHAVIOUR_t moveFurther;
 // it is about the Sight.
 
-BEHAVIOUR_t getFoodFromMap;
-BEHAVIOUR_t getPointFromMap;
-BEHAVIOUR_t doCannibal;
+void moveCloser(Cell* const pCell) _VOID_FUNC_NOT_IMPLEMENT
+void moveFurther(Cell* const pCell) _VOID_FUNC_NOT_IMPLEMENT
+// </movement>
 
-BEHAVIOUR_t divide;
+void getFood(Cell* const pCell) _VOID_FUNC_NOT_IMPLEMENT
+void getPoint(Cell* const pCell) _VOID_FUNC_NOT_IMPLEMENT
+void doCannibal(Cell* const pCell) _VOID_FUNC_NOT_IMPLEMENT
+
+void divide(Cell* const pCell) _VOID_FUNC_NOT_IMPLEMENT

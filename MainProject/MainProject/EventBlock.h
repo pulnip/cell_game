@@ -4,6 +4,10 @@
 #include "SuperHeader.h"
 #include "LinkedList.h"
 
+#include "Screen.h"
+
+#include <windows.h>
+
 typedef struct _Trigger{
     Bool isHidden;
     Rect pos;

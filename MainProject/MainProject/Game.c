@@ -1,10 +1,6 @@
+#include "Cell.h"
+
 #include "Game.h"
-
-#include <stdlib.h>
-#include <time.h>
-#include <string.h>
-
-const int defaultHP=10;
 
 Pixel map[CONSOLE_HEIGHT][CONSOLE_WIDTH];
 Bool game_over;
