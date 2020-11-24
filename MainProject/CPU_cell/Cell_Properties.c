@@ -8,12 +8,9 @@
 #include "Game.h"
 #include "CPU_cell_notice"
 
-//세포의 종류
+
 //세포의 유전 정보 테크트리
 
-
-#define Defensive_cell
-#define Mobility_cell
 
 #define Recognize_ability
 #define Agrresive_ability
