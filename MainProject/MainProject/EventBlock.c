@@ -5,6 +5,8 @@ List Triggers;
 int initTriggers(void){
     Triggers.head=NULL;
     Triggers.tail=NULL;
+
+    return 0;
 }
 
 int checkTriggerArg(Rect rect, int _vkey){
@@ -85,8 +87,7 @@ int setPos(Trigger* t, Rect pos){
 
 Rect getPos(Trigger* t){
     if(t==NULL) return (Rect){0, 0, 0, 0}; // return null Rect
-
-    return t->pos;
+    else return t->pos;
 }
 
 int setKey(Trigger* t, int _vkey){
@@ -286,7 +287,7 @@ void ButtonHideAnimation(Trigger* t){
 void ToggleButtonAnimation(Trigger* t){
     if((t->log)&0x1){
         hideTrigger(t);
-        t->log=((t->log)&(-1U-0x1));
+        t->log=((t->log)&0xfffffffeU);
     }
     else{
         showTrigger(t);

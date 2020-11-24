@@ -19,7 +19,7 @@ typedef struct _Cell{
     Coord pos;
     int hp;
     Coord forward;
-    // 탐색한 것의 위치 좌표
+    // The location coordinates of the searched
 } Cell;
 
 typedef void (BEHAVIOUR_t)(Cell*);

@@ -9,7 +9,7 @@ int initList(List* list){
     return 0;
 }
 
-int appendNode(const pObject const _pObj, List* list){
+int appendNode(pObject _pObj, List* list){
     if((_pObj==NULL)||(list==NULL)) return 1;
 
     Node* newNode=(Node*)malloc(sizeof(Node));
@@ -30,57 +30,39 @@ int appendNode(const pObject const _pObj, List* list){
     return 0;
 }
 
-pObject removeNode(const pObject const _pObj, List* list){
+pObject removeNode(pObject _pObj, List* list){
     if((_pObj==NULL)||(list==NULL)) return NULL;
 
     Node* aheadNode=NULL;
     Node* rmNode=list->head;
+    if (rmNode == NULL) return NULL;
     pObject res=NULL;
 
     while(rmNode!=NULL){
-        if(rmNode->pObject==_pObj) break;
+        if (rmNode->pObject == _pObj) {
+            res = rmNode->pObject;
+            break;
+        }
 
         aheadNode=rmNode;
         rmNode=rmNode->next;
     }
 
-    res=rmNode->pObject;
     if     (rmNode==list->head) list->head=rmNode->next;
     else if(rmNode==list->tail) list->tail=aheadNode;
-    else                        aheadNode->next=rmNode->next;
+    else {
+        if (rmNode != NULL) aheadNode->next = rmNode->next;
+    }
     free(rmNode);
 
     return res;
 }
-int deleteNode(const pObject const _pObj, List* list){
+int deleteNode(pObject _pObj, List* list){
     pObject lastRef=removeNode(_pObj, list);
     if(lastRef==NULL) return 1;
 
     free(lastRef);
     return 0;
-}
-
-int destroyNode(const pObject const _pObject, List* list){
-    Node* aheadNode=NULL;
-    Node* rmNode=list->head;
-
-    if(list->head!=NULL){
-        while(_pObject!=rmNode->pObject){
-            aheadNode=rmNode;
-            rmNode=rmNode->next;
-            if(rmNode==NULL) break;
-        }
-
-        if(rmNode!=NULL){
-            aheadNode->next=rmNode->next;
-            free(rmNode->pObject);
-            free(rmNode);
-
-            return 0;
-        }
-        else return 1;
-    }
-    else return 1;
 }
 
 size_t getListLen(List* list){

@@ -6,7 +6,7 @@ Pixel map[CONSOLE_HEIGHT][CONSOLE_WIDTH];
 Bool game_over;
 
 int initGame(void){
-    srand(time(NULL));
+    srand((unsigned int)time(NULL));
     initMap();
     spreadFood();
 
