@@ -27,16 +27,13 @@
     <ClCompile Include="LinkedList.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="__old_Game.c">
+    <ClCompile Include="Cell.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CellBehaviours.c">
+    <ClCompile Include="EventBlock.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Map.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="note.c">
+    <ClCompile Include="Screen.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,21 +47,27 @@
     <ClInclude Include="LinkedList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CellBehaviours.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Map.h">
+    <ClInclude Include="EventBlock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Screen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SuperHeader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cell.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="map.txt">
+    <Text Include="log.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="log.txt">
+    <Text Include="screen.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

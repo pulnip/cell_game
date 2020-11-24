@@ -1,9 +1,22 @@
 #include "Screen.h"
 #include "Infra.h"
 
+#include <stdio.h>
 #include <windows.h>
 CHAR_INFO background[CONSOLE_HEIGHT][CONSOLE_WIDTH];
 CHAR_INFO screen[CONSOLE_HEIGHT][CONSOLE_WIDTH];
+
+int initScreen(){
+    copyScreenFromBG();
+
+    return 0;
+}
+
+int updateScreen(){
+    drawScreen();
+
+    return 0;
+}
 
 int readScreenFromFile(){
 
@@ -13,7 +26,7 @@ int readScreenFromFile(){
     fopen_s(&map_in, SCREEN_FILE_PATH, "rt");
     fopen_s(&log, ".\\log.txt", "wt");
 #else
-    FILE* map_in=fopen(MAP_FILE_PATH, "rt");
+    FILE* map_in=fopen(SCREEN_FILE_PATH, "rt");
     FILE* log=fopen(".\\log.txt", "wt");
 #endif
     if((map_in==NULL)||(log==NULL)){

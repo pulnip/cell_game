@@ -1,21 +1,10 @@
-#ifndef __INC_SCREEN
-#define __INC_SCREEN
-
-#include "SuperHeader.h"
-
-#include "Infra.h"
-
-#include <Windows.h>
-/* Preview
-
-CONSOLE_WIDTH
-0#########1#########2#########3#########4#########5#########6#########7#########8#########9#########A#########B#########C
+0#########1#########2#########3#########4#########5#########6#########7#########8#########9#########A#########B#########4
 #+--------------------------------------------------------------------------------------------------------------------+#
-#|MAP_WIDTH                                                                                                           |#
 #|                                                                                                                    |#
-#|   MAP                                                                                                              |#
+#|   W                                                                                                                |#
+#|   BUTTON                                                                                                           |#
+#| A S D                                                                                                              |#
 #|                                                                                                                    |#
-#|MAP_HEIGHT                                                                                                          |#
 #|                                                                                                                    |#
 #|                                                                                                                    |#
 #|                                                                                                                    |#
@@ -24,7 +13,7 @@ CONSOLE_WIDTH
 #|                                                                                                                    |#
 #|                                                                                                                    |#
 #|                                                                                                                    |#
-#|                                                                                                                    |#
+#|                                             GAME_START!                                                            |#
 #|                                                                                                                    |#
 #|                                                                                                                    |#
 #|                                                                                                                    |#
@@ -43,75 +32,21 @@ CONSOLE_WIDTH
 #                                                                                                                      #
 # GAME_INFORMATION AND STAT                                                                                            #
 #                                                                                                                      #
-#                                                                                                                      #
+#  Q(Toggle Button)   W(Button)                                                                                        #
 #                                                                                                                      #
 #                                                                                                                      #
 #                                                                                                                      #
 #                                                                                                                      #
 0#########1#########2#########3#########4#########5#########6#########7#########8#########9#########A#########B#########C
 4                                                                                                                      4
-*/
 
-// range expression standard: [a, b)
+#Size Information
 
-enum Color{
-    FG_BLACK  =0x00,
-    FG_BLUE   =0x01,
-    FG_GREEN  =0x02,
-    FG_CYAN   =0x03,
-    FG_RED    =0x04,
-    FG_MAGENTA=0x05,
-    FG_YELLOW =0x06,
-    FG_WHITE  =0x07,
+Program will not read Info.
+But this info is just for convenience.
 
-    FG_INTENSE=0x08,
+CONSOLE_WIDTH = 120
+CONSOLE_HEIGHT= 40
 
-    BG_BLACK  =0x00,
-    BG_BLUE   =0x10,
-    BG_GREEN  =0x20,
-    BG_CYAN   =0x30,
-    BG_RED    =0x40,
-    BG_MAGENTA=0x50,
-    BG_YELLOW =0x60,
-    BG_WHITE  =0x70,
-
-    BG_INTENSE=0x80
-};
-
-#ifndef __INC_CELL
-typedef enum _isCell{
-    NoCell   =0,
-    UserCell =1,
-    CPUCell  =2
-} isCell;
-#endif
-
-#ifndef MAP_SIZE
-#define MAP_SIZE
-
-#define MAP_TOP CONSOLE_TOP+1 
-#define MAP_BOTTOM CONSOLE_BOTTOM*3/4
-#define MAP_LEFT CONSOLE_LEFT+1
-#define MAP_RIGHT CONSOLE_RIGHT-1
-
-#define MAP_WIDTH MAP_RIGHT-MAP_LEFT
-#define MAP_HEIGHT MAP_BOTTOM-MAP_TOP
-
-#endif // MAP_SIZE
-
-extern CHAR_INFO background[CONSOLE_HEIGHT][CONSOLE_WIDTH];
-extern CHAR_INFO screen[CONSOLE_HEIGHT][CONSOLE_WIDTH];
-
-int initScreen();
-int updateScreen();
-
-#define SCREEN_FILE_PATH ".\\screen.txt"
-int readScreenFromFile(void);
-// copy from screen.txt to background
-int copyScreenFromBG(void);
-// copy from background to screen
-
-int drawScreen(void);
-
-
-#endif // __INC_SCREEN
+MAP_WIDTH = CONSOLE_WIDTH -2
+MAP_HEIGHT= CONSOLE_HEIGHT *(3/4)

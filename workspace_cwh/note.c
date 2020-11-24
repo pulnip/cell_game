@@ -4,7 +4,7 @@
 #define CONSOLE_WIDTH 120
 #define CONSOLE_HEIGHT 40
 
-#define MAP_FILE_PATH ".\\map.txt"
+#define MAP_FILE_PATH ".\\screen.txt"
 
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -113,21 +113,21 @@ typedef struct _Rect{
 typedef void* pObject;
 typedef struct _Node{
     struct _Node* next;
-    pObject pData;
+    pObject pObject;
 } Node;
 
 typedef struct _List{
     Node* head;
     Node* tail;
 } List;
-int appendNode(const pObject const _pObject, List* list){
-    if(_pObject==NULL) return 1;
+int appendNode(const pObject const _pObj, List* list){
+    if((_pObj==NULL)||(list==NULL)) return 1;
 
     Node* newNode=(Node*)malloc(sizeof(Node));
     if(newNode==NULL){
         return 1;
     }
-    newNode->pData=_pObject;
+    newNode->pObject=_pObj;
     newNode->next=NULL;
 
     if(list->tail==NULL){
@@ -141,27 +141,75 @@ int appendNode(const pObject const _pObject, List* list){
     return 0;
 }
 
-int deleteNode(const pObject const _pObject, List* list){
+// naming rule
+// remove = entity still alive
+// delete = entity is killed
+
+pObject removeNode(const pObject const _pObj, List* list){
+    if((_pObj==NULL)||(list==NULL)) return NULL;
+
     Node* aheadNode=NULL;
     Node* rmNode=list->head;
+    pObject res=NULL;
 
-    if(list->head!=NULL){
-        while(_pObject!=rmNode->pData){
-            aheadNode=rmNode;
-            rmNode=rmNode->next;
-            if(rmNode==NULL) break;
-        }
+    while(rmNode!=NULL){
+        if(rmNode->pObject==_pObj) break;
 
-        if(rmNode!=NULL){
-            aheadNode->next=rmNode->next;
-
-            return 0;
-        }
-        else return 1;
+        aheadNode=rmNode;
+        rmNode=rmNode->next;
     }
-    else return 1;
+
+    res=rmNode->pObject;
+    if     (rmNode==list->head) list->head=rmNode->next;
+    else if(rmNode==list->tail) list->tail=aheadNode;
+    else                        aheadNode->next=rmNode->next;
+    free(rmNode);
+
+    return res;
+}
+int deleteNode(const pObject const _pObj, List* list){
+    pObject lastRef=removeNode(_pObj, list);
+    if(lastRef==NULL) return 1;
+
+    free(lastRef);
+    return 0;
 }
 
+int eraseStaticDataList(List* const list) {
+    if(list==NULL) return 1;
+
+    Node* n=list->head;
+    list->head=NULL;
+
+    while(n!=NULL){
+        Node* temp=n->next;
+        free(n);
+
+        n=temp;
+    }
+
+    list->tail=NULL;
+
+    return 0;
+}
+int eraseDynamicDataList(List* const list) {
+    if(list==NULL) return 1;
+
+    Node* n=list->head;
+    list->head=NULL;
+
+    while(n!=NULL){
+        Node* temp=n->next;
+        free(n->pObject);
+        free(n);
+
+        n=temp;
+    }
+
+    list->tail=NULL;
+
+    return 0;
+}
 
 List Triggers;
 
@@ -182,15 +230,11 @@ int checkTriggerArg(Rect rect, int _vkey){
         (CONSOLE_BOTTOM<=rect.Bottom) ||
         (rect.Right -rect.Left< 1   ) ||
         (rect.Bottom-rect.Top < 1   )
-    ) {
-        return 1;
-    }
+    ) return 1;
 
     if( (0    > _vkey) ||
         (0xff < _vkey)
-    ) {
-        return 1;
-    }
+    ) return 1;
 
     return 0;
 }
@@ -202,8 +246,10 @@ typedef struct _Trigger{
     Bool isHidden;
     Rect pos;
     int key;
-    List OnClickEvent;
-    Bool isToggled;
+    List OnKeyDownEvent;
+    List KeyDownEvent;
+    List OnKeyUpEvent;
+    List KeyUpEvent;
     int log;
 } Trigger;
 
@@ -217,17 +263,17 @@ Trigger* createTrigger(Rect rect, int _vkey){
 
     t->isHidden=True;
 
-    t->pos.Left=rect.Left;
-    t->pos.Top=rect.Top;
-    t->pos.Right=rect.Right;
+    t->pos.Left  =rect.Left;
+    t->pos.Top   =rect.Top;
+    t->pos.Right =rect.Right;
     t->pos.Bottom=rect.Bottom;
 
     t->key=_vkey;
 
-    t->OnClickEvent.head=NULL;
-    t->OnClickEvent.tail=NULL;
-
-    t->isToggled=False;
+    t->OnKeyDownEvent.head=t->OnKeyDownEvent.tail=NULL;
+    t->  KeyDownEvent.head=t->  KeyDownEvent.tail=NULL;
+    t->OnKeyUpEvent.head  =t->OnKeyUpEvent.tail  =NULL;
+    t->  KeyUpEvent.head  =t->  KeyUpEvent.tail  =NULL;
 
     t->log=0;
 
@@ -288,37 +334,77 @@ int getKey(Trigger* t){
 
 typedef void (*TriggerEvent)(Trigger*);
 
-int appendEvent(Trigger* t, TriggerEvent func){
+int appendOnKeyDownEvent(Trigger* t, TriggerEvent func){
     if(t==NULL) return 1;
 
-    return appendNode(func, &(t->OnClickEvent));
+    return appendNode(func, &(t->OnKeyDownEvent));
 }
-
-int deleteEvent(Trigger* t, TriggerEvent func){
+int appendKeyDownEvent(Trigger* t, TriggerEvent func){
     if(t==NULL) return 1;
 
-    return deleteNode(func, &(t->OnClickEvent));
+    return appendNode(func, &(t->KeyDownEvent));
+}
+int appendOnKeyUpEvent(Trigger* t, TriggerEvent func){
+    if(t==NULL) return 1;
+
+    return appendNode(func, &(t->OnKeyUpEvent));
+}
+int appendKeyUpEvent(Trigger* t, TriggerEvent func){
+    if(t==NULL) return 1;
+
+    return appendNode(func, &(t->KeyUpEvent));
 }
 
+// <remove event func>
+int removeOnKeyDownEvent(Trigger* t, TriggerEvent func){
+    if(t==NULL) return 1;
+    
+    if( !removeNode(func, &(t->OnKeyDownEvent)) ) return 1;
+    return 0;
+}
+int removeKeyDownEvent(Trigger* t, TriggerEvent func){
+    if(t==NULL) return 1;
+    
+    if( !removeNode(func, &(t->KeyDownEvent)) ) return 1;
+    return 0;
+}
+int removeOnKeyUpEvent(Trigger* t, TriggerEvent func){
+    if(t==NULL) return 1;
+    
+    if( !removeNode(func, &(t->OnKeyUpEvent)) ) return 1;
+    return 0;
+}
+int removeKeyUpEvent(Trigger* t, TriggerEvent func){
+    if(t==NULL) return 1;
+    
+    if( !removeNode(func, &(t->KeyUpEvent)) ) return 1;
+    return 0;
+}
+// </remove Event func>
+
+int drawTrigger(Trigger* t){
+    if(t==NULL) return 1;
+
+    if( !(t->isHidden) ){
+        Rect rect=t->pos;
+
+        for(    int i=rect.Top ; i<rect.Bottom; ++i){
+            for(int j=rect.Left; j<rect.Right ; ++j){
+                CHAR_INFO* pci=&screen[i][j];
+                pci->Char.AsciiChar=' ';
+                pci->Attributes=FG_WHITE|BG_WHITE;   
+            }
+        }
+    }
+
+    return 0;
+}
 int drawTriggers(void){
     Node* n=Triggers.head;
     if(n==NULL) return 1;
 
     while(n!=NULL){
-        Trigger* t=n->pData;
-
-        if( !(t->isHidden) ){
-
-            Rect rect=t->pos;
-
-            for(    int i=rect.Top ; i<rect.Bottom; ++i){
-                for(int j=rect.Left; j<rect.Right ; ++j){
-                    CHAR_INFO* pci=&screen[i][j];
-                    pci->Char.AsciiChar=' ';
-                    pci->Attributes=FG_WHITE|BG_WHITE;   
-                }
-            }
-        }
+        drawTrigger(n->pObject);
 
         n=n->next;
     }
@@ -326,11 +412,51 @@ int drawTriggers(void){
     return 0;
 }
 
-int runTriggerEvent(Trigger* t){
-    Node* en=t->OnClickEvent.head; // TriggerEvent Node
+int runOnKeyDownEvent(Trigger* t){
+    if(t==NULL) return 1;
+    Node* en=t->OnKeyDownEvent.head;
 
     while(en!=NULL){
-        TriggerEvent tbe=en->pData;
+        TriggerEvent tbe=en->pObject;
+        tbe(t);
+
+        en=en->next;
+    }
+
+    return 0;
+}
+int runKeyDownEvent(Trigger* t){
+    if(t==NULL) return 1;
+    Node* en=t->KeyDownEvent.head;
+
+    while(en!=NULL){
+        TriggerEvent tbe=en->pObject;
+        tbe(t);
+
+        en=en->next;
+    }
+
+    return 0;
+}
+int runOnKeyUpEvent(Trigger* t){
+    if(t==NULL) return 1;
+    Node* en=t->OnKeyUpEvent.head;
+
+    while(en!=NULL){
+        TriggerEvent tbe=en->pObject;
+        tbe(t);
+
+        en=en->next;
+    }
+
+    return 0;
+}
+int runKeyUpEvent(Trigger* t){
+    if(t==NULL) return 1;
+    Node* en=t->KeyUpEvent.head;
+
+    while(en!=NULL){
+        TriggerEvent tbe=en->pObject;
         tbe(t);
 
         en=en->next;
@@ -353,14 +479,13 @@ void getKBInput(){
     for(int i=0; i<0x100; ++i){
         KeyState lastState=keys[i];
         
-        // #error "CHECK VALUE"
         short tmpKey=GetKeyState(i);
         keys[i].bPressed = (tmpKey&0x8000)>>(8*sizeof(short)-1)&0x1;
         keys[i].bToggled = tmpKey&0x1;
 
-        Bool isChanged=lastState.bPressed^keys[i].bPressed;
+        Bool isChanged=(lastState.bPressed)^(keys[i].bPressed);
         
-        keys[i].bKeyDown = keys[i].bPressed & isChanged;
+        keys[i].bKeyDown =  keys[i].bPressed & isChanged;
         keys[i].bKeyUp   = !keys[i].bPressed & isChanged;
     }
 }
@@ -370,41 +495,44 @@ int checkTriggered(void){
     if(n==NULL) return 1;
 
     while(n!=NULL){
-        Trigger* t=n->pData;        
-
-        if(keys[t->key].bKeyDown){
-            runTriggerEvent(t);
-        }
-
+        Trigger* t=n->pObject;
         n=n->next;
+        if(t==NULL) continue;
+
+        if(keys[t->key].bPressed) {
+            if(keys[t->key].bKeyDown)runOnKeyDownEvent(t);
+            runKeyDownEvent(t);}
+        else{
+            if(keys[t->key].bKeyUp)  runOnKeyUpEvent(t);
+            runKeyUpEvent(t); 
+        }
     }
 
     return 0;
 }
 
 int deleteTrigger(Trigger* t){
-    Node* en=t->OnClickEvent.head;
+    if(t==NULL) return 1;
 
-    while(en!=NULL){
-        Node* temp=en->next;
-        free(en);
-        en=temp;
-    }
+    eraseStaticDataList(&(t->OnKeyDownEvent));
+    eraseStaticDataList(&(t->  KeyDownEvent));
+    eraseStaticDataList(&(t->OnKeyUpEvent  ));
+    eraseStaticDataList(&(t->  KeyUpEvent  ));
 
-    free(t);
+    return deleteNode(t, &Triggers);
 }
 
 int deleteTriggers(void){
     Node* n=Triggers.head;
 
     while(n!=NULL){
-        deleteTrigger(n->pData);
-
         Node* temp=n->next;
-        free(n);
+        deleteTrigger(n->pObject);
+        
         n=temp;
     }
-
+    //implicit All Node deleted.
+    
     return 0;
 }
 
@@ -454,8 +582,13 @@ int drawScreen(void){
 
 
 
-
-void buttonAnimation(Trigger* t){
+void ButtonShowAnimation(Trigger* t){
+    showTrigger(t);
+}
+void ButtonHideAnimation(Trigger* t){
+    hideTrigger(t);
+}
+void ToggleButtonAnimation(Trigger* t){
     if((t->log)&0x1){
         hideTrigger(t);
         t->log=((t->log)&(-1U-0x1));
@@ -470,38 +603,30 @@ int main(void){
     // <write screen>
     if (setConsoleDefault() ||
         readScreenFromFile()
-    ) {   
-        return 1;
-    }
+    ) return 1;
     drawScreen();
 
     initEventTriggerList();
 
-    Rect rectw={5, 3, 6, 4};
-    Rect recta={3, 5, 4, 6};
-    Rect rects={5, 5, 6, 6};
-    Rect rectd={7, 5, 8, 6};
+    Rect rectq={3, 34, 19, 35};
+    Rect rectw={22, 34, 31, 35};
 
+
+    Trigger* tq=createTrigger(rectq, 'Q');
     Trigger* tw=createTrigger(rectw, 'W');
-    Trigger* ta=createTrigger(recta, 'A');
-    Trigger* ts=createTrigger(rects, 'S');
-    Trigger* td=createTrigger(rectd, 'D');
 
-    // Appensasdsdaaaaaaa
-    appendEvent(tw, buttonAnimation);
-    appendEvent(ta, buttonAnimation);
-    appendEvent(ts, buttonAnimation);
-    appendEvent(td, buttonAnimation);
-
-
+    appendOnKeyDownEvent(tq, ToggleButtonAnimation);
+    appendOnKeyDownEvent(tw, ButtonShowAnimation);
+    appendOnKeyUpEvent(tw, ButtonHideAnimation);
+        
     while(True){
         if(GetKeyState(VK_ESCAPE)&0x8000) break;
         copyScreenFromBG();
 
         getKBInput();
-
         checkTriggered();
         drawTriggers();
+
         drawScreen();
     }
 

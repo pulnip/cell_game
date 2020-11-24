@@ -1,15 +1,15 @@
 #ifndef __INC_LINKED_LIST
 #define __INC_LINKED_LIST
 
-#ifndef __INC_BASE
-#include "base.h"
-#endif
+#include "SuperHeader.h"
+
+#include <stdlib.h>
 
 typedef void* pObject;
 
 typedef struct _Node{
-    Node* next;
-    pObject pData;
+    struct _Node* next;
+    pObject pObject;
 } Node;
 
 typedef struct _List{
@@ -23,8 +23,11 @@ int initList(List*);
 int appendNode(pObject, List*);
 // Append Object(cell, ..) at Tail
 
+// Naming Rule
+// remove = entity is alive
+// delete = entity is killed
+pObject removeNode(pObject, List*);
 int deleteNode(pObject, List*);
-// just delete Object from the List.
 
 int destroyNode(pObject, List*);
 // if the Object is in List,
@@ -33,7 +36,11 @@ int destroyNode(pObject, List*);
 size_t getListLen(List*);
 // Get the Number of List Element
 
-void destroyList(List*);
-// destroy All Element and List
+int eraseStaticObjectList(List*);
+// remove all elements
+int eraseDynamicObjectList(List*);
+// delete all elements
+int deleteList(List*);
+// delete List itself
 
 #endif //__INC_LINKED_LIST
