@@ -62,7 +62,7 @@ void Get_User_Cell_information(int )
 	{
 		Distinguish_Pixel = 2
 	}
-	//여기까지는 불린형으로 받는것이 조금 불편할 것 같아 int형으로 바꿈
+	
 
 	Cell.id
 

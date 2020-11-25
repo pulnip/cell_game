@@ -81,7 +81,7 @@ size_t getListLen(List* list){
     }
 }
 
-int eraseStaticObjectList(List* const list) {
+int eraseNonHeapObjectList(List* const list) {
     if(list==NULL) return 1;
 
     Node* n=list->head;
@@ -98,7 +98,7 @@ int eraseStaticObjectList(List* const list) {
 
     return 0;
 }
-int eraseDynamicObjectList(List* const list) {
+int eraseHeapObjectList(List* const list) {
     if(list==NULL) return 1;
 
     Node* n=list->head;

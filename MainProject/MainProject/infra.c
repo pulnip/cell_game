@@ -74,8 +74,8 @@ void getKBInput(){
 
         Bool isChanged=(lastState.bPressed)^(keys[i].bPressed);
         
-        keys[i].bKeyDown =  keys[i].bPressed & isChanged;
-        keys[i].bKeyUp   = !keys[i].bPressed & isChanged;
+        keys[i].bKeyDown =   keys[i].bPressed & isChanged;
+        keys[i].bKeyUp   = (!keys[i].bPressed)&0x1 & isChanged ;
     }
 }
 

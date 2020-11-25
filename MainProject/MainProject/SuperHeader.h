@@ -1,9 +1,14 @@
 #ifndef __SUPER_HEADER
 #define __SUPER_HEADER
 
+#include <stdlib.h>
+
 #define _INT_FUNC_NOT_IMPLEMENT { return 0; }
 #define _VOID_FUNC_NOT_IMPLEMENT { }
 
+#define LOCAL static
+typedef int (StatusFunc)(void);
+typedef void (Procedure)(void);
 
 #ifndef True
 #define True 1
