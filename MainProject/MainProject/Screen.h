@@ -3,9 +3,11 @@
 
 #include "SuperHeader.h"
 
-#include "Infra.h"
+#include "Map.h"
+#include "EventBlock.h"
 
 #include <Windows.h>
+
 /* Preview
 
 CONSOLE_WIDTH
@@ -78,40 +80,23 @@ enum Color{
     BG_INTENSE=0x80
 };
 
-#ifndef __INC_CELL
-typedef enum _isCell{
-    NoCell   =0,
-    UserCell =1,
-    CPUCell  =2
-} isCell;
-#endif
-
-#ifndef MAP_SIZE
-#define MAP_SIZE
-
-#define MAP_TOP CONSOLE_TOP+1 
-#define MAP_BOTTOM CONSOLE_BOTTOM*3/4
-#define MAP_LEFT CONSOLE_LEFT+1
-#define MAP_RIGHT CONSOLE_RIGHT-1
-
-#define MAP_WIDTH MAP_RIGHT-MAP_LEFT
-#define MAP_HEIGHT MAP_BOTTOM-MAP_TOP
-
-#endif // MAP_SIZE
-
-extern CHAR_INFO background[CONSOLE_HEIGHT][CONSOLE_WIDTH];
 extern CHAR_INFO screen[CONSOLE_HEIGHT][CONSOLE_WIDTH];
 
-int initScreen();
-int updateScreen();
+StatusFunc initScreen;
+StatusFunc updateScreen;
 
+StatusFunc setConsoleDefault;
 #define SCREEN_FILE_PATH ".\\screen.txt"
-int readScreenFromFile(void);
+StatusFunc readScreenFromFile;
 // copy from screen.txt to background
-int copyScreenFromBG(void);
+StatusFunc copyScreenFromBG;
 // copy from background to screen
 
-int drawScreen(void);
+StatusFunc filterPixelToCI;
 
+int drawTrigger(Trigger*);
+StatusFunc drawTriggers;
+
+StatusFunc drawScreen;
 
 #endif // __INC_SCREEN

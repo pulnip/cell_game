@@ -1,46 +1,54 @@
-#include "Infra.h"
-#include "Game.h"
-
 #include "base.h"
 
+#include <time.h>
+
 // <OnStart()>
+
 #ifndef __INC_INFRA 
-int setInfra() { return 0; }
+int initInfra(void)     _INT_FUNC_NOT_IMPLEMENT
 #endif
 #ifndef __INC_GAME
-int initGame() { return 0; }
+int initGame(void)     _INT_FUNC_NOT_IMPLEMENT
 #endif
-int initUser() { return 0; }
-int initComputer() { return 0; }
+int initUser(void)     _INT_FUNC_NOT_IMPLEMENT
+int initComputer(void) _INT_FUNC_NOT_IMPLEMENT
+
 // </OnStart()>
 
 // <OnUpdate()>
+
 #ifndef __INC_INFRA
-int FastEscape() { return 0; }
-int initScreen() { return 0; }
+int FastEscape(void)     _INT_FUNC_NOT_IMPLEMENT
+int updateInfra1(void)   _INT_FUNC_NOT_IMPLEMENT
 #endif
-int updateUser() { return 0; }
-int updateComputer() { return 0; }
 #ifndef __INC_GAME
-int updateGame() { return 0; }
+int updateGame(void)     _INT_FUNC_NOT_IMPLEMENT
 #endif
+int updateUser(void)     _INT_FUNC_NOT_IMPLEMENT
+int updateComputer(void) _INT_FUNC_NOT_IMPLEMENT
 #ifndef __INC_INFRA
-int updateScreen() { return 0; }
+int updateInfra2(void)   _INT_FUNC_NOT_IMPLEMENT
 #endif
+
 // </OnUpdate>
 
+
 // <OnDestroy()>
-int showResult() { return 0; }
-#ifndef __INC_INFRA
-int deleteData() { return 0; }
-void waitUntilKeyInput() { return 0; }
+
+#ifndef __INC_GAME
+int deleteGame(void)         _INT_FUNC_NOT_IMPLEMENT
 #endif
+#ifndef __INC_INFRA
+int deleteInfra(void)        _INT_FUNC_NOT_IMPLEMENT
+void waitUntilKeyInput(void) _INT_FUNC_NOT_IMPLEMENT
+#endif
+
 // </OnDestroy()>
 
+#include <stdio.h>
+
 int main(void){
-    if( OnStart() ){
-        game_over=True;
-    }
+    if( OnStart() )game_over=True;
 
     time_t t1, t2;
     t1=t2=clock();
@@ -48,21 +56,18 @@ int main(void){
     while( !game_over ){
         t2=clock();
         time_t _ElapsedTime=t2-t1;
-        
+
         t1=t2;
-
-        if( OnUpdate(_ElapsedTime) ){
-            game_over=True;
-        }
+        if( OnUpdate(_ElapsedTime) )game_over=True;
     }
-    OnDestroy();
 
+    OnDestroy();
     return 0;
 }
 
 int OnStart(){
     if( (
-        setInfra()     ||
+        initInfra()    ||
         initGame()     ||
         initUser()     ||
         initComputer()
@@ -73,21 +78,19 @@ int OnStart(){
 
 int OnUpdate(time_t ElapsedTime){
     if( (
-        FastEscape()     ||
-        initScreen()     ||
-        updateSystem()   ||
-        updateUser()     ||
-        updateComputer() ||
-        updateGame()     || 
-        updateScreen()
+        updateInfra1()          ||
+        updateGame(ElapsedTime) ||
+        updateUser()            ||
+        updateComputer()        ||
+        updateInfra2()
         // add ...
     ) ) return 1;
     return 0;
 }
 
 int OnDestroy(){
-    showResult();
-    deleteData();
+    deleteGame();
+    deleteInfra();
     waitUntilKeyInput();
     // add ...
 

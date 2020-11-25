@@ -35,8 +35,8 @@ typedef struct _Rect{
 #define CONSOLE_LEFT 0
 #define CONSOLE_RIGHT 120
 
-#define CONSOLE_WIDTH CONSOLE_RIGHT-CONSOLE_LEFT
-#define CONSOLE_HEIGHT CONSOLE_BOTTOM-CONSOLE_TOP
+#define CONSOLE_WIDTH (CONSOLE_RIGHT-CONSOLE_LEFT)
+#define CONSOLE_HEIGHT (CONSOLE_BOTTOM-CONSOLE_TOP)
 
 #define GetRandom(min, max) ( \
     (rand() % (int)((max)-(min))) + (min) \

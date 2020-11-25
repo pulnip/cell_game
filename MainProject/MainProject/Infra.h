@@ -3,6 +3,9 @@
 
 #include "SuperHeader.h"
 
+#include "Screen.h"
+#include "EventBlock.h"
+
 #include <Windows.h>
 
 typedef struct _KeyState{
@@ -13,20 +16,20 @@ typedef struct _KeyState{
     Bool bToggled;
 } KeyState;
 
-extern HANDLE hStdOut;
-extern CONSOLE_SCREEN_BUFFER_INFO csbi;
-
 extern KeyState keys[0x100];
 
-int setInfra();
-int FastEscape();
+StatusFunc initInfra;
 
-int setConsoleDefault();
-void getKBInput();
-void waitUntilKeyInput();
+StatusFunc FastEscape;
+StatusFunc updateInfra1;
+StatusFunc updateInfra2;
 
-void filterPixelToCI();
+StatusFunc deleteInfra;
+Procedure waitUntilKeyInput;
 
-void makeTrigger();
+Procedure getKBInput;
+
+StatusFunc checkTriggered;
+StatusFunc makeTrigger;
 
 #endif // __INC_INFRA

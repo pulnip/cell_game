@@ -1,19 +1,48 @@
 #include "Screen.h"
-#include "Infra.h"
 
 #include <stdio.h>
-#include <windows.h>
+
+HANDLE hStdOut;
+CONSOLE_SCREEN_BUFFER_INFO csbi;
+
 CHAR_INFO background[CONSOLE_HEIGHT][CONSOLE_WIDTH];
 CHAR_INFO screen[CONSOLE_HEIGHT][CONSOLE_WIDTH];
 
 int initScreen(){
+    setConsoleDefault();
+    readScreenFromFile();
     copyScreenFromBG();
+
+    drawScreen();
 
     return 0;
 }
 
 int updateScreen(){
+    copyScreenFromBG();
+    filterPixelToCI();
+    drawTriggers();
     drawScreen();
+
+    return 0;
+}
+
+int setConsoleDefault(void) {
+    hStdOut=GetStdHandle(STD_OUTPUT_HANDLE);
+    if(hStdOut==NULL) return 1;
+    
+    SMALL_RECT rectWindowSize;
+    rectWindowSize.Left=rectWindowSize.Top=0;
+    rectWindowSize.Right=CONSOLE_WIDTH-1;
+    rectWindowSize.Bottom=CONSOLE_HEIGHT-1;
+
+    COORD coord;
+    coord.X=CONSOLE_WIDTH;
+    coord.Y=CONSOLE_HEIGHT;
+
+    if( (!(SetConsoleScreenBufferSize(hStdOut, coord))) ||
+        (!(SetConsoleWindowInfo(hStdOut, TRUE, &rectWindowSize)))
+    ) return 1;
 
     return 0;
 }
@@ -59,6 +88,66 @@ int copyScreenFromBG(void){
         for(int j=0; j<CONSOLE_WIDTH;  ++j){
             screen[i][j]=background[i][j];
         }
+    }
+
+    return 0;
+}
+
+int filterPixelToCI(){
+    for(    int i=0; i<MAP_HEIGHT; ++i){
+        for(int j=0; j<MAP_WIDTH ; ++j){
+            Pixel const unit=map[i][j];
+            CHAR_INFO* const pMapPoint=&screen[MAP_TOP+i][MAP_LEFT+j];
+
+            if(unit.Point){
+                pMapPoint->Char.AsciiChar='P';
+                pMapPoint->Attributes=FG_BLUE|BG_WHITE;
+            }
+
+            if(unit.Food){
+                pMapPoint->Char.AsciiChar='+';
+                pMapPoint->Attributes=FG_GREEN|BG_BLACK;
+            }
+
+            if(unit.Cell){
+                pMapPoint->Char.AsciiChar='@';
+                if(unit.Cell==UserCell) {
+                    pMapPoint->Attributes=FG_WHITE|BG_BLACK;
+                } else if(unit.Cell==CPUCell) {
+                    pMapPoint->Attributes=FG_RED|BG_BLACK;
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+int drawTrigger(Trigger* t){
+    if(t==NULL) return 1;
+
+    if( !(t->isHidden) ){
+        Rect rect=t->pos;
+
+        for(    int i=rect.Top ; i<rect.Bottom; ++i){
+            for(int j=rect.Left; j<rect.Right ; ++j){
+                CHAR_INFO* pci=&screen[i][j];
+                pci->Char.AsciiChar=' ';
+                pci->Attributes=FG_WHITE|BG_WHITE;   
+            }
+        }
+    }
+
+    return 0;
+}
+int drawTriggers(void){
+    Node* n=Triggers.head;
+    if(n==NULL) return 1;
+
+    while(n!=NULL){
+        drawTrigger(n->pObject);
+
+        n=n->next;
     }
 
     return 0;

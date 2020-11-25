@@ -3,36 +3,11 @@
 
 #include "SuperHeader.h"
 
-#include <time.h>
-#include <stdio.h>
-#include <Windows.h>
+#include "Infra.h"
+#include "Game.h"
 
-int OnStart();
+StatusFunc OnStart;
 int OnUpdate(time_t ElapsedTime);
-int OnDestroy();
-
-// <OnStart()>
-int setInfra();
-int initGame();
-int initUser();
-int initComputer();
-// </OnStart()>
-
-// <OnUpdate()>
-int FastEscape();
-int initScreen();
-int updateSystem();
-int updateUser();
-int updateComputer();
-int updateGame();
-int updateScreen();
-// </OnUpdate>
-
-// <OnDestroy()>
-int showResult();
-int deleteData();
-void waitUntilKeyInput();
-// </OnDestroy()>
-
+StatusFunc OnDestroy;
 
 #endif // __INC_BASE

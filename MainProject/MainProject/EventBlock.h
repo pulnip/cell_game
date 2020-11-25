@@ -4,10 +4,6 @@
 #include "SuperHeader.h"
 #include "LinkedList.h"
 
-#include "Screen.h"
-
-#include <windows.h>
-
 typedef struct _Trigger{
     Bool isHidden;
     Rect pos;
@@ -51,11 +47,10 @@ int removeKeyDownEvent(Trigger*, TriggerEvent func);
 int removeOnKeyUpEvent(Trigger*, TriggerEvent func);
 int removeKeyUpEvent(Trigger*, TriggerEvent func);
 
-int drawTrigger(Trigger*);
-int drawTriggers(void);
-
 int checkTriggered(void);
 // check by bKeyDown (call Event once).
+//implemented on Infra.h
+
 int runOnKeyDownEvent(Trigger*);
 int runKeyDownEvent(Trigger*);
 int runOnKeyUpEvent(Trigger*);
@@ -70,6 +65,5 @@ void ButtonHideAnimation(Trigger*);
 // just for type conversion
 void ToggleButtonAnimation(Trigger*);
 // </AnimationEvent>
-
 
 #endif // __INC_EVENT_BLOCK

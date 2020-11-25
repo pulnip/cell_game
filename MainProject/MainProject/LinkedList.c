@@ -1,5 +1,7 @@
 #include "LinkedList.h"
 
+#include <stdlib.h>
+
 int initList(List* list){
     if(list==NULL) return 1;
 

@@ -1,86 +1,30 @@
-#include "Cell.h"
-
 #include "Game.h"
 
-Pixel map[CONSOLE_HEIGHT][CONSOLE_WIDTH];
+#include <time.h>
+
 Bool game_over;
 
 int initGame(void){
     srand((unsigned int)time(NULL));
+
     initMap();
     spreadFood();
+    spreadPoint();
 
     return 0;
 }
 
-int updateGame(void){
-    // if(getFoodAmount() < MaxFoodRegen){
-    //     spreadFood();
-    // }
+int updateGame(time_t ElapsedTime){
+    static time_t timer=0;
+    timer+=ElapsedTime;
+    if( timer > 2000){
+        updateMap();
+        timer -= 2000;
+    }
 
     return 0;
 }
 
-int initMap(){
-    memset(map, 0, sizeof(Pixel)*CONSOLE_HEIGHT*CONSOLE_WIDTH);
-}
-
-int updateMap(){
-    if(getFoodAmount() < MaxFoodRegen){
-        spreadFood();
-    }
-
-    if(getPointAmount() < MaxPointRegen){
-        spreadPoint();
-    }
-}
-
-int spreadFood(void){
-    for(int i=0; i<CONSOLE_HEIGHT; ++i){
-        for(int j=0; j<CONSOLE_WIDTH; ++j){
-            if(map[i][j].Food + 1 != 0){
-                int p=GetRandom(0, 100);
-                map[i][j].Food+=(
-                    p < FoodGenerateProbability ?
-                    1 : 0
-                );
-            }
-        }
-    }
-}
-
-int getFoodAmount(void){
-    int res=0;
-    for(int i=0; i<CONSOLE_HEIGHT; ++i){
-        for(int j=0; j<CONSOLE_WIDTH; ++j){
-            res += map[i][j].Food;
-        }
-    }
-
-    return res;
-}
-
-int spreadPoint(void){
-    for(int i=0; i<CONSOLE_HEIGHT; ++i){
-        for(int j=0; j<CONSOLE_WIDTH; ++j){
-            if(map[i][j].Point + 1 != 0){
-                int p=GetRandom(0, 100);
-                map[i][j].Point+=(
-                    p < PointGenerateProbability ?
-                    1 : 0
-                );
-            }
-        }
-    }
-}
-
-int getPointAmount(void){
-    int res=0;
-    for(int i=0; i<CONSOLE_HEIGHT; ++i){
-        for(int j=0; j<CONSOLE_WIDTH; ++j){
-            res += map[i][j].Point;
-        }
-    }
-
-    return res;
+int deleteGame(void){
+    return 0;
 }

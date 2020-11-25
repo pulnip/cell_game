@@ -3,15 +3,7 @@
 
 #include "SuperHeader.h"
 
-#include "Game.h"
-
-#ifndef __INC_SCREEN
-typedef enum _isCell{
-    NoCell   =0,
-    UserCell =1,
-    CPUCell  =2
-} isCell;
-#endif
+#include "Map.h"
 
 typedef struct _Cell{
     isCell id;
@@ -25,7 +17,6 @@ typedef struct _Cell{
 typedef void (BEHAVIOUR_t)(Cell*);
 typedef BEHAVIOUR_t* pBEHAVIOUR_t;
 typedef pBEHAVIOUR_t* DNA_t; //DNA is Array of pBEHAVIOUR
-
 
 
 #define PROTO_CELL_NUMBER 20
