@@ -10,6 +10,10 @@
 #include "Cell.h"
 #include "Cell.c"
 
+struct Coord;
+struct Pixel;
+struct Cell;
+
 //0.기본세포의 정보
 //1.세포의 유전 정보 테크트리
 //2.세포가 죽는 조건
@@ -79,7 +83,7 @@ void Agrresive_ability(int level, int attack_point)//레벨과 현재 공격력을 입력하
 	
 }
 
-void Stability_ability(int level, int health_point)//레벨과 현재 공격력을 입력하세요
+void Stability_ability(int level, int health_point)//레벨과 현재 '최대'체력을 입력하세요
 {
 	int level1_ST_ability=200;
 	int level2_ST_ability=400;
@@ -111,7 +115,7 @@ void Stability_ability(int level, int health_point)//레벨과 현재 공격력을 입력하
 	//체력 유전정보
 }
 
-void Defensive_ability(int level, int defense_point)//레벨과 현재 공격력을 입력하세요
+void Defensive_ability(int level, int defense_point)//레벨과 현재 방어력을 입력하세요
 {
 	int level1_DE_ability=40;
 	int level2_DE_ability=80;
@@ -154,13 +158,34 @@ void Mobility_ability(int level)//레벨을 입력하세요
 	//기동력 유전정보
 }
 
-void Digestive_ability(int level)//레벨을 입력하세요
+void Digestive_ability(int level, int starve_minus_health_point)//레벨을 입력하세요
 {
-	int level1_Di_ability;
-	int level2_Di_ability;
-	int level3_Di_ability;
-	int level4_Di_ability;
-	int level5_Di_ability;
+	int level1_DI_ability;
+	int level2_DI_ability;
+	int level3_DI_ability;
+	int level4_DI_ability;
+	int level5_DI_ability;
+
+	switch case(level)
+	{
+	case 1:
+		starve_minus_health_point += level1_DI_ability;
+		break;
+	case 2:
+		starve_minus_health_point += level2_DI_ability;
+		break;
+	case 3:
+		starve_minus_health_point += level3_DI_ability;
+		break;
+	case 4:
+		starve_minus_health_point += level4_DI_ability;
+		break;
+	case 5:
+		starve_minus_health_point += level5_DI_ability;
+		break;
+	}
+	default:
+		printf("You just choose between 1 to 5");
 
 	//허기 감소 유전정보
 }
