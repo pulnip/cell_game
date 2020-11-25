@@ -36,9 +36,9 @@ int destroyNode(pObject, List*);
 size_t getListLen(List*);
 // Get the Number of List Element
 
-int eraseStaticObjectList(List*);
+int eraseNonHeapObjectList(List*);
 // remove all elements
-int eraseDynamicObjectList(List*);
+int eraseHeapObjectList(List*);
 // delete all elements
 int deleteList(List*);
 // delete List itself

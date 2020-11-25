@@ -256,10 +256,10 @@ int runKeyUpEvent(Trigger* t){
 int deleteTrigger(Trigger* t){
     if(t==NULL) return 1;
 
-    eraseStaticObjectList(&(t->OnKeyDownEvent));
-    eraseStaticObjectList(&(t->  KeyDownEvent));
-    eraseStaticObjectList(&(t->OnKeyUpEvent  ));
-    eraseStaticObjectList(&(t->  KeyUpEvent  ));
+    eraseNonHeapObjectList(&(t->OnKeyDownEvent));
+    eraseNonHeapObjectList(&(t->  KeyDownEvent));
+    eraseNonHeapObjectList(&(t->OnKeyUpEvent  ));
+    eraseNonHeapObjectList(&(t->  KeyUpEvent  ));
 
     return deleteNode(t, &Triggers);
 }
