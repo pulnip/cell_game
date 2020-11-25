@@ -102,3 +102,7 @@ void Digestive_ability()
 
 //체력이 0이되는 경우
 
+void Cell_Health_Zero()
+{
+
+}
