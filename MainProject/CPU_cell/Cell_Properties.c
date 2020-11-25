@@ -16,7 +16,7 @@ struct Cell;
 
 //0.기본세포의 정보
 //1.세포의 유전 정보 테크트리
-//2.세포가 죽는 조건
+//2.세포 특성의 상호작용
 
 
 
@@ -29,13 +29,19 @@ struct Cell;
 
 //기본 세포의 정보
 
+int health_point; //체력
+int attack_point; //공격력
+void mobility; //기동성
+int defense_point; //방어력
+int starve_minus_health_point; //허기(초당 감소하는 체력)
+
 void Basic_Cell_Information()
 {
-	int health_point = 1000; //체력
-	int attack_point = 100; //공격력
-	void mobility; //기동성
-	int defense_point = 20; //방어력
-	int starve_minus_health_point = 10; //허기(초당 감소하는 체력)
+	int health_point = 1000; 
+	int attack_point = 100; 
+	void mobility;
+	int defense_point = 20; 
+	int starve_minus_health_point = 10; 
 }
 
 //세포 유전 정보 테크트리
@@ -191,11 +197,21 @@ void Digestive_ability(int level, int starve_minus_health_point)//레벨을 입력하�
 }
 
 
-//세포의 죽음 ==> 체력의 0, 이외의 경우는 시간에 관련한 것이므로 타 파일에서 다룸
+//세포 특성의 상호작용
 
-//체력이 0이되는 경우
+//공격
 
-void Cell_Health_Zero()
+int Attack(int attack_point, int defense_point) //공격 포인트는 공격하는 사람의 것 방어 포인트는 방어 하는 사람의 것
 {
-
+	attack_point -= defense_point;
+	return attack_point;
 }
+
+//공격 받음
+
+void Be_Attacked(int health_point)
+{
+	health_point = health_point - Attack();
+}
+
+//
