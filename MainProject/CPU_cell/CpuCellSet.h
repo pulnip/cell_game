@@ -4,5 +4,5 @@
 #include "SuperHeader.h"
 typedef void(*DO)();
 
-void createMoveSet(int *set);
+void createMovingSet(int *set);
 void doYourMovingSet(int* set);
