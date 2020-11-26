@@ -94,11 +94,32 @@ int setKey(Trigger* t, int _vkey){
     t->key=_vkey;
     return 0;
 }
-
 int getKey(Trigger* t){
     if(t==NULL) return -1;
 
     return t->key;
+}
+
+Trigger* searchTriggerByVKey(int _vkey){
+    Node* n=Triggers.head;
+
+    while(n!=NULL){
+        const Trigger* t=n->pObject;
+        if(t!=NULL){
+            if(t->key==_vkey) return t;
+
+            n=n->next;
+        }
+        else{
+            Node* temp=n->next;
+
+            removeUselessNode(n, &Triggers);
+
+            n=temp;
+        }
+    }
+
+    return NULL;
 }
 
 int appendOnKeyDownEvent(Trigger* t, TriggerEvent func){

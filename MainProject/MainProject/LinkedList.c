@@ -60,6 +60,8 @@ pObject removeNode(pObject _pObj, List* list){
     return res;
 }
 int deleteNode(pObject _pObj, List* list){
+    if((_pObj==NULL)||(list==NULL) ) return 1;
+
     pObject lastRef=removeNode(_pObj, list);
     if(lastRef==NULL) return 1;
 
@@ -67,10 +69,49 @@ int deleteNode(pObject _pObj, List* list){
     return 0;
 }
 
-size_t getListLen(List* list){
-    if(list->head==NULL){
-        return 0;
+Bool isNodeInList(const Node* sn, List* list){
+    if((sn==NULL)||(list==NULL)) return False;
+
+    Node* n=list->head;
+
+    while(n!=NULL){
+        if(sn==n) return True;
+
+        n=n->next;
     }
+
+    return False;
+}
+int removeUselessNode(const Node* dn, List* list){
+    if((dn==NULL)||(list==NULL)) return 1;
+
+    if( !isNodeInList(dn, list) ) return 1;
+
+    Node* aheadNode=NULL;
+    Node* n=list->head;
+
+    while(n!=NULL){
+        if(dn==n){
+            if(n==list->head) list->head=n->next;
+            else if(n==list->tail) list->tail=aheadNode;
+            else aheadNode->next=n->next;
+            
+            free(n);
+
+            return 0;
+        }
+
+        aheadNode=n;
+        n=n->next;
+    }
+
+    return 1;
+}
+
+size_t getListLen(List* list){
+    if(list==NULL) return 0;
+    if(list->head==NULL) return 0;
+
     else {
         size_t len=1;
         Node* temp=list->head;

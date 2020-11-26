@@ -27,9 +27,7 @@ int appendNode(pObject, List*);
 pObject removeNode(pObject, List*);
 int deleteNode(pObject, List*);
 
-int destroyNode(pObject, List*);
-// if the Object is in List,
-// delete Object from the List and, destroy Object itself.
+int removeUselessNode(Node*, List*);
 
 size_t getListLen(List*);
 // Get the Number of List Element

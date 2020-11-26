@@ -26,6 +26,8 @@ int checkTriggerArg(Rect, int _vkey);
 Trigger* createTrigger(Rect, int _vkey);
 // if success, return id of Trigger (Non-zero),
 // else return 0
+Trigger* createVanillaButton(Rect, int _vkey);
+Trigger* createToggleButton(Rect, int _vkey);
 
 int showTrigger(Trigger*);
 int hideTrigger(Trigger*);
@@ -36,6 +38,8 @@ Rect getPos(Trigger*);
 
 int setKey(Trigger*, int _vkey);
 int getKey(Trigger*);
+
+Trigger* searchTriggerByVKey(int _vkey);
 
 int appendOnKeyDownEvent(Trigger*, TriggerEvent func);
 int appendKeyDownEvent(Trigger*, TriggerEvent func);
@@ -57,7 +61,7 @@ int runOnKeyUpEvent(Trigger*);
 int runKeyUpEvent(Trigger*);
 
 int deleteTrigger(Trigger*);
-int deleteTriggers(void);
+StatusFunc deleteTriggers;
 
 // <AnimationEvent>
 void ButtonShowAnimation(Trigger*);
