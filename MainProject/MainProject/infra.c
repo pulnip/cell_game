@@ -87,15 +87,10 @@ int makeTrigger(void) {
     Rect rectq={3, 34, 19, 35};
     Rect rectw={22, 34, 31, 35};
 
-    Trigger* tq=createTrigger(rectq, 'Q');
+    Trigger* tq=createToggleButton(rectq, 'Q');
     if(tq==NULL) return 1;
-    Trigger* tw=createTrigger(rectw, 'W');
+    Trigger* tw=createVanillaButton(rectw, 'W');
     if(tw==NULL) return 1;
-
-    if( appendOnKeyDownEvent(tq, ToggleButtonAnimation) ||
-        appendOnKeyDownEvent(tw, ButtonShowAnimation) ||
-        appendOnKeyUpEvent(tw, ButtonHideAnimation)
-    ) return 1;
 
     return 0;
 }

@@ -82,7 +82,7 @@ Bool isNodeInList(const Node* sn, List* list){
 
     return False;
 }
-int removeUselessNode(const Node* dn, List* list){
+int removeUselessNode(Node* dn, List* list){
     if((dn==NULL)||(list==NULL)) return 1;
 
     if( !isNodeInList(dn, list) ) return 1;

@@ -26,7 +26,7 @@ int checkTriggerArg(Rect rect, int _vkey){
     return 0;
 }
 
-Trigger* createTrigger(Rect rect, int _vkey){
+Trigger* createVanillaTrigger(Rect rect, int _vkey){
     if (checkTriggerArg(rect, _vkey)){
         return NULL;
     }
@@ -51,6 +51,21 @@ Trigger* createTrigger(Rect rect, int _vkey){
     t->log=0;
 
     appendNode(t, &Triggers);
+
+    return t;
+}
+Trigger* createVanillaButton(Rect rect, int _vkey){
+    Trigger* t=createVanillaTrigger(rect, _vkey);
+
+    appendOnKeyDownEvent(t, VanillaButtonShowAnimation);
+    appendOnKeyUpEvent(  t, VanillaButtonHideAnimation);
+
+    return t;
+}
+Trigger* createToggleButton(Rect rect, int _vkey){
+    Trigger* t=createVanillaTrigger(rect, _vkey);
+
+    appendOnKeyDownEvent(t, ToggleButtonAnimation);
 
     return t;
 }
@@ -104,7 +119,7 @@ Trigger* searchTriggerByVKey(int _vkey){
     Node* n=Triggers.head;
 
     while(n!=NULL){
-        const Trigger* t=n->pObject;
+        Trigger* t=n->pObject;
         if(t!=NULL){
             if(t->key==_vkey) return t;
 
@@ -246,10 +261,10 @@ int deleteTriggers(void){
     return 0;
 }
 
-void ButtonShowAnimation(Trigger* t){
+void VanillaButtonShowAnimation(Trigger* t){
     showTrigger(t);
 }
-void ButtonHideAnimation(Trigger* t){
+void VanillaButtonHideAnimation(Trigger* t){
     hideTrigger(t);
 }
 void ToggleButtonAnimation(Trigger* t){

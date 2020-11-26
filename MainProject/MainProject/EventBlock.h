@@ -23,8 +23,8 @@ extern List Triggers;
 int initTriggers(void);
 
 int checkTriggerArg(Rect, int _vkey);
-Trigger* createTrigger(Rect, int _vkey);
-// if success, return id of Trigger (Non-zero),
+Trigger* createVanillaTrigger(Rect, int _vkey);
+// if success, return Trigger (Non-zero),
 // else return 0
 Trigger* createVanillaButton(Rect, int _vkey);
 Trigger* createToggleButton(Rect, int _vkey);
@@ -64,8 +64,8 @@ int deleteTrigger(Trigger*);
 StatusFunc deleteTriggers;
 
 // <AnimationEvent>
-void ButtonShowAnimation(Trigger*);
-void ButtonHideAnimation(Trigger*);
+void VanillaButtonShowAnimation(Trigger*);
+void VanillaButtonHideAnimation(Trigger*);
 // just for type conversion
 void ToggleButtonAnimation(Trigger*);
 // </AnimationEvent>
