@@ -37,3 +37,4 @@ typedef struct Get_Set_Information {
 
 void Get_Set_Information();	//세트의 정보를 가져오는 함수
 
+typedef 

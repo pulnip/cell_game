@@ -209,9 +209,9 @@ int Attack(int attack_point, int defense_point) //공격 포인트는 공격하는 사람의 
 
 //공격 받음
 
-void Be_Attacked(int health_point)
+void Be_Attacked(int health_point,int defense_point)
 {
-	health_point = health_point - Attack();
+	health_point = health_point - Attack()+defense_point;
 }
 
 //

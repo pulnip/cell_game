@@ -16,7 +16,3 @@ void doYourMovingSet(int* set) {   //보내온 세트에 따라 행동
 		DO set[j](); 
 	}
 }
-
-
-
-
