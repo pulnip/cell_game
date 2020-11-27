@@ -197,21 +197,31 @@ void Digestive_ability(int level, int starve_minus_health_point)//레벨을 입력하�
 }
 
 
+
 //세포 특성의 상호작용
 
-//공격
 
+//공격
 int Attack(int attack_point, int defense_point) //공격 포인트는 공격하는 사람의 것 방어 포인트는 방어 하는 사람의 것
 {
 	attack_point -= defense_point;
 	return attack_point;
 }
 
-//공격 받음
 
+//공격 받음
 void Be_Attacked(int health_point,int defense_point)
 {
 	health_point = health_point - Attack()+defense_point;
 }
+
+
+//한 턴 지나서 허기로 인해 체력 깎이는 행동
+void Starve(int health_point, int starve_minus_health_point)
+{
+	health_point = health_point - starve_minus_health_point;
+}
+
+
 
 //
