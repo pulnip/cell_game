@@ -83,7 +83,8 @@ enum Color{
 extern CHAR_INFO screen[CONSOLE_HEIGHT][CONSOLE_WIDTH];
 
 StatusFunc initScreen;
-StatusFunc updateScreen;
+StatusFunc updateScreen1;
+StatusFunc updateScreen2;
 
 StatusFunc setConsoleDefault;
 #define SCREEN_FILE_PATH ".\\screen.txt"

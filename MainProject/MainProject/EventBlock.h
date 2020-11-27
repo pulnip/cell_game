@@ -15,7 +15,7 @@ typedef struct _Trigger{
     int log;
 } Trigger;
 
-typedef void (*TriggerEvent)(Trigger*);
+typedef void (*TriggerEvent)(pObject);
 
 extern List Triggers;
 // all Trigger must be in Triggers.
@@ -28,6 +28,8 @@ Trigger* createVanillaTrigger(Rect, int _vkey);
 // else return 0
 Trigger* createVanillaButton(Rect, int _vkey);
 Trigger* createToggleButton(Rect, int _vkey);
+Trigger** createVerticalScrollBar(Rect, int Up_vkey, int Down_vkey);
+// must free the return value (it is heap Object)
 
 int showTrigger(Trigger*);
 int hideTrigger(Trigger*);
@@ -53,7 +55,7 @@ int removeKeyUpEvent(Trigger*, TriggerEvent func);
 
 int checkTriggered(void);
 // check by bKeyDown (call Event once).
-//implemented on Infra.h
+//implemented on Infra
 
 int runOnKeyDownEvent(Trigger*);
 int runKeyDownEvent(Trigger*);
@@ -64,10 +66,10 @@ int deleteTrigger(Trigger*);
 StatusFunc deleteTriggers;
 
 // <AnimationEvent>
-void VanillaButtonShowAnimation(Trigger*);
-void VanillaButtonHideAnimation(Trigger*);
+void VanillaButtonShowAnimation(void*);
+void VanillaButtonHideAnimation(void*);
 // just for type conversion
-void ToggleButtonAnimation(Trigger*);
+void ToggleButtonAnimation(void*);
 // </AnimationEvent>
 
 #endif // __INC_EVENT_BLOCK
