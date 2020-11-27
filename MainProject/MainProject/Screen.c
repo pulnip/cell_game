@@ -18,8 +18,13 @@ int initScreen(){
     return 0;
 }
 
-int updateScreen(){
+int updateScreen1(){
     copyScreenFromBG();
+
+    return 0;
+}
+
+int updateScreen2(){
     filterPixelToCI();
     drawTriggers();
     drawScreen();
@@ -131,9 +136,7 @@ int drawTrigger(Trigger* t){
 
         for(    int i=rect.Top ; i<rect.Bottom; ++i){
             for(int j=rect.Left; j<rect.Right ; ++j){
-                CHAR_INFO* pci=&screen[i][j];
-                pci->Char.AsciiChar=' ';
-                pci->Attributes=FG_WHITE|BG_WHITE;   
+                screen[i][j].Attributes=FG_BLACK|BG_WHITE;   
             }
         }
     }

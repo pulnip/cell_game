@@ -56,6 +56,7 @@ Trigger* createVanillaTrigger(Rect rect, int _vkey){
 }
 Trigger* createVanillaButton(Rect rect, int _vkey){
     Trigger* t=createVanillaTrigger(rect, _vkey);
+    if(t==NULL) return NULL;
 
     appendOnKeyDownEvent(t, VanillaButtonShowAnimation);
     appendOnKeyUpEvent(  t, VanillaButtonHideAnimation);
@@ -64,10 +65,29 @@ Trigger* createVanillaButton(Rect rect, int _vkey){
 }
 Trigger* createToggleButton(Rect rect, int _vkey){
     Trigger* t=createVanillaTrigger(rect, _vkey);
+    if(t==NULL) return NULL;
 
     appendOnKeyDownEvent(t, ToggleButtonAnimation);
 
     return t;
+}
+
+Trigger** createVerticalScrollBar(Rect rect, int Up_vkey, int Down_vkey){
+    if(rect.Bottom-rect.Top < 2) return NULL;
+
+    int mid=((rect.Top+rect.Bottom)>>1)&0x7fffffff;
+    Rect URect={rect.Left, rect.Top, rect.Right, mid        };
+    Rect DRect={rect.Left, mid     , rect.Right, rect.Bottom};
+
+    Trigger* UT=createVanillaButton(URect,   Up_vkey);
+    Trigger* DT=createVanillaButton(DRect, Down_vkey);
+    if( (UT==NULL)||(DT==NULL) ) return NULL;
+
+    Trigger** res=malloc(sizeof(Trigger*)*2);
+    res[0]=UT;
+    res[1]=DT;
+
+    return res;
 }
 
 int showTrigger(Trigger* t){
@@ -261,13 +281,19 @@ int deleteTriggers(void){
     return 0;
 }
 
-void VanillaButtonShowAnimation(Trigger* t){
+void VanillaButtonShowAnimation(void* obj){
+    Trigger* t=obj;
+    
     showTrigger(t);
 }
-void VanillaButtonHideAnimation(Trigger* t){
+void VanillaButtonHideAnimation(void* obj){
+    Trigger* t=obj;
+
     hideTrigger(t);
 }
-void ToggleButtonAnimation(Trigger* t){
+void ToggleButtonAnimation(void* obj){
+    Trigger* t=obj;
+
     if((t->log)&0x1){
         hideTrigger(t);
         t->log=((t->log)&0xfffffffeU);

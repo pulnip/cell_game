@@ -16,6 +16,16 @@ typedef struct _KeyState{
     Bool bToggled;
 } KeyState;
 
+typedef struct _VerticalScrollWindow{
+    Trigger* pUpTrigger;
+    Trigger* pDownTrigger;
+
+    List messageList;
+    List msgTriggers;
+    int msglistPos;
+} VerticalScrollWindow;
+
+
 extern KeyState keys[0x100];
 
 StatusFunc initInfra;
@@ -31,5 +41,12 @@ Procedure getKBInput;
 
 StatusFunc checkTriggered;
 StatusFunc makeTrigger;
+
+int initScrollWindow(Trigger* ut, Trigger* dt);
+StatusFunc updateScrollWindow;
+StatusFunc deleteScrollWindow;
+
+size_t getCStringLen(char* str);
+int printMsgToScreen(char* msg, Coord);
 
 #endif // __INC_INFRA
