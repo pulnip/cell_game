@@ -23,7 +23,6 @@ struct Cell;
 #define Agrresive_ability
 #define Stability_ability
 #define Defensive_ability
-#define Mobility_ability
 #define Digestive_ability
 
 //±âº» ¼¼Æ÷ÀÇ Á¤º¸
@@ -31,7 +30,6 @@ struct Cell;
 int recognition_point;//ÀÎÁö ´É·Â
 int health_point; //Ã¼·Â
 int attack_point; //°ø°İ·Â
-void mobility; //±âµ¿¼º
 int defense_point; //¹æ¾î·Â
 int starve_minus_health_point; //Çã±â(ÃÊ´ç °¨¼ÒÇÏ´Â Ã¼·Â)
 
@@ -170,17 +168,6 @@ void Defensive_ability(int level, int defense_point)//·¹º§°ú ÇöÀç ¹æ¾î·ÂÀ» ÀÔ·ÂÇ
 		break;
 
 	//¹æ¾î·Â À¯ÀüÁ¤º¸
-}
-
-void Mobility_ability(int level)//·¹º§À» ÀÔ·ÂÇÏ¼¼¿ä
-{
-	int level1_MO_ability;
-	int level2_MO_ability;
-	int level3_MO_ability;
-	int level4_MO_ability;
-	int level5_MO_ability;
-
-	//±âµ¿·Â À¯ÀüÁ¤º¸
 }
 
 void Digestive_ability(int level, int starve_minus_health_point)//·¹º§À» ÀÔ·ÂÇÏ¼¼¿ä
