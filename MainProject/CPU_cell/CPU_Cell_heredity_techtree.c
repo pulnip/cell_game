@@ -20,9 +20,47 @@ struct Cell;
 //해야 할 것. 
 
 
-void Cell_gene_techtree_information()
+void Cell_gene_techtree_information() //유저 입장에서 테크트리 선택 시
 {
-	printf("##### 테크트리 #####")
+	int num= 0;
+	printf("##### 테크트리 #####\n\n");
+	printf("1. 인지 능력\n");
+	printf("1. 공격 능력\n");
+	printf("1. 체력 능력\n");
+	printf("1. 방어 능력\n");
+	printf("1. 기동 능력\n");
+	printf("1. 기동 능력\n");
+	scanf("%d",&num;);
+
+	switch(num)
+	case 1:
+	printf("Recognize_ability	:");
+	break;
+
+	case 2:
+	printf("Agrresive_ability	:");
+	break;
+
+	case 3:
+	printf("Stability_ability	:");
+	break;
+
+	case 4:
+	printf("Defensive_ability	:");
+	break;
+
+	case 5:
+	printf("Mobility_ability	:");
+	break;
+
+	case 6:
+	printf("Digestive_ability	:");
+	break;
+	
+	default:
+	break;
+	
+
 }
 
 int select[6];
