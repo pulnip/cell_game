@@ -84,6 +84,7 @@ Trigger** createVerticalScrollBar(Rect rect, int Up_vkey, int Down_vkey){
     if( (UT==NULL)||(DT==NULL) ) return NULL;
 
     Trigger** res=malloc(sizeof(Trigger*)*2);
+    if (res == NULL) return NULL;
     res[0]=UT;
     res[1]=DT;
 

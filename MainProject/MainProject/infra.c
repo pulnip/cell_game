@@ -154,6 +154,8 @@ int initScrollWindow(Trigger* ut, Trigger* dt){
     appendOnKeyDownEvent(dt, ScrollDownMsgPos);
 
     vsw.msglistPos=0;
+
+    return 0;
 }
 int updateScrollWindow(void){
     Node* mn=vsw.messageList.head;
@@ -169,10 +171,11 @@ int updateScrollWindow(void){
     for(int i=0; i<vsw.msglistPos; ++i){
         if(mn==NULL) return 0;
 
-        if(tn!=NULL) hideTrigger(tn->pObject);
-
+        if (tn != NULL) {
+            hideTrigger(tn->pObject);
+            tn = tn->next;
+        }
         mn=mn->next;
-        tn=tn->next;
     }
 
     for(int i=0; i<7; ++i){
@@ -207,6 +210,8 @@ int updateScrollWindow(void){
 int deleteScrollWindow(void){
     eraseNonHeapObjectList(&(vsw.messageList));
     eraseNonHeapObjectList(&(vsw.msgTriggers));
+
+    return 0;
 }
 
 size_t getCStringLen(char* str){
@@ -215,9 +220,12 @@ size_t getCStringLen(char* str){
     return len;
 }
 int printMsgToScreen(char* msg, Coord coord){
-    int msgLen=getCStringLen(msg);
+    int msgLen=(int)getCStringLen(msg);
 
-    int min=((msgLen<CONSOLE_WIDTH*2/3-2 - coord.x)?msgLen:CONSOLE_WIDTH*2/3-2 - coord.x);
+    int min = ((msgLen < CONSOLE_WIDTH * 2 / 3 - 2 - coord.x) ?
+        msgLen :
+        CONSOLE_WIDTH * 2 / 3 - 2 - coord.x
+    );
 
     for(int i=0; i<min; ++i){
         screen[coord.y][coord.x + i].Char.AsciiChar=msg[i];
@@ -234,5 +242,5 @@ void ScrollUpMsgPos(void* obj){
 void ScrollDownMsgPos(void* obj){
     Trigger* t=obj;
 
-    if(vsw.msglistPos+7 < getListLen(&(vsw.messageList))) vsw.msglistPos+=1;
+    if((size_t)vsw.msglistPos+7 < getListLen(&(vsw.messageList))) vsw.msglistPos+=1;
 }
