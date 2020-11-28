@@ -9,7 +9,10 @@
 
 
 void Basic_Cell_Information();
-void Recognize_ability(int level, int );//레벨과 현재 기동력을 입력하세요
+void Recognize_ability(int level, int Recognize_ability);//레벨과 현재 기동력을 입력하세요
+//이거 근데 cell.h에서 MAX_SIGHT의 수치를 변형해야 하는 거라 define하지 않고 그냥 변수 선언 하면 안되려나? 아니면 그냥 이 항목 빼버리든가 둘 중 하나로 정합시당
+
+
 void Agrresive_ability(int level, int attack_point);//레벨과 현재 공격력을 입력하세요
 void Stability_ability(int level, int health_point);//레벨과 현재 '최대'체력을 입력하세요
 void Defensive_ability(int level, int defense_point);//레벨과 현재 방어력을 입력하세요

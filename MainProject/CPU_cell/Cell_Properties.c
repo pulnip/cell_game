@@ -6,6 +6,7 @@
 #include "Game.h"
 #include "CPU_cell_notice.h"
 #include "Cell.h"
+#include "Cell_Properties.h"
 
 
 struct Coord;
@@ -228,9 +229,10 @@ int Attack(int attack_point, int defense_point) //공격 포인트는 공격하는 사람의 
 
 
 //공격 받음
-void Be_Attacked(int health_point,int defense_point)
+int Be_Attacked(int health_point,int defense_point)
 {
 	health_point = health_point - Attack()+defense_point;
+	return health_point;
 }
 
 
@@ -238,6 +240,7 @@ void Be_Attacked(int health_point,int defense_point)
 void Starve(int health_point, int starve_minus_health_point)
 {
 	health_point = health_point - starve_minus_health_point;
+	return health_point;
 }
 
 
