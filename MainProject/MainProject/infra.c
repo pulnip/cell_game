@@ -123,10 +123,24 @@ int initScrollWindow(Trigger* ut, Trigger* dt){
     char* msg1="MESSAGE 1";
     char* msg2="MESSAGE 2";
     char* msg3="MESSAGE 3";
+    char* msg4="MESSAGE 4";
+    char* msg5="MESSAGE 5";
+    char* msg6="MESSAGE 6";
+    char* msg7="MESSAGE 7";
+    char* msg8="MESSAGE 8";
+    char* msg9="MESSAGE 9";
+    char* msga="MESSAGE 10";
 
     appendNode(msg1, &(vsw.messageList));
     appendNode(msg2, &(vsw.messageList));
     appendNode(msg3, &(vsw.messageList));
+    appendNode(msg4, &(vsw.messageList));
+    appendNode(msg5, &(vsw.messageList));
+    appendNode(msg6, &(vsw.messageList));
+    appendNode(msg7, &(vsw.messageList));
+    appendNode(msg8, &(vsw.messageList));
+    appendNode(msg9, &(vsw.messageList));
+    appendNode(msga, &(vsw.messageList));
 
     Trigger* t1=createVanillaButton((Rect){0, 0, 1, 1}, '1');
     Trigger* t2=createVanillaButton((Rect){0, 0, 1, 1}, '2');
@@ -135,6 +149,9 @@ int initScrollWindow(Trigger* ut, Trigger* dt){
     appendNode(t1, &(vsw.msgTriggers));
     appendNode(t2, &(vsw.msgTriggers));
     appendNode(t3, &(vsw.msgTriggers));
+
+    appendOnKeyDownEvent(ut,   ScrollUpMsgPos);
+    appendOnKeyDownEvent(dt, ScrollDownMsgPos);
 
     vsw.msglistPos=0;
 }
@@ -150,30 +167,33 @@ int updateScrollWindow(void){
     };
 
     for(int i=0; i<vsw.msglistPos; ++i){
-        if((mn==NULL)||(tn==NULL)) return 0;
+        if(mn==NULL) return 0;
 
-        hideTrigger(tn->pObject);
+        if(tn!=NULL) hideTrigger(tn->pObject);
 
         mn=mn->next;
         tn=tn->next;
     }
 
     for(int i=0; i<7; ++i){
-        if((mn==NULL)||(tn==NULL)) return 0;
+        if(mn==NULL) return 0;
         char* msg=mn->pObject;
-        Trigger* t=tn->pObject;
+
+        if(tn!=NULL){
+            Trigger* t=tn->pObject;
         
-        size_t len=getCStringLen(msg);
-        setPos(t, (Rect){
-            msgOrigin.x,
-            msgOrigin.y+i,
-            CONSOLE_WIDTH*2/3-2,
-            msgOrigin.y+i+1
-        });
+            size_t len=getCStringLen(msg);
+            setPos(t, (Rect){
+                msgOrigin.x,
+                msgOrigin.y+i,
+                CONSOLE_WIDTH*2/3-2,
+                msgOrigin.y+i+1
+            });
+            tn=tn->next;
+        }
         printMsgToScreen(msg, (Coord){msgOrigin.x, msgOrigin.y+i});
 
         mn=mn->next;
-        tn=tn->next;
     }
 
     while(tn!=NULL){
@@ -204,4 +224,15 @@ int printMsgToScreen(char* msg, Coord coord){
     }
 
     return 0;
+}
+
+void ScrollUpMsgPos(void* obj){
+    Trigger* t=obj;
+
+    if(vsw.msglistPos>0) vsw.msglistPos-=1;
+}
+void ScrollDownMsgPos(void* obj){
+    Trigger* t=obj;
+
+    if(vsw.msglistPos+7 < getListLen(&(vsw.messageList))) vsw.msglistPos+=1;
 }

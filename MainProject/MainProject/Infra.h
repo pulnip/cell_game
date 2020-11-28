@@ -49,4 +49,8 @@ StatusFunc deleteScrollWindow;
 size_t getCStringLen(char* str);
 int printMsgToScreen(char* msg, Coord);
 
+// Event
+void ScrollUpMsgPos(void*);
+void ScrollDownMsgPos(void*);
+
 #endif // __INC_INFRA
