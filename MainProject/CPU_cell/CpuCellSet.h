@@ -4,5 +4,5 @@
 #include "SuperHeader.h"
 typedef void(*DO)();
 
-void createMovingSet(int *set);
-void doYourMovingSet(int* set);
+void createMovingSet(Cell *cell);
+void doYourMovingSet(Cell *cell);
