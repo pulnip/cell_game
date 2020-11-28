@@ -4,9 +4,8 @@
 #include "base.h"
 #include "Infra.h"
 #include "CellBehaviours.h"
-#include "LinkedList.h"
 #include "Game.h"
-#include "CPU_cell_notice"
+#include "CPU_cell_notice.h"
 
 //질문은 맨 위에 써 놓을께
 //#####아 그리고 생각이 난 건데 우리 맵에 대한 공통적인 파일도 만들어야 하지 않을까#####

@@ -8,7 +8,6 @@
 #include "Game.h"
 #include "CPU_cell_notice.h"
 #include "Cell.h"
-#include "Cell.c"
 #include "Cell_properties.c"
 
 struct Coord;
@@ -25,24 +24,25 @@ void Cell_gene_techtree_information() //유저 입장에서 테크트리 선택 시
 	int num= 0;
 	printf("##### 테크트리 #####\n\n");
 	printf("1. 인지 능력\n");
-	printf("1. 공격 능력\n");
-	printf("1. 체력 능력\n");
-	printf("1. 방어 능력\n");
-	printf("1. 기동 능력\n");
-	printf("1. 기동 능력\n");
+	printf("2. 공격 능력\n");
+	printf("3. 체력 능력\n");
+	printf("4. 방어 능력\n");
+	printf("5. 기동 능력\n");
+	printf("6. 소화 능력\n");
+	printf("테크트리를 올리고 싶은 영역의 번호를 입력하세요 :")
 	scanf("%d",&num;);
 
-	switch(num)
+	switch(num){
 	case 1:
-	printf("Recognize_ability	:");
+	
 	break;
 
 	case 2:
-	printf("Agrresive_ability	:");
+	
 	break;
 
 	case 3:
-	printf("Stability_ability	:");
+	
 	break;
 
 	case 4:
@@ -59,7 +59,7 @@ void Cell_gene_techtree_information() //유저 입장에서 테크트리 선택 시
 	
 	default:
 	break;
-	
+	}
 
 }
 

@@ -2,13 +2,11 @@
 #include <stdlib.h>
 #include <time.h>
 #include "base.h"
-#include "Infra.h"
 #include "CellBehaviours.h"
-#include "LinkedList.h"
 #include "Game.h"
-#include "CPU_cell_notice"
+#include "CPU_cell_notice.h"
 #include "Cell.h"
-#include "Cell.c"
+
 
 struct Coord;
 struct Pixel;
