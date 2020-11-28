@@ -28,7 +28,7 @@ struct Cell;
 
 //기본 세포의 정보
 
-void recognition_point;//인지 능력
+int recognition_point;//인지 능력
 int health_point; //체력
 int attack_point; //공격력
 void mobility; //기동성
