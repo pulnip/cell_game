@@ -44,13 +44,13 @@ void BasicCellInformation()
 
 BasicInfo ChooseStat() 
 {
-	Cell BasicInfo;
+	BasicInfo _temp;
 	int level_A=0;
 	int level_S=0;
 	int level_D=0;
-	BasicInfo.stat.healthPoint = DEFAULT_HP;
-	BasicInfo.stat.attackPoint = DEFAULT_AP;
-	BasicInfo.stat.defensePoint = DEFAULT_DP;
+	_temp.healthPoint = DEFAULT_HP;
+	_temp.attackPoint = DEFAULT_AP;
+	_temp.defensePoint = DEFAULT_DP;
 	int total, num = 0;
 
 	while (!(total == 5)) {
@@ -77,7 +77,7 @@ BasicInfo ChooseStat()
 	BasicInfo.stat.attackPoint += AgrresiveAbility(level_A);
 	BasicInfo.stat.defensePoint += DefensiveAbility(level_D);
 
-	return BasicInfo.stat
+	return _temp;
 }
 
 //세포 유전 정보 테크트리
