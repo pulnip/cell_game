@@ -52,11 +52,10 @@ void changeIsCellPos(Cell* _cell) {  //exeCpuCells 안에 포함됨
 }
 
 
-void createMovingSet(Cell* cell) {   //행동을 담당하는 세트만 만드는 함수  
+void createCpuMovingSet(Cell* cell) {   //행동을 담당하는 세트만 만드는 함수  
 	for (int i = 0; i < 8; i++) { // 구조체 cell에 접근하는 방법
-		cell->set[i] = BehaviourList[GetRandom(0, sizeof(BehaviourList) / 4)];
+		cell->DNA[i] = BehaviourList[GetRandom(0, sizeof(BehaviourList) / 4)];
 	}
-	set[8] = 0; // 아니면 set의 마지막을 score로? 20번째줄 참고 
 }
 
 

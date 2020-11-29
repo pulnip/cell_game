@@ -6,7 +6,7 @@
 #include "SuperHeader.h"
 typedef void(*DO)();
 
-void createMovingSet(Cell* cell);
+void createCpuMovingSet(Cell* cell);
 void exeCpuCells(void);
 
 

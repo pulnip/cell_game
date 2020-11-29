@@ -19,19 +19,19 @@ struct Cell;
 
 
 
-#define Recognize_ability
+
 #define Agrresive_ability
 #define Stability_ability
 #define Defensive_ability
-#define Digestive_ability
+
 
 //기본 세포의 정보
 
-int recognition_point;//인지 능력
+
 int health_point; //체력
 int attack_point; //공격력
 int defense_point; //방어력
-int starve_minus_health_point; //허기(초당 감소하는 체력)
+
 
 void Basic_Cell_Information()
 {
@@ -49,20 +49,12 @@ BasicInfo choose_stat() //일단 각 테크트리 당 부여할 레벨단계의 입력
 	int level_S;
 	int level_D;
 
-	while (1)
-	{
-		srand(time(NULL));
-		int total = 0;
-		level_A = (rand() % 5) + 1;
-		level_S = (rand() % 5) + 1;
-		level_D = (rand() % 5) + 1;
-
-		total = level_A + level_S + level_D;
-
-		if (total == 5)
-		{
-			break;
-		}
+	while (!(total == 5)) {
+		int num = GetRandom(1, 5); //범위안에서 랜덤으로 하나 숫자뽑아주는
+		if (num == 1) A_level++;
+		else if (num == 2) B_level++;
+		else if (num == 3) C_level++;
+		total++;
 	}
 	
 	asd.stat.healthPoint += Agrresive_ability(level_A);
