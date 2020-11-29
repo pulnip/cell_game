@@ -19,4 +19,4 @@ int updateComputer(void);
 Cell* createCpuCell(Cell temp);
 //cell base data
 
-void isCellPos(Cell* _cell);
+void changeIsCellPos(Cell* _cell);
