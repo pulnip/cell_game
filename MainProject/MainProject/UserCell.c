@@ -1,11 +1,11 @@
 #include "UserCell.h"
 
-List Cells;
+List UserCells;
 
 #define PROTO_CPU_CELL_NUMBER 2
 
 int initUserCell(void){
-    initList(&Cells);
+    initList(&UserCells);
 
     for(int i=0; i<PROTO_CELL_NUMBER; ++i){
         Cell* cell=createUserCell();
@@ -23,7 +23,7 @@ int updateUserCell(void){
     return 0;
 }
 int deleteUserCell(void){
-    eraseHeapObjectList(&Cells);
+    eraseHeapObjectList(&UserCells);
     // ..
 
     return 0;
@@ -48,13 +48,13 @@ Cell* createUserCell(){
     // basic info
     // ..
 
-    appendNode(cell, &Cells);
+    appendNode(cell, &UserCells);
 
     return cell;
 }
 
-void printCells(void){
-    Node* n=Cells.head;
+void printUserCells(void){
+    Node* n=UserCells.head;
 
     while(n!=NULL){
         Cell* cell=n->pObject;
