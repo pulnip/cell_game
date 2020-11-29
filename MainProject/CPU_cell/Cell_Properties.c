@@ -35,17 +35,17 @@ int starve_minus_health_point; //Çã±â(ÃÊ´ç °¨¼ÒÇÏ´Â Ã¼·Â)
 
 void Basic_Cell_Information()
 {
-	void recognition_point;
+	//void recognition_point;
 	int health_point = 1000; 
 	int attack_point = 100; 
-	void mobility;
+	//void mobility;
 	int defense_point = 20; 
 	int starve_minus_health_point = 10; 
 }
 
 //¼¼Æ÷ À¯Àü Á¤º¸ Å×Å©Æ®¸®
 
-void Recognize_ability(int level)//·¹º§À» ÀÔ·ÂÇÏ¼¼¿ä
+/*void Recognize_ability(int level)//·¹º§À» ÀÔ·ÂÇÏ¼¼¿ä
 {
 	int level1_Re_ability;
 	int level2_Re_ability;
@@ -70,7 +70,7 @@ void Recognize_ability(int level)//·¹º§À» ÀÔ·ÂÇÏ¼¼¿ä
 	//cell.h¿¡¼­ÀÇ MAX_SIGHTÀÇ ¹üÀ§¸¦ ¼­¼­È÷ 1¾¿ ³ÐÇô ³ª°¡´Â °É·Î ÇÏ¸é µÉ °Í °°À½
 	//level1Àº 6 level2Àº 7 level3´Â 8
 }
-
+*/
 void Agrresive_ability(int level, int attack_point)//·¹º§°ú ÇöÀç °ø°Ý·ÂÀ» ÀÔ·ÂÇÏ¼¼¿ä
 {
 	int level1_AG_ability=100;
@@ -170,6 +170,7 @@ void Defensive_ability(int level, int defense_point)//·¹º§°ú ÇöÀç ¹æ¾î·ÂÀ» ÀÔ·ÂÇ
 	//¹æ¾î·Â À¯ÀüÁ¤º¸
 }
 
+/*
 void Digestive_ability(int level, int starve_minus_health_point)//·¹º§À» ÀÔ·ÂÇÏ¼¼¿ä
 {
 	int level1_DI_ability;
@@ -202,7 +203,7 @@ void Digestive_ability(int level, int starve_minus_health_point)//·¹º§À» ÀÔ·ÂÇÏ¼
 	//Çã±â °¨¼Ò À¯ÀüÁ¤º¸
 }
 
-
+*/
 
 //¼¼Æ÷ Æ¯¼ºÀÇ »óÈ£ÀÛ¿ë
 

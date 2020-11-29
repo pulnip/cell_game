@@ -8,6 +8,7 @@
 typedef struct _Cell{
     isCell id;
     void (**DNA)(struct _Cell);
+    Coord lastPos;
     Coord pos;
     int turnDNA;
     Coord forward;
