@@ -6,6 +6,7 @@
 #include "Game.h"
 #include "CPU_cell_notice.h"
 #include "Cell.h"
+#include "Cell_Properties.h"
 
 
 struct Coord;
@@ -22,19 +23,19 @@ struct Cell;
 #define Agrresive_ability
 #define Stability_ability
 #define Defensive_ability
-#define Mobility_ability
 #define Digestive_ability
 
 //±âº» ¼¼Æ÷ÀÇ Á¤º¸
 
+int recognition_point;//ÀÎÁö ´É·Â
 int health_point; //Ã¼·Â
 int attack_point; //°ø°İ·Â
-void mobility; //±âµ¿¼º
 int defense_point; //¹æ¾î·Â
 int starve_minus_health_point; //Çã±â(ÃÊ´ç °¨¼ÒÇÏ´Â Ã¼·Â)
 
 void Basic_Cell_Information()
 {
+	void recognition_point;
 	int health_point = 1000; 
 	int attack_point = 100; 
 	void mobility;
@@ -49,6 +50,21 @@ void Recognize_ability(int level)//·¹º§À» ÀÔ·ÂÇÏ¼¼¿ä
 	int level1_Re_ability;
 	int level2_Re_ability;
 	int level3_Re_ability;
+
+	switch case(level)
+	{
+	case 1:
+		recognition_point += level1_Re_ability;
+		break;
+	case 2:
+		recognition_point += level2_Re_ability;
+		break;
+	case 3:
+		recognition_point += level3_Re_ability;
+		break;
+	default:
+		printf("You just choose between 1 to 5");
+		break;
 
 	//ÀÎ½Ä¹üÀ§ À¯ÀüÁ¤º¸
 	//cell.h¿¡¼­ÀÇ MAX_SIGHTÀÇ ¹üÀ§¸¦ ¼­¼­È÷ 1¾¿ ³ĞÇô ³ª°¡´Â °É·Î ÇÏ¸é µÉ °Í °°À½
@@ -83,6 +99,7 @@ void Agrresive_ability(int level, int attack_point)//·¹º§°ú ÇöÀç °ø°İ·ÂÀ» ÀÔ·ÂÇÏ
 	}
 	default:
 		printf("You just choose between 1 to 5");
+		break;
 	//°ø°İ·Â À¯ÀüÁ¤º¸
 	
 }
@@ -115,6 +132,7 @@ void Stability_ability(int level, int health_point)//·¹º§°ú ÇöÀç 'ÃÖ´ë'Ã¼·ÂÀ» ÀÔ
 	}
 	default:
 		printf("You just choose between 1 to 5");
+		break;
 	
 	//Ã¼·Â À¯ÀüÁ¤º¸
 }
@@ -147,19 +165,9 @@ void Defensive_ability(int level, int defense_point)//·¹º§°ú ÇöÀç ¹æ¾î·ÂÀ» ÀÔ·ÂÇ
 	}
 	default:
 		printf("You just choose between 1 to 5");
+		break;
 
 	//¹æ¾î·Â À¯ÀüÁ¤º¸
-}
-
-void Mobility_ability(int level)//·¹º§À» ÀÔ·ÂÇÏ¼¼¿ä
-{
-	int level1_MO_ability;
-	int level2_MO_ability;
-	int level3_MO_ability;
-	int level4_MO_ability;
-	int level5_MO_ability;
-
-	//±âµ¿·Â À¯ÀüÁ¤º¸
 }
 
 void Digestive_ability(int level, int starve_minus_health_point)//·¹º§À» ÀÔ·ÂÇÏ¼¼¿ä
@@ -190,7 +198,7 @@ void Digestive_ability(int level, int starve_minus_health_point)//·¹º§À» ÀÔ·ÂÇÏ¼
 	}
 	default:
 		printf("You just choose between 1 to 5");
-
+		break;
 	//Çã±â °¨¼Ò À¯ÀüÁ¤º¸
 }
 
@@ -208,9 +216,10 @@ int Attack(int attack_point, int defense_point) //°ø°İ Æ÷ÀÎÆ®´Â °ø°İÇÏ´Â »ç¶÷ÀÇ 
 
 
 //°ø°İ ¹ŞÀ½
-void Be_Attacked(int health_point,int defense_point)
+int Be_Attacked(int health_point,int defense_point)
 {
 	health_point = health_point - Attack()+defense_point;
+	return health_point;
 }
 
 
@@ -218,6 +227,7 @@ void Be_Attacked(int health_point,int defense_point)
 void Starve(int health_point, int starve_minus_health_point)
 {
 	health_point = health_point - starve_minus_health_point;
+	return health_point;
 }
 
 

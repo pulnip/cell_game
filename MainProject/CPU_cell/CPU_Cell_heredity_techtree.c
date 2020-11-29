@@ -4,7 +4,6 @@
 #include "base.h"
 #include "Infra.h"
 #include "CellBehaviours.h"
-#include "LinkedList.h"
 #include "Game.h"
 #include "CPU_cell_notice.h"
 #include "Cell.h"
@@ -29,32 +28,46 @@ void Cell_gene_techtree_information() //유저 입장에서 테크트리 선택 시
 	printf("4. 방어 능력\n");
 	printf("5. 기동 능력\n");
 	printf("6. 소화 능력\n");
-	printf("테크트리를 올리고 싶은 영역의 번호를 입력하세요 :")
-	scanf("%d",&num;);
+	printf("테크트리를 올리고 싶은 영역의 번호를 입력하세요 :");
+	scanf("%d",&num);
 
 	switch(num){
 	case 1:
-	
+	int num_level;
+	printf("테크트리 레벨 : ");
+	scanf("%d",&num_level);
+
+	Recognize_ability(int )
 	break;
 
 	case 2:
-	
+	int num_level;
+	printf("테크트리 레벨 : ");
+	scanf("%d",&num_level);
 	break;
 
 	case 3:
-	
+	int num_level;
+	printf("테크트리 레벨 : ");
+	scanf("%d",&num_level);
 	break;
 
 	case 4:
-	printf("Defensive_ability	:");
+	int num_level;
+	printf("테크트리 레벨 : ");
+	scanf("%d",&num_level);	
 	break;
 
 	case 5:
-	printf("Mobility_ability	:");
+	int num_level;
+	printf("테크트리 레벨 : ");
+	scanf("%d",&num_level);
 	break;
 
 	case 6:
-	printf("Digestive_ability	:");
+	int num_level;
+	printf("테크트리 레벨 : ");
+	scanf("%d",&num_level);
 	break;
 	
 	default:
