@@ -6,15 +6,22 @@
 #include "SuperHeader.h"
 typedef void(*DO)();
 
-void setCpuMovingSet(Cell* cell);
-void exeCpuCells(void);
-
+typedef struct _bestDNA {
+	void (*DNA[DNA_LEN])(struct _Cell);
+	int score;
+}bestDNA;
 
 int initComputer(void);
 int updateComputer(void);
 
 
+void changeIsCellPos(Cell* _cell);
+
+void setCpuMovingSet(Cell* cell);
+
+
 Cell* createCpuCell(Cell temp);
 //cell base data
 
-void changeIsCellPos(Cell* _cell);
+void exeCpuCells(void);
+
