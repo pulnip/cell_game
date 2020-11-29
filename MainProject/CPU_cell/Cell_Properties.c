@@ -49,20 +49,12 @@ BasicInfo choose_stat() //일단 각 테크트리 당 부여할 레벨단계의 입력
 	int level_S;
 	int level_D;
 
-	while (1)
-	{
-		srand(time(NULL));
-		int total = 0;
-		level_A = (rand() % 5) + 1;
-		level_S = (rand() % 5) + 1;
-		level_D = (rand() % 5) + 1;
-
-		total = level_A + level_S + level_D;
-
-		if (total == 5)
-		{
-			break;
-		}
+	while (!(total == 5)) {
+		int num = GetRandom(1, 5); //범위안에서 랜덤으로 하나 숫자뽑아주는
+		if (num == 1) A_level++;
+		else if (num == 2) B_level++;
+		else if (num == 3) C_level++;
+		total++;
 	}
 	
 	asd.stat.healthPoint += Agrresive_ability(level_A);
