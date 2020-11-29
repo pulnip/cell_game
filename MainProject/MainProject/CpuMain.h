@@ -1,4 +1,4 @@
-#include "Cell_Properties.h" // 태림이 함수를 가져올 헤더파일이 없음
+#include "CellProperties.h" // 태림이 함수를 가져올 헤더파일이 없음
 #include "Cell.h"
 #include "Map.h"
 #include "Game.h"
