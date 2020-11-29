@@ -2,6 +2,7 @@
 #define __INC_CELL
 
 #include "SuperHeader.h"
+#include "LinkedList.h"
 
 #include "Map.h"
 
@@ -15,6 +16,9 @@ typedef struct _Cell{
     BasicInfo stat;
     // The location coordinates of the searched
 } Cell;
+
+extern List UserCells;
+extern List CPUCells;
 
 typedef void (BEHAVIOUR_t)(Cell*);
 typedef BEHAVIOUR_t* pBEHAVIOUR_t;

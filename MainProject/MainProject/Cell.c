@@ -1,5 +1,8 @@
 #include "Cell.h"
 
+List UserCells;
+List CPUCells;
+
 pBEHAVIOUR_t const BehaviourList[]={
     seeEnemy, seeFriend, seeFood,
     moveCloser, moveFurther,
