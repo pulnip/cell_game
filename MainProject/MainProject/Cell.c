@@ -96,3 +96,21 @@ void getPoint(Cell* const pCell) _VOID_FUNC_NOT_IMPLEMENT
 void doCannibal(Cell* const pCell) _VOID_FUNC_NOT_IMPLEMENT
 
 void divide(Cell* const pCell) _VOID_FUNC_NOT_IMPLEMENT
+
+Cell* searchCellByPos(Coord _pos, isCell id){
+    Node* n=NULL;
+    if(id==UserCell) n=UserCells.head;
+    else if(id==CPUCell) n=CPUCells.head;
+
+    while(n!=NULL){
+        Cell* cell=n->pObject;
+
+        if( (cell->pos.x==_pos.x) && 
+            (cell->pos.y==_pos.y)
+        ) return cell;
+
+        n=n->next;
+    }
+
+    return NULL;
+}

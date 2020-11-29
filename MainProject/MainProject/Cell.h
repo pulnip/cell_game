@@ -6,9 +6,11 @@
 
 #include "Map.h"
 
+#define DNA_LEN 8
+
 typedef struct _Cell{
     isCell id;
-    void (**DNA)(struct _Cell);
+    void (*DNA[DNA_LEN])(struct _Cell);
     int turnDNA;
     Coord lastPos;
     Coord pos;
@@ -22,7 +24,7 @@ extern List CPUCells;
 
 typedef void (BEHAVIOUR_t)(Cell*);
 typedef BEHAVIOUR_t* pBEHAVIOUR_t;
-typedef pBEHAVIOUR_t* DNA_t; //DNA is Array of pBEHAVIOUR
+//DNA is Array of pBEHAVIOUR
 
 typedef struct _BasicInfo
 {
@@ -51,6 +53,8 @@ BEHAVIOUR_t getPoint;
 BEHAVIOUR_t doCannibal;
 
 BEHAVIOUR_t divide;
+
+Cell* searchCellByPos(Coord pos, isCell id);
 
 #define BEHAVIOUR_NUMBER 9
 
