@@ -8,9 +8,10 @@
 typedef struct _Cell{
     isCell id;
     void (**DNA)(struct _Cell);
+    int turnDNA;
     Coord lastPos;
     Coord pos;
-    int turnDNA;
+    int hp;
     Coord forward;
     BasicInfo stat;
     // The location coordinates of the searched

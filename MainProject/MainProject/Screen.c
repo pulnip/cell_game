@@ -114,13 +114,13 @@ int filterPixelToCI(){
                 pMapPoint->Attributes=FG_GREEN|BG_BLACK;
             }
 
-            if(unit.Cell){
+            if(unit.isUserCell){
                 pMapPoint->Char.AsciiChar='@';
-                if(unit.Cell==UserCell) {
-                    pMapPoint->Attributes=FG_WHITE|BG_BLACK;
-                } else if(unit.Cell==CPUCell) {
-                    pMapPoint->Attributes=FG_RED|BG_BLACK;
-                }
+                pMapPoint->Attributes=FG_WHITE|BG_BLACK;
+            }
+            if(unit.isCPUCell){
+                pMapPoint->Char.AsciiChar='@';
+                pMapPoint->Attributes=FG_RED|BG_BLACK;
             }
         }
     }
