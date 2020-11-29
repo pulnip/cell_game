@@ -10,8 +10,6 @@ void createMovingSet(Cell* cell);
 void exeCpuCells(void);
 
 
-extern List Cells;
-
 int initComputer(void);
 int updateComputer(void);
 
