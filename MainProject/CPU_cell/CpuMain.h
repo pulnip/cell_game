@@ -16,4 +16,4 @@ Cell* createCell(Cell temp);
 isCell getId(char* _id);
 Coord getPos(void);
 Coord getForward(void);
-
+BasicInfo getBasicInfo();

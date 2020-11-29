@@ -12,12 +12,21 @@ typedef struct _Cell{
     int turnDNA;
     int hp;
     Coord forward;
+    BasicInfo stat;
     // The location coordinates of the searched
 } Cell;
 
 typedef void (BEHAVIOUR_t)(Cell*);
 typedef BEHAVIOUR_t* pBEHAVIOUR_t;
 typedef pBEHAVIOUR_t* DNA_t; //DNA is Array of pBEHAVIOUR
+
+typedef struct _BasicInfo
+{
+    int healthPoint; //= 1000;   //체력
+    int attackPoint; //= 100;       //공격력
+    int defensePoint; //= 20;       //방어력
+    int starveMinusHealthPoint; //= 10; //허기?
+} BasicInfo;
 
 
 #define PROTO_CELL_NUMBER 20

@@ -1,4 +1,4 @@
-#include "CpuCell.h"
+#include "CpuMain.h"
 
 int initComputer(void) {
 	initList(&Cells);
@@ -11,7 +11,9 @@ int initComputer(void) {
 		_temp.pos = getPos();
 		_temp.forward = getForward();
 		_temp.turnDNA = 0;
-		Basic_Cell_Information(); // 개선이 필요합니다. cell에 대한 접근방법 필요.
+		_temp.stat = getBasicInfo();
+
+		(); // 개선이 필요합니다. cell에 대한 접근방법 필요.
 
 		Cell newCell = createCell(_temp);
 		if (!(newCell) == NULL) {
@@ -28,6 +30,7 @@ int initComputer(void) {
 *    Coord pos; getPos
 *    int turnDNA; init(0)
 *    int hp;
+*    BasicInfo stat;
 *    Coord forward;
 *    // The location coordinates of the searched
 *} Cell;
@@ -38,7 +41,7 @@ int updateComputer(void) { //cell이
 }
 
 //Cell create (getId, get posForward
-Cell* createCell(Cell _temp) {
+Cell* createCpuCell(Cell _temp) {
 	Cell* cell = malloc(sizeof(Cell));
 
 	cell->hp = _temp.hp;
@@ -54,13 +57,13 @@ Cell* createCell(Cell _temp) {
 
 
 isCell getId(char *_id){ //map.h isCell 구조체참조
-	if (!strcmp(_id,"USER") {
+	if (!(strcmp(_id,"USER")) {
 		return 1;
 	}
-	else if (!strcmp(_id, "CPU") {
+	else if (!(strcmp(_id, "CPU")) {
 		return 2;
 	}
-	else if (!strcmp(_id, "NOCELL") {
+	else if (!(strcmp(_id, "NOCELL")) {
 		return 0;
 	}
 	else { return -1;} // 생성실패
@@ -75,7 +78,15 @@ Coord getPos(void) {
 
 Coord getForward(void) {
 	Cell _cell;
-	Coord.forward.x = GetRandom(?, ? ); //? forward뭘로 할건지
-	Coord.forward.x = GetRandom(?, ? ); // "
+	_cell.forward.x = GetRandom(?, ? ); //? forward뭘로 할건지
+	_cell.forward.y = GetRandom(?, ? ); // "
 	return _cell.forward;
+}
+BasicInfo getBasicInfo(void) {
+	Cell _cell;
+	_cell.healthPoint; //= 1000;   //체력
+	int attackPoint; //= 100;       //공격력
+	int defensePoint; //= 20;       //방어력
+	int starveMinusHealthPoint; //= 10; //허기?
+
 }
