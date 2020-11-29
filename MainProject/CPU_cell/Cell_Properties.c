@@ -42,9 +42,29 @@ void Basic_Cell_Information()
 	
 }
 
-BasicInfo choose_stat(int level_A, int level_S, int level_D) //일단 각 테크트리 당 부여할 레벨단계의 입력
+BasicInfo choose_stat() //일단 각 테크트리 당 부여할 레벨단계의 입력
 {
 	Cell asd;
+	int level_A;
+	int level_S;
+	int level_D;
+
+	while (1)
+	{
+		srand(time(NULL));
+		int total = 0;
+		level_A = (rand() % 5) + 1;
+		level_S = (rand() % 5) + 1;
+		level_D = (rand() % 5) + 1;
+
+		total = level_A + level_S + level_D;
+
+		if (total == 5)
+		{
+			break;
+		}
+	}
+	
 	asd.stat.healthPoint += Agrresive_ability(level_A);
 	asd.stat.attackPoint += Stability_ability(level_S);
 	asd.stat.defensePoint += Defensive_ability(level_D);
