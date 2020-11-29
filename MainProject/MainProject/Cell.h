@@ -38,6 +38,8 @@ typedef struct _BasicInfo
 
 #define MAX_SIGHT 5
 #define DEFAULT_HP 1000
+#define DEFAULT_AP 100
+#define DEFAULT_DP 20
 
 BEHAVIOUR_t seeEnemy;
 BEHAVIOUR_t seeFriend;
