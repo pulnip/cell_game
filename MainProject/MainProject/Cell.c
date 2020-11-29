@@ -20,7 +20,7 @@ void seeEnemy(Cell* const pCell){
             for(int _x=_pos.x-MAX_SIGHT; _x<=_pos.x+MAX_SIGHT; ++_x){
                 if( (0<=_x) && (_x<CONSOLE_WIDTH ) ) 
                 {
-                    if(map[_y][_x].Cell==EnemyId){
+                    if(map[_y][_x].isCPUCell){
                         pCell->forward.x=_x;
                         pCell->forward.y=_y;
                         break;
@@ -41,7 +41,7 @@ void seeFriend(Cell* const pCell){
             for (int _x = _pos.x - MAX_SIGHT; _x <= _pos.x + MAX_SIGHT; ++_x) {
                 if ((0 <= _x) && (_x < CONSOLE_WIDTH))
                 {
-                    if (map[_y][_x].Cell == FriendId) {
+                    if (map[_y][_x].isUserCell) {
                         pCell->forward.x = _x;
                         pCell->forward.y = _y;
                         break;
