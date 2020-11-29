@@ -35,12 +35,21 @@ int starve_minus_health_point; //Çã±â(ÃÊ´ç °¨¼ÒÇÏ´Â Ã¼·Â)
 
 void Basic_Cell_Information()
 {
-	//void recognition_point;
+
 	int health_point = 1000; 
 	int attack_point = 100; 
-	//void mobility;
 	int defense_point = 20; 
-	int starve_minus_health_point = 10; 
+	
+}
+
+BasicInfo choose_stat(int level_A, int level_S, int level_D) //ÀÏ´Ü °¢ Å×Å©Æ®¸® ´ç 
+{
+	Cell asd;
+	asd.stat.healthPoint += Agrresive_ability(level_A);
+	asd.stat.attackPoint += Stability_ability(level_S);
+	asd.stat.defensePoint += Defensive_ability(level_D);
+
+	return asd.stat
 }
 
 //¼¼Æ÷ À¯Àü Á¤º¸ Å×Å©Æ®¸®
@@ -71,7 +80,7 @@ void Basic_Cell_Information()
 	//level1Àº 6 level2Àº 7 level3´Â 8
 }
 */
-void Agrresive_ability(int level, int attack_point)//·¹º§°ú ÇöÀç °ø°İ·ÂÀ» ÀÔ·ÂÇÏ¼¼¿ä
+int Agrresive_ability(int level, int attack_point)//·¹º§°ú ÇöÀç °ø°İ·ÂÀ» ÀÔ·ÂÇÏ¼¼¿ä
 {
 	int level1_AG_ability=100;
 	int level2_AG_ability=200;
@@ -101,10 +110,12 @@ void Agrresive_ability(int level, int attack_point)//·¹º§°ú ÇöÀç °ø°İ·ÂÀ» ÀÔ·ÂÇÏ
 		printf("You just choose between 1 to 5");
 		break;
 	//°ø°İ·Â À¯ÀüÁ¤º¸
+
+		return attack_point;
 	
 }
 
-void Stability_ability(int level, int health_point)//·¹º§°ú ÇöÀç 'ÃÖ´ë'Ã¼·ÂÀ» ÀÔ·ÂÇÏ¼¼¿ä
+int Stability_ability(int level, int health_point)//·¹º§°ú ÇöÀç 'ÃÖ´ë'Ã¼·ÂÀ» ÀÔ·ÂÇÏ¼¼¿ä
 {
 	int level1_ST_ability=200;
 	int level2_ST_ability=400;
@@ -135,9 +146,11 @@ void Stability_ability(int level, int health_point)//·¹º§°ú ÇöÀç 'ÃÖ´ë'Ã¼·ÂÀ» ÀÔ
 		break;
 	
 	//Ã¼·Â À¯ÀüÁ¤º¸
+
+	return health_point;
 }
 
-void Defensive_ability(int level, int defense_point)//·¹º§°ú ÇöÀç ¹æ¾î·ÂÀ» ÀÔ·ÂÇÏ¼¼¿ä
+int Defensive_ability(int level, int defense_point)//·¹º§°ú ÇöÀç ¹æ¾î·ÂÀ» ÀÔ·ÂÇÏ¼¼¿ä
 {
 	int level1_DE_ability=40;
 	int level2_DE_ability=80;
@@ -168,6 +181,8 @@ void Defensive_ability(int level, int defense_point)//·¹º§°ú ÇöÀç ¹æ¾î·ÂÀ» ÀÔ·ÂÇ
 		break;
 
 	//¹æ¾î·Â À¯ÀüÁ¤º¸
+
+		return defense_point;
 }
 
 /*
