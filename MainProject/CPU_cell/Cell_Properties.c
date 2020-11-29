@@ -19,19 +19,19 @@ struct Cell;
 
 
 
-#define Recognize_ability
+
 #define Agrresive_ability
 #define Stability_ability
 #define Defensive_ability
-#define Digestive_ability
+
 
 //기본 세포의 정보
 
-int recognition_point;//인지 능력
+
 int health_point; //체력
 int attack_point; //공격력
 int defense_point; //방어력
-int starve_minus_health_point; //허기(초당 감소하는 체력)
+
 
 void Basic_Cell_Information()
 {
