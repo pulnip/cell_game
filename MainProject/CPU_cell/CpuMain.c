@@ -1,40 +1,44 @@
 #include "CpuCell.h"
 
-int initComputer(void) {//cell 선언방법을 모르겠네
+int initComputer(void) {
+	initList(&Cells);
+	int count = 0;
 	for (int i = 0; i < PROTO_CELL_NUMBER; i++) {
-		Cell _temp//일단 cell을 만드는 함수 return 방법 생각 안했음 // 링크드 리스트까지 연결해야함 set기본 9칸
+		Cell _temp;
 		//tempDNA createMovingSet(cell); //구조체 2차원배열 접근방법 모름 찾아봐야함 cell->set
 		//createTech(cell); //태림이가 짜놓은 코드가 뭔지 모르겠음
 		_temp.id = getId("CPU");  //Cell->id , isCell = 1
 		_temp.pos = getPos();
 		_temp.forward = getForward();
-		_temp
+		_temp.turnDNA = 0;
 		Basic_Cell_Information(); // 개선이 필요합니다. cell에 대한 접근방법 필요.
 
-		createCell(_temp);
+		Cell newCell = createCell(_temp);
+		if (!(newCell) == NULL) {
+			count++;
+		}
 	}
+	if (count == PROTO_CELL_NUMBER) { return 1; } // suc
+	else { return -1; }//fail
 }
 /*
 *typedef struct _Cell{
-*    isCell id;
+*    isCell id;  getId
 *    void (**DNA)(struct _Cell);
-*    Coord pos;
+*    Coord pos; getPos
+*    int turnDNA; init(0)
 *    int hp;
 *    Coord forward;
 *    // The location coordinates of the searched
-*	// Tech랑 DNA의 구별이 필요하지 않나 싶습니다.
 *} Cell;
 */
 
 int updateComputer(void) { //cell이 
-	for (int i = 0; i < 8; i++) { //  한번에 8번이아니라 한번씩.
-		while(list.next != NULL)
-			doYourMovingSet(&cell);
-	}
+	exeCells(); // 
 }
 
 //Cell create (getId, get posForward
-Cell* createCell(cell _temp) {
+Cell* createCell(Cell _temp) {
 	Cell* cell = malloc(sizeof(Cell));
 
 	cell->hp = _temp.hp;
@@ -43,7 +47,7 @@ Cell* createCell(cell _temp) {
 	cell->forward = _temp.forward;
 	//void (**DNA)(struct _Cell);
 
-	appendNode(cell, &cell);
+	appendNode(cell, &cells);
 
 	return cell;
 } //나중에 destroyed 필요

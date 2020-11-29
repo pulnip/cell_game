@@ -5,15 +5,15 @@
 #include <string.h>
 
 
-extern List cells;
+extern List Cells;
 
 int initComputer(void);
 int updateComputer(void);
 
 
-Cell* createCell(cell temp);
+Cell* createCell(Cell temp);
 //cell base data
 isCell getId(char* _id);
 Coord getPos(void);
-Coord getForward(void)
+Coord getForward(void);
 

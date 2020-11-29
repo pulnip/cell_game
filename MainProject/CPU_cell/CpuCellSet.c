@@ -11,9 +11,14 @@ void createMovingSet(Cell *cell) {   //행동을 담당하는 세트만 만드는 함수
 	set[8] = 0; // 아니면 set의 마지막을 score로? 20번째줄 참고 
 }
 
-void doYourMovingSet(int* set) {   //보내온 세트에 따라 행동
-	for (int j = 0; j < 8; j++) {
-		DO set[j](); 
+void exeCells(void) {
+	Node* n = Cells.head;
+	while (n!= NULL) {
+		Cell* cell = n->pObject;
+		DO cell->DNA[cell->turnDNA](cell); //Do 필요없는건가
+		//filterPixelToCI()
+		cell->turnDNA = ((cell->turnDNA) + 1) % 8 // 1~8까지의 세트 안에서만 
+		n = n->next;
 	}
 }
 
@@ -38,6 +43,5 @@ void createNewSet(**parentSet) { //2차원배열로 왔다고 가정
 }
 
 
-}
 
 

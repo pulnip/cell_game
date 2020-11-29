@@ -5,4 +5,4 @@
 typedef void(*DO)();
 
 void createMovingSet(Cell *cell);
-void exeSet(Cell *cell);
+void exeCells(void);
