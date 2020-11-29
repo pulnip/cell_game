@@ -9,7 +9,8 @@ int initComputer(void) {
 		//createTech(cell); //태림이가 짜놓은 코드가 뭔지 모르겠음
 		_temp.id = getId("CPU");  //Cell->id , isCell = 1
 		_temp.pos = getPos();
-		_temp.forward = getForward();
+		_cell.pos.x = GetRandom(0, MAP_WIDTH); 
+		_cell.pos.y = GetRandom(0, MAP_HEIGHT);
 		_temp.turnDNA = 0;
 		_temp.stat = getBasicInfo();
 
