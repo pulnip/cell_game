@@ -14,7 +14,7 @@ int initComputer(void) {
 		_temp.turnDNA = 0;
 		_temp.forward.x = _temp.pos.x;
 		_temp.forward.y = _temp.pos.y;
-		_tempStat = chooseStat();
+		_tempStat = ChooseStat();
 		_temp.stat.healthPoint = _tempStat.stat.healthPoint;
 		_temp.stat.defensePoint = _tempStat.stat.defensePoint;
 		_temp.stat.attackPoint = _tempStat.stat.attackPoint;
