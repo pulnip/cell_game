@@ -45,12 +45,12 @@ void Basic_Cell_Information()
 BasicInfo choose_stat() //일단 각 테크트리 당 부여할 레벨단계의 입력
 {
 	Cell asd;
-	int level_A;
-	int level_S;
-	int level_D;
-	asd.stat.healthPoint += 1000;
-	asd.stat.attackPoint += 100;
-	asd.stat.defensePoint += 20;
+	int level_A=0;
+	int level_S=0;
+	int level_D=0;
+	asd.stat.healthPoint = 1000;
+	asd.stat.attackPoint = 100;
+	asd.stat.defensePoint = 20;
 	int total, num = 0;
 
 	while (!(total == 5)) {
@@ -58,15 +58,15 @@ BasicInfo choose_stat() //일단 각 테크트리 당 부여할 레벨단계의 입력
 		num = GetRandom(1, 4); //1~3 범위안에서 랜덤으로 하나 숫자뽑아주는
 		if (num == 1)
 		{
-			A_level++;
+			level_A++;
 		}
 		else if (num == 2) 
 		{ 
-			S_level++;
+			level_S++;
 		}
 		else if (num == 3)
 		{
-			D_level++;
+			level_D++;
 		}
 
 		total = A_level + S_level + D_level;
