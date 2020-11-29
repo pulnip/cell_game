@@ -26,9 +26,9 @@ int updateInfra1(void){
     getKBInput();
 
     updateScreen1();
-    updateScrollWindow();
 
     checkTriggered();
+    updateScrollWindow();
 
     return 0;
 }
