@@ -82,6 +82,15 @@ Coord getForward(void) {
 	_cell.forward.y = GetRandom(?, ? ); // "
 	return _cell.forward;
 }
+
+void _setForward(Cell* cell, Coord coord){
+	cell->forward.x=coord.x;
+	cell->forward.y=coord.y;
+}
+Coord _getForward(Cell* cell){
+	return cell->forward
+}
+
 BasicInfo getBasicInfo(void) {
 	Cell _cell;
 	_cell.healthPoint; //= 1000;   //Ã¼·Â
