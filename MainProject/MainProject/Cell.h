@@ -10,7 +10,6 @@ typedef struct _Cell{
     void (**DNA)(struct _Cell);
     Coord pos;
     int turnDNA;
-    int hp;
     Coord forward;
     BasicInfo stat;
     // The location coordinates of the searched
@@ -25,7 +24,6 @@ typedef struct _BasicInfo
     int healthPoint; //= 1000;   //체력
     int attackPoint; //= 100;       //공격력
     int defensePoint; //= 20;       //방어력
-    int starveMinusHealthPoint; //= 10; //허기?
 } BasicInfo;
 
 

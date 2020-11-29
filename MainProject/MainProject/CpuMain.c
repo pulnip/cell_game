@@ -7,7 +7,7 @@ int initComputer(void) {
 		Cell _temp;
 		//tempDNA createMovingSet(cell); //구조체 2차원배열 접근방법 모름 찾아봐야함 cell->set
 		//createTech(cell); //태림이가 짜놓은 코드가 뭔지 모르겠음
-		_temp.id = getId("CPU");  //Cell->id , isCell = 1
+		_temp.id = 2;  //Cell->id , isCell = 1
 		_temp.pos = getPos();
 		_cell.pos.x = GetRandom(0, MAP_WIDTH);  
 		_cell.pos.y = GetRandom(0, MAP_HEIGHT);
