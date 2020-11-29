@@ -11,7 +11,6 @@ typedef struct _Cell{
     int turnDNA;
     Coord lastPos;
     Coord pos;
-    int hp;
     Coord forward;
     BasicInfo stat;
     // The location coordinates of the searched

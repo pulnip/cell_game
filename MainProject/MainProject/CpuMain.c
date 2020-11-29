@@ -44,15 +44,14 @@ Cell* createCpuCell(Cell _temp) {
 	return cell;
 } //나중에 destroyed 필요
 
-void isCellPos(Cell* _cell) {  //exeCpuCells 안에 포함됨
-	_cell->lastPos = _cell->pos;
+
+void changeIsCellPos(Cell* _cell) {  //exeCpuCells 안에 포함됨
+	_cell->lastPos.x = _cell->pos.x;
+	_cell->lastPos.y = -cell->pos.y;
 	map[_cell->lastPos.x][_cell->lastPos.y] = False;
 }
-//CPU 세트를 만드는 곳
 
-//행동 패턴을 만드는 곳
 
-// Cell 구조체에 point 추가?
 void createMovingSet(Cell* cell) {   //행동을 담당하는 세트만 만드는 함수  
 	for (int i = 0; i < 8; i++) { // 구조체 cell에 접근하는 방법
 		cell->set[i] = BehaviourList[GetRandom(0, sizeof(BehaviourList) / 4)];
@@ -60,11 +59,12 @@ void createMovingSet(Cell* cell) {   //행동을 담당하는 세트만 만드는 함수
 	set[8] = 0; // 아니면 set의 마지막을 score로? 20번째줄 참고 
 }
 
+
 void exeCpuCells(void) { // ?
 	Node* n = Cells.head;
 	while (n != NULL) {
 		Cell* cell = n->pObject;
-		DO cell->DNA[cell->turnDNA](cell); //Do 필요없는건가
+		cell->DNA[cell->turnDNA](cell); //Do 필요없는건가
 		isCellPos(cell);
 		map[cell->pos.x][cell->pos.y] = True;
 		cell->turnDNA = ((cell->turnDNA) + 1) % 8; // 1~8까지의 세트 안에서만 
