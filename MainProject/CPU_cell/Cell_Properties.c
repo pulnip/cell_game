@@ -42,7 +42,7 @@ void Basic_Cell_Information()
 	
 }
 
-BasicInfo choose_stat(int level_A, int level_S, int level_D) //일단 각 테크트리 당 
+BasicInfo choose_stat(int level_A, int level_S, int level_D) //일단 각 테크트리 당 부여할 레벨단계의 입력
 {
 	Cell asd;
 	asd.stat.healthPoint += Agrresive_ability(level_A);
@@ -107,7 +107,7 @@ int Agrresive_ability(int level, int attack_point)//레벨과 현재 공격력을 입력하�
 		break;
 	}
 	default:
-		printf("You just choose between 1 to 5");
+	
 		break;
 	//공격력 유전정보
 
@@ -142,7 +142,7 @@ int Stability_ability(int level, int health_point)//레벨과 현재 '최대'체력을 입�
 		break;
 	}
 	default:
-		printf("You just choose between 1 to 5");
+	
 		break;
 	
 	//체력 유전정보
@@ -177,7 +177,7 @@ int Defensive_ability(int level, int defense_point)//레벨과 현재 방어력을 입력하
 		break;
 	}
 	default:
-		printf("You just choose between 1 to 5");
+		
 		break;
 
 	//방어력 유전정보

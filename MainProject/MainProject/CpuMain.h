@@ -3,6 +3,11 @@
 #include "Cell.h"
 #include "Map.h"
 #include <string.h>
+#include "SuperHeader.h"
+typedef void(*DO)();
+
+void createMovingSet(Cell* cell);
+void exeCpuCells(void);
 
 
 extern List Cells;
@@ -13,3 +18,5 @@ int updateComputer(void);
 
 Cell* createCpuCell(Cell temp);
 //cell base data
+
+void isCellPos(Cell* _cell);
