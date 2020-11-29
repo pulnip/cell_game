@@ -1,7 +1,7 @@
 #include "CpuMain.h"
 
 int initComputer(void) {
-	initList(&Cells);
+	initList(&CPUCells);
 	int count = 0;
 	for (int i = 0; i < PROTO_CELL_NUMBER; i++) {
 		Cell _temp;
@@ -39,7 +39,7 @@ Cell* createCpuCell(Cell _temp) {
 	cell->forward = _temp.forward;
 	//void (**DNA)(struct _Cell);
 
-	appendNode(cell, &cells);
+	appendNode(cell, &CPUcells);
 
 	return cell;
 } //나중에 destroyed 필요
