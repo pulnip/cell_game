@@ -11,9 +11,5 @@ int initComputer(void);
 int updateComputer(void);
 
 
-Cell* createCell(Cell temp);
+Cell* createCpuCell(Cell temp);
 //cell base data
-isCell getId(char* _id);
-Coord getPos(void);
-Coord getForward(void);
-BasicInfo getBasicInfo();

@@ -11,7 +11,7 @@ void createMovingSet(Cell *cell) {   //행동을 담당하는 세트만 만드는 함수
 	set[8] = 0; // 아니면 set의 마지막을 score로? 20번째줄 참고 
 }
 
-void exeCells(void) {
+void exeCpuCells(void) {
 	Node* n = Cells.head;
 	while (n!= NULL) {
 		Cell* cell = n->pObject;
