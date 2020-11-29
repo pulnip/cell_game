@@ -48,13 +48,27 @@ BasicInfo choose_stat() //일단 각 테크트리 당 부여할 레벨단계의 입력
 	int level_A;
 	int level_S;
 	int level_D;
+	int total, num = 0;
 
 	while (!(total == 5)) {
-		int num = GetRandom(1, 5); //범위안에서 랜덤으로 하나 숫자뽑아주는
-		if (num == 1) A_level++;
-		else if (num == 2) B_level++;
-		else if (num == 3) C_level++;
-		total++;
+		
+		num = GetRandom(1, 4); //범위안에서 랜덤으로 하나 숫자뽑아주는
+		if (num == 1)
+		{
+			A_level++;
+		}
+		else if (num == 2) 
+		{ 
+			B_level++;
+		}
+		else if (num == 3)
+		{
+			C_level++;
+		}
+
+		total = A_level + B_level + C_level;
+		
+
 	}
 	
 	asd.stat.healthPoint += Agrresive_ability(level_A);
@@ -92,7 +106,7 @@ BasicInfo choose_stat() //일단 각 테크트리 당 부여할 레벨단계의 입력
 	//level1은 6 level2은 7 level3는 8
 }
 */
-int Agrresive_ability(int level, int attack_point)//레벨과 현재 공격력을 입력하세요
+int Agrresive_ability(int level)//레벨을 입력하세요
 {
 	int level1_AG_ability=100;
 	int level2_AG_ability=200;
@@ -127,7 +141,7 @@ int Agrresive_ability(int level, int attack_point)//레벨과 현재 공격력을 입력하�
 	
 }
 
-int Stability_ability(int level, int health_point)//레벨과 현재 '최대'체력을 입력하세요
+int Stability_ability(int level)//레벨을 입력하세요
 {
 	int level1_ST_ability=200;
 	int level2_ST_ability=400;
@@ -162,7 +176,7 @@ int Stability_ability(int level, int health_point)//레벨과 현재 '최대'체력을 입�
 	return health_point;
 }
 
-int Defensive_ability(int level, int defense_point)//레벨과 현재 방어력을 입력하세요
+int Defensive_ability(int level)//레벨을 입력하세요
 {
 	int level1_DE_ability=40;
 	int level2_DE_ability=80;
