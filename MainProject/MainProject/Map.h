@@ -4,8 +4,8 @@
 #include "SuperHeader.h"
 
 typedef struct _Pixel{
-    Bool Cell;
-    // 0: no cell, 1: User cell, 2: CPU cell
+    Bool isUserCell;
+    Bool isCPUCell;
     SmallSize_t Point;
     SmallSize_t Food;
 } Pixel;
