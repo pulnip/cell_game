@@ -59,14 +59,14 @@ BasicInfo choose_stat() //일단 각 테크트리 당 부여할 레벨단계의 입력
 		}
 		else if (num == 2) 
 		{ 
-			B_level++;
+			S_level++;
 		}
 		else if (num == 3)
 		{
-			C_level++;
+			D_level++;
 		}
 
-		total = A_level + B_level + C_level;
+		total = A_level + S_level + D_level;
 		
 	}
 	
