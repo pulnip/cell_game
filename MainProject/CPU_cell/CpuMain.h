@@ -1,9 +1,19 @@
 #include "CpuCellSet.h"
 #include "Cell_Properties.h" // 태림이 함수를 가져올 헤더파일이 없음
 #include "Cell.h"
+#include "Map.h"
+#include <string.h>
+
+
+extern List cells;
 
 int initComputer(void);
-??? createCell();
 int updateComputer(void);
-void createId(Cell *cell, int id);
-void createPosforward(Cell *cell);
+
+
+Cell* createCell(cell temp);
+//cell base data
+isCell getId(char* _id);
+Coord getPos(void);
+Coord getForward(void)
+
