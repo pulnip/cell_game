@@ -48,6 +48,9 @@ BasicInfo choose_stat() //일단 각 테크트리 당 부여할 레벨단계의 입력
 	int level_A;
 	int level_S;
 	int level_D;
+	asd.stat.healthPoint += 1000;
+	asd.stat.attackPoint += 100;
+	asd.stat.defensePoint += 20;
 	int total, num = 0;
 
 	while (!(total == 5)) {
@@ -70,8 +73,8 @@ BasicInfo choose_stat() //일단 각 테크트리 당 부여할 레벨단계의 입력
 		
 	}
 	
-	asd.stat.healthPoint += Agrresive_ability(level_A);
-	asd.stat.attackPoint += Stability_ability(level_S);
+	asd.stat.healthPoint += Stability_ability(level_S);
+	asd.stat.attackPoint += Agrresive_ability(level_A);
 	asd.stat.defensePoint += Defensive_ability(level_D);
 
 	return asd.stat
