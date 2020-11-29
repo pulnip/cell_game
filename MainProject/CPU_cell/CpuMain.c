@@ -24,13 +24,14 @@ int initComputer(void) {//cell 선언방법을 모르겠네
 
 int updateComputer(void) { //cell이 
 	for (int i = 0; i < 8; i++) { //  한번에 8번이아니라 한번씩.
-		doYourMovingSet(&cell);
+		while(list.next != NULL)
+			doYourMovingSet(&cell);
 	}
 }
 
 void createId(Cell *cell, int id) {
-	cell.id 에 id 넣기.; (구조체에 직접적으로 접근해야함)
-
+	cell->id = 1;
 }
 void createPosforward(*cell) {
+	GetRandom(0, 2)
 }
