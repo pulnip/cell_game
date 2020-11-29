@@ -20,9 +20,9 @@ struct Cell;
 
 
 
-#define Agrresive_ability
-#define Stability_ability
-#define Defensive_ability
+#define AgrresiveAbility
+#define StabilityAbility
+#define DefensiveAbility
 
 
 //기본 세포의 정보
@@ -33,7 +33,7 @@ int attack_point; //공격력
 int defense_point; //방어력
 
 
-void Basic_Cell_Information()
+void BasicCellInformation()
 {
 
 	int health_point = 1000; 
@@ -42,7 +42,7 @@ void Basic_Cell_Information()
 	
 }
 
-BasicInfo choosestat() //일단 각 테크트리 당 부여할 레벨단계의 입력
+BasicInfo ChooseStat() 
 {
 	Cell BasicInfo;
 	int level_A=0;
@@ -73,9 +73,9 @@ BasicInfo choosestat() //일단 각 테크트리 당 부여할 레벨단계의 입력
 		
 	}
 	
-	BasicInfo.stat.healthPoint += Stability_ability(level_S);
-	BasicInfo.stat.attackPoint += Agrresive_ability(level_A);
-	BasicInfo.stat.defensePoint += Defensive_ability(level_D);
+	BasicInfo.stat.healthPoint += StabilityAbility(level_S);
+	BasicInfo.stat.attackPoint += AgrresiveAbility(level_A);
+	BasicInfo.stat.defensePoint += DefensiveAbility(level_D);
 
 	return BasicInfo.stat
 }
@@ -108,7 +108,7 @@ BasicInfo choosestat() //일단 각 테크트리 당 부여할 레벨단계의 입력
 	//level1은 6 level2은 7 level3는 8
 }
 */
-int Agrresive_ability(int level)//레벨을 입력하세요
+int AgrresiveAbility(int level)//레벨을 입력하세요
 {
 	int level1_AG_ability=100;
 	int level2_AG_ability=200;
@@ -143,7 +143,7 @@ int Agrresive_ability(int level)//레벨을 입력하세요
 	
 }
 
-int Stability_ability(int level)//레벨을 입력하세요
+int StabilityAbility(int level)//레벨을 입력하세요
 {
 	int level1_ST_ability=200;
 	int level2_ST_ability=400;
@@ -178,7 +178,7 @@ int Stability_ability(int level)//레벨을 입력하세요
 	return health_point;
 }
 
-int Defensive_ability(int level)//레벨을 입력하세요
+int DefensiveAbility(int level)//레벨을 입력하세요
 {
 	int level1_DE_ability=40;
 	int level2_DE_ability=80;
@@ -260,7 +260,7 @@ int Attack(int attack_point, int defense_point) //공격 포인트는 공격하는 사람의 
 
 
 //공격 받음
-int Be_Attacked(int health_point,int defense_point)
+int BeAttacked(int health_point,int defense_point)
 {
 	health_point = health_point - Attack()+defense_point;
 	return health_point;
