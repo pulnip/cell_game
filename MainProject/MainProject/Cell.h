@@ -31,7 +31,7 @@ typedef struct _BasicInfo
 #define PROTO_CELL_NUMBER 20
 
 #define MAX_SIGHT 5
-#define DEFAULT_HP 10
+#define DEFAULT_HP 1000
 
 BEHAVIOUR_t seeEnemy;
 BEHAVIOUR_t seeFriend;
