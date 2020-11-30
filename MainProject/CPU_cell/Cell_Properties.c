@@ -108,6 +108,7 @@ BasicInfo ChooseStat()
 	//level1은 6 level2은 7 level3는 8
 }
 */
+
 int AgrresiveAbility(int level)//레벨을 입력하세요
 {
 	int level1_AG_ability=100;
