@@ -59,11 +59,6 @@ Cell* createCpuCell(void) {
 } //나중에 destroyed 필요
 
 
-void changeIsCellPos(Cell* _cell) {  //exeCpuCells 안에 포함됨
-	_cell->lastPos.x = _cell->pos.x;
-	_cell->lastPos.y = _cell->pos.y;
-	map[_cell->lastPos.x][_cell->lastPos.y] = False;
-}
 
 
 void setCpuMovingSet(Cell* cell) {   //행동을 담당하는 세트만 만드는 함수  
@@ -75,12 +70,18 @@ void setCpuMovingSet(Cell* cell) {   //행동을 담당하는 세트만 만드는 함수
 
 void exeCpuCells(void) {
 	Node* n = CPUCells.head;
+	Cell* cell;
 	while (n != NULL) {
-		Cell* cell = n->pObject;
+
 		cell->DNA[cell->turnDNA](cell); //Do 필요없는건가
 		changeIsCellPos(cell);
 		
-		map[cell->pos.x][cell->pos.y] = True;
+		//print
+		map[cell->pos.x][cell->pos.y].isCPUCell = True;
+		cell->lastPos.x = cell->pos.x;
+		cell->lastPos.y = cell->pos.y;
+		map[cell->lastPos.x][cell->lastPos.y].isCPUCell = False;
+
 		cell->turnDNA = ((cell->turnDNA) + 1) % 8; // 1~8까지의 세트 안에서만 
 		n = n->next;
 		updateGame(200); //2000/200 == 10 == 0.1초?
@@ -120,7 +121,7 @@ bestDNA* selectBestArray(bestDNA *_bestDNA) { //졸려서 이 문법이 맞는지도 모르겠
 void *createNewSet(bestDNA baseDNA, bestDNA base2DNA) { //1등 배열  //2등배열
 	void *tempSet[DNA_LEN];
 	for (int i = 0; i < 8; i++) {
-		(tempSet+i) = Behaviour[parentSet[GetRandom(0, 2)][i]];
+		(tempSet+i) = BehaviourLIst[baseDNA.DNA[GetRandom(0, 2)][i]];
 	}
 }
 */
