@@ -15,7 +15,7 @@ int initCPUCell(void) {
 
 	return 0;
 }
-
+#include <stdio.h>
 int updateCPUCell(time_t ElapsedTime) {
 	static time_t timer = 0;
 	timer += ElapsedTime;
@@ -38,22 +38,19 @@ int deleteCPUCell(void) {
 Cell* createCpuCell(void) {
 	Cell* cell = malloc(sizeof(Cell));
 	if (cell == NULL) return NULL;
-	BasicInfo _tempStat;
+
 	cell->id = CPUCell;
+
+	setCpuMovingSet(cell);
+	cell->turnDNA = 0;
 
 	cell->lastPos.x = cell->pos.x = GetRandom(0, MAP_WIDTH);
 	cell->lastPos.y = cell->pos.y = GetRandom(0, MAP_HEIGHT);
 
-	cell->turnDNA = 0;
-	setCpuMovingSet(cell);
-
-	_tempStat = ChooseStat();
-	cell->stat.healthPoint = _tempStat.healthPoint;
-	cell->stat.defensePoint = _tempStat.defensePoint;
-	cell->stat.attackPoint = _tempStat.attackPoint;
-
 	cell->forward.x = cell->pos.x;
 	cell->forward.y = cell->pos.y;
+
+	ChooseStat(&(cell->stat));
 
 	cell->score = 0;
 
@@ -76,13 +73,13 @@ void exeCpuCells(void) {
 
 		cell->DNA[cell->turnDNA](cell);
 
-		//print
-		map[cell->pos.x][cell->pos.y].isCPUCell = True;
+		map[cell->lastPos.y][cell->lastPos.x].isCPUCell = False;
+		map[cell->pos.y][cell->pos.x].isCPUCell = True;
 		cell->lastPos.x = cell->pos.x;
 		cell->lastPos.y = cell->pos.y;
-		map[cell->lastPos.x][cell->lastPos.y].isCPUCell = False;
 
 		cell->turnDNA = ((cell->turnDNA) + 1) % 8; 
+
 		n = n->next;
 	}
 }
@@ -116,19 +113,18 @@ bestDNA* selectBestArray(bestDNA* _bestDNA) {
 	return _bestDNA;
 }
 
-BasicInfo ChooseStat()
+void ChooseStat(BasicInfo* _temp)
 {
-	BasicInfo _temp;
 	int level_A = 0;
 	int level_S = 0;
 	int level_D = 0;
-	_temp.healthPoint = DEFAULT_HP;
-	_temp.attackPoint = DEFAULT_AP;
-	_temp.defensePoint = DEFAULT_DP;
+	_temp->healthPoint = DEFAULT_HP;
+	_temp->attackPoint = DEFAULT_AP;
+	_temp->defensePoint = DEFAULT_DP;
 	int total = 0;
 	int num = 0;
 
-	while (!(total == 5)) {
+	while (total != 5) {
 
 		num = GetRandom(1, 4);
 		if (num == 1)
@@ -149,11 +145,9 @@ BasicInfo ChooseStat()
 	}
 
 
-	_temp.healthPoint += StabilityAbility(level_S);
-	_temp.attackPoint += AgrresiveAbility(level_A);
-	_temp.defensePoint += DefensiveAbility(level_D);
-
-	return _temp;
+	_temp->healthPoint += StabilityAbility(level_S);
+	_temp->attackPoint += AgrresiveAbility(level_A);
+	_temp->defensePoint += DefensiveAbility(level_D);
 }
 
 void SelectBestTech(time_t ElapsedTime)
@@ -186,10 +180,8 @@ void SelectBestTech(time_t ElapsedTime)
 
 int AgrresiveAbility(int level)
 {
-	BasicInfo _temp;
-	_temp.healthPoint = DEFAULT_HP;
-	_temp.attackPoint = DEFAULT_AP;
-	_temp.defensePoint = DEFAULT_DP;
+	int attackPoint = DEFAULT_AP;
+
 	int level1_AG_ability = 100;
 	int level2_AG_ability = 200;
 	int level3_AG_ability = 300;
@@ -223,10 +215,7 @@ int AgrresiveAbility(int level)
 
 int StabilityAbility(int level)
 {
-	BasicInfo _temp;
-	_temp.healthPoint = DEFAULT_HP;
-	_temp.attackPoint = DEFAULT_AP;
-	_temp.defensePoint = DEFAULT_DP;
+	int healthPoint = DEFAULT_HP;
 	int level1_ST_ability = 200;
 	int level2_ST_ability = 400;
 	int level3_ST_ability = 600;
@@ -261,10 +250,7 @@ int StabilityAbility(int level)
 
 int DefensiveAbility(int level)
 {
-	BasicInfo _temp;
-	_temp.healthPoint = DEFAULT_HP;
-	_temp.attackPoint = DEFAULT_AP;
-	_temp.defensePoint = DEFAULT_DP;
+	int defensePoint = DEFAULT_DP;
 	int level1_DE_ability = 40;
 	int level2_DE_ability = 80;
 	int level3_DE_ability = 120;
@@ -299,6 +285,5 @@ int DefensiveAbility(int level)
 
 int Attack(int attackpoint, int defensePoint)
 {
-	attackpoint -= defensePoint;
-	return attackpoint;
+	return attackpoint-defensePoint;
 }
