@@ -20,7 +20,7 @@ int updateCPUCell(time_t ElapsedTime) {
 	static time_t timer = 0;
 	timer += ElapsedTime;
 
-	if (timer > 500) {
+	if (timer > 50) {
 		exeCpuCells();
 		timer -= 500;
 	}
