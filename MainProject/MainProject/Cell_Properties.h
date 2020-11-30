@@ -6,7 +6,7 @@
 #include "Game.h"
 #include "CPU_cell_notice.h"
 #include "Cell.h"
-
+#include "CpuMain.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -16,6 +16,7 @@ void BasicCellInformation();
 void AgrresiveAbility(int level, int attack_point);
 void StabilityAbility(int level, int health_point);
 void DefensiveAbility(int level, int defense_point);
+void SelectBestTech(int a, int b, int c);
 
 
 

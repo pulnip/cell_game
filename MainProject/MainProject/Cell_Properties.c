@@ -85,8 +85,28 @@ BasicInfo ChooseStat()
 
 void SelectBestTech(int a, int b, int c)
 {
+	updateCPUCell(time_t ElapsedTime);
+
+	if (time_t ElapsedTime > 100) //시간이 100이 넘어갔을 때 cpu의 스펙 업
+	{
+		BasicInfo.stat.healthPoint += 100;
+		BasicInfo.stat.attackPoint += 10;
+		BasicInfo.stat.defensePoint += 1;
+	}
+	else if (time_t ElapsedTime > 500) //시간이 500이 넘어갔을 때 cpu의 스펙 업
+	{
+		BasicInfo.stat.healthPoint += 200;
+		BasicInfo.stat.attackPoint += 20;
+		BasicInfo.stat.defensePoint += 2;
+	}
+	else if (time_t ElapsedTime > 1000) //시간이 1000이 넘어갔을 때 cpu의 스펙 업
+	{
+		BasicInfo.stat.healthPoint += 300;
+		BasicInfo.stat.attackPoint += 30;
+		BasicInfo.stat.defensePoint += 3;
+	}
+
 	
-	selectBestArray(bestDNA * _bestDNA);
 }
 
 
