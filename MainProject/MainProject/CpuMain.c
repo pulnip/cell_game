@@ -1,9 +1,9 @@
-#include "CpuMain.h"
+ï»¿#include "CpuMain.h"
 
 int initCPUCell(void) {
 	initList(&CPUCells);
 	int count = 0;
-	for (int i = 0; i < PROTO_CELL_NUMBER; i++) {  // usercell.cÃ³·³ ±×³É createCpuCell()¿¡¼­ ¹ÞÀ»±î °í¹ÎÁß ³ªÁß¿¡ »õ·Î ¸¸µé¶§ »ý°¢ÇÏ¸é ¾ÆÂñÇÏ³×
+	for (int i = 0; i < PROTO_CELL_NUMBER; i++) {  // usercell.cÃ³ï¿½ï¿½ ï¿½×³ï¿½ createCpuCell()ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½é¶§ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï³ï¿½
 		
 		Cell* newCell = createCpuCell();
 		if (!(newCell == NULL)) {
@@ -51,18 +51,18 @@ Cell* createCpuCell(void) {
 	cell->forward.y = cell->pos.y;
 
 	cell->score = 0;
-	// DNA´Â ÀÌ ÇÔ¼ö ¹Û¿¡¼­ ¸¸µë
+	// DNAï¿½ï¿½ ï¿½ï¿½ ï¿½Ô¼ï¿½ ï¿½Û¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	appendNode(cell, &CPUCells);
 
 	setCpuMovingSet(cell);
 
 	return cell;
-} //³ªÁß¿¡ destroyed ÇÊ¿ä
+} //ï¿½ï¿½ï¿½ß¿ï¿½ destroyed ï¿½Ê¿ï¿½
 
 
 
 
-void setCpuMovingSet(Cell* cell) {   //Çàµ¿À» ´ã´çÇÏ´Â ¼¼Æ®¸¸ ¸¸µå´Â ÇÔ¼ö  
+void setCpuMovingSet(Cell* cell) {   //ï¿½àµ¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½  
 	for (int i = 0; i < 8; i++) { //sensoring movement doing
 		cell->DNA[i] = BehaviourList[GetRandom(0, BEHAVIOUR_NUMBER)];
 	}
@@ -82,12 +82,12 @@ void exeCpuCells(void) {
 		cell->lastPos.y = cell->pos.y;
 		map[cell->lastPos.x][cell->lastPos.y].isCPUCell = False;
 
-		cell->turnDNA = ((cell->turnDNA) + 1) % 8; // 1~8±îÁöÀÇ ¼¼Æ® ¾È¿¡¼­¸¸ 
+		cell->turnDNA = ((cell->turnDNA) + 1) % 8; // 1~8ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ® ï¿½È¿ï¿½ï¿½ï¿½ï¿½ï¿½ 
 		n = n->next;
 	}
 }
 
-bestDNA* selectBestArray(bestDNA *_bestDNA) { //Á¹·Á¼­ ÀÌ ¹®¹ýÀÌ ¸Â´ÂÁöµµ ¸ð¸£°Ú´Ù. score ¿Å±â¸é DNA°¡¸£Å°´Â °Åµµ °°ÀÌ ¿òÁ÷ÀÌ³ª
+bestDNA* selectBestArray(bestDNA *_bestDNA) { //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ð¸£°Ú´ï¿½. score ï¿½Å±ï¿½ï¿½ DNAï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Åµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½
 	Node* n = CPUCells.head;
 	Cell* cell;
 	_bestDNA[0].score = 0;
@@ -117,7 +117,7 @@ bestDNA* selectBestArray(bestDNA *_bestDNA) { //Á¹·Á¼­ ÀÌ ¹®¹ýÀÌ ¸Â´ÂÁöµµ ¸ð¸£°Ú
 }
 
 /*
-void *createNewSet(bestDNA baseDNA, bestDNA base2DNA) { //1µî ¹è¿­  //2µî¹è¿­
+void *createNewSet(bestDNA baseDNA, bestDNA base2DNA) { //1ï¿½ï¿½ ï¿½è¿­  //2ï¿½ï¿½è¿­
 	void *tempSet[DNA_LEN];
 	for (int i = 0; i < 8; i++) {
 		(tempSet+i) = BehaviourLIst[baseDNA.DNA[GetRandom(0, 2)][i]];

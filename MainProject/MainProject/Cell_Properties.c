@@ -1,4 +1,4 @@
-#include "Cell_Properties.h"
+ï»¿#include "Cell_Properties.h"
 
 int healthPoint = 0;
 int attackPoint = 0;
@@ -14,11 +14,12 @@ BasicInfo ChooseStat()
 	_temp.healthPoint = DEFAULT_HP;
 	_temp.attackPoint = DEFAULT_AP;
 	_temp.defensePoint = DEFAULT_DP;
-	int total=0, num = 0;
+	int total = 0;
+	int num = 0;
 
 	while (!(total == 5)) {
-		
-		num = GetRandom(1, 4); //1~3 ¹üÀ§¾È¿¡¼­ ·£´ýÀ¸·Î ÇÏ³ª ¼ýÀÚ»Ì¾ÆÁÖ´Â
+
+		num = GetRandom(1, 4); //1~3 ï¿½ï¿½ï¿½ï¿½ï¿½È¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ ï¿½ï¿½ï¿½Ú»Ì¾ï¿½ï¿½Ö´ï¿½
 		if (num == 1)
 		{
 			level_A++;
@@ -52,19 +53,19 @@ void SelectBestTech(time_t ElapsedTime)
 	_temp.defensePoint = DEFAULT_DP;
 
 
-	if (ElapsedTime > 100) //½Ã°£ÀÌ 100ÀÌ ³Ñ¾î°¬À» ¶§ cpuÀÇ ½ºÆå ¾÷
+	if (ElapsedTime > 100) //ï¿½Ã°ï¿½ï¿½ï¿½ 100ï¿½ï¿½ ï¿½Ñ¾î°¬ï¿½ï¿½ ï¿½ï¿½ cpuï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	{
 		_temp.healthPoint += 100;
 		_temp.attackPoint += 10;
 		_temp.defensePoint += 1;
 	}
-	else if (ElapsedTime > 500) //½Ã°£ÀÌ 500ÀÌ ³Ñ¾î°¬À» ¶§ cpuÀÇ ½ºÆå ¾÷
+	else if (ElapsedTime > 500) //ï¿½Ã°ï¿½ï¿½ï¿½ 500ï¿½ï¿½ ï¿½Ñ¾î°¬ï¿½ï¿½ ï¿½ï¿½ cpuï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	{
 		_temp.healthPoint += 200;
 		_temp.attackPoint += 20;
 		_temp.defensePoint += 2;
 	}
-	else if (ElapsedTime > 1000) //½Ã°£ÀÌ 1000ÀÌ ³Ñ¾î°¬À» ¶§ cpuÀÇ ½ºÆå ¾÷
+	else if (ElapsedTime > 1000) //ï¿½Ã°ï¿½ï¿½ï¿½ 1000ï¿½ï¿½ ï¿½Ñ¾î°¬ï¿½ï¿½ ï¿½ï¿½ cpuï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	{
 		_temp.healthPoint += 300;
 		_temp.attackPoint += 30;
@@ -75,7 +76,7 @@ void SelectBestTech(time_t ElapsedTime)
 }
 
 
-int AgrresiveAbility(int level)//·¹º§À» ÀÔ·ÂÇÏ¼¼¿ä
+int AgrresiveAbility(int level)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½
 {
 	BasicInfo _temp;
 	_temp.healthPoint = DEFAULT_HP;
@@ -108,13 +109,13 @@ int AgrresiveAbility(int level)//·¹º§À» ÀÔ·ÂÇÏ¼¼¿ä
 		break;
 
 	}
-	//°ø°Ý·Â À¯ÀüÁ¤º¸
+	//ï¿½ï¿½ï¿½Ý·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 		return attackPoint;
 	
 }
 
-int StabilityAbility(int level)//·¹º§À» ÀÔ·ÂÇÏ¼¼¿ä
+int StabilityAbility(int level)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½
 {
 	BasicInfo _temp;
 	_temp.healthPoint = DEFAULT_HP;
@@ -149,12 +150,12 @@ int StabilityAbility(int level)//·¹º§À» ÀÔ·ÂÇÏ¼¼¿ä
 
 	}
 	
-	//Ã¼·Â À¯ÀüÁ¤º¸
+	//Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	return healthPoint;
 }
 
-int DefensiveAbility(int level)//·¹º§À» ÀÔ·ÂÇÏ¼¼¿ä
+int DefensiveAbility(int level)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½
 {
 	BasicInfo _temp;
 	_temp.healthPoint = DEFAULT_HP;
@@ -189,7 +190,7 @@ int DefensiveAbility(int level)//·¹º§À» ÀÔ·ÂÇÏ¼¼¿ä
 
 	}
 
-	//¹æ¾î·Â À¯ÀüÁ¤º¸
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 		return defensePoint;
 }
@@ -197,8 +198,8 @@ int DefensiveAbility(int level)//·¹º§À» ÀÔ·ÂÇÏ¼¼¿ä
 
 
 
-//°ø°Ý
-int Attack(int attackpoint, int defensePoint) //°ø°Ý Æ÷ÀÎÆ®´Â °ø°ÝÇÏ´Â »ç¶÷ÀÇ °Í ¹æ¾î Æ÷ÀÎÆ®´Â ¹æ¾î ÇÏ´Â »ç¶÷ÀÇ °Í
+//ï¿½ï¿½ï¿½ï¿½
+int Attack(int attackpoint, int defensePoint) //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 {
 	attackpoint -= defensePoint;
 	return attackpoint;
