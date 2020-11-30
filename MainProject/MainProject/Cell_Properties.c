@@ -111,7 +111,7 @@ int AgrresiveAbility(int level)//레벨을 입력하세요
 	}
 	//공격력 유전정보
 
-		return attackpoint;
+		return attackPoint;
 	
 }
 
