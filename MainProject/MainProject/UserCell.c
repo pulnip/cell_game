@@ -1,6 +1,5 @@
 #include "UserCell.h"
-
-List UserCells;
+#include "Cell.h"
 
 #define PROTO_CPU_CELL_NUMBER 2
 
@@ -10,18 +9,18 @@ int initUserCell(void){
     for(int i=0; i<PROTO_CELL_NUMBER; ++i){
         Cell* cell=createUserCell();
     }
-
-    // ..
-
+    UserCellDNA();
     return 0;
 }
+
 int updateUserCell(void){
     // ..
 
-    printCells();
-
+    printUserCells();
+  
     return 0;
 }
+
 int deleteUserCell(void){
     eraseHeapObjectList(&UserCells);
     // ..
@@ -30,23 +29,23 @@ int deleteUserCell(void){
 }
 
 Cell* createUserCell(){
+
     Cell* cell=malloc(sizeof(Cell));
     cell->id=UserCell;
 
-    cell->DNA=NULL;
+    strcpy(cell->DNA, NULL);
 
     cell->lastPos.x=cell->pos.x=GetRandom(0, MAP_WIDTH);
     cell->lastPos.y=cell->pos.y=GetRandom(0, MAP_HEIGHT);
 
     cell->turnDNA=0;
 
-    cell->hp=DEFAULT_HP;
+    cell->healthPoint = DEFAULT_HP;
+    cell->attackPoint = DEFAULT_AP;
+    cell->defensePoint = DEFAULT_DP;
 
     cell->forward.x=cell->pos.x;
     cell->forward.x=cell->pos.y;
-
-    // basic info
-    // ..
 
     appendNode(cell, &UserCells);
 
@@ -63,5 +62,30 @@ void printUserCells(void){
         map[cell->pos.y][cell->pos.x].isUserCell=True;
 
         n=n->next;
+    }
+}
+
+/*
+printf("-----세트 목록------\n");
+printf("1. 적을 보기\n");
+printf("2. 아군을 보기\n");
+printf("3. 음식을 보기\n");
+printf("4. 가까이 다가가기\n");
+printf("5. 멀리 떨어지기\n");
+printf("6. 음식을 먹기\n");
+printf("7. 포인트를 얻기\n");
+printf("8. 적을 공격하기\n");
+printf("9. 분열하기\n");
+*/
+
+void UserCellDNA(void)
+{
+    char* const arr[9] = { "seeEnemy", "seeFriend", "seeFood", "moveCloser", "moveFurther", 
+        "getFood", "getPoint", "doCannibal", "divide" };
+    int* SaveArr[8];
+    for (int i = 0; i < 8; i++) 
+    {
+        int num = UserInput(); // 화면에서 유저의 입력을 받았다고 가정하는 가상의 함수
+        num = SaveArr[i];
     }
 }
