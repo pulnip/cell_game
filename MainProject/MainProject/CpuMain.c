@@ -5,7 +5,7 @@ int initCPUCell(void) {
 	int count = 0;
 	for (int i = 0; i < PROTO_CELL_NUMBER; i++) {  // usercell.c처럼 그냥 createCpuCell()에서 받을까 고민중 나중에 새로 만들때 생각하면 아찔하네
 		
-		Cell* newCell = createCpuCell(void);
+		Cell* newCell = createCpuCell();
 		if (!(newCell == NULL)) {
 			count++;
 		}
@@ -42,16 +42,16 @@ Cell* createCpuCell(void) {
 	cell->turnDNA = 0;
 
 	_tempStat = ChooseStat();
-	cell->stat.healthPoint = _tempStat.stat.healthPoint;
-	cell->stat.defensePoint = _tempStat.stat.defensePoint;
-	cell->stat.attackPoint = _tempStat.stat.attackPoint;
+	cell->stat.healthPoint = _tempStat.healthPoint;
+	cell->stat.defensePoint = _tempStat.defensePoint;
+	cell->stat.attackPoint = _tempStat.attackPoint;
 
 	cell->forward.x = cell->pos.x;
 	cell->forward.y = cell->pos.y;
 
 	cell->score = 0;
 	// DNA는 이 함수 밖에서 만듬
-	appendNode(cell, &CPUcells);
+	appendNode(cell, &CPUCells);
 
 	setCpuMovingSet(cell);
 
@@ -61,7 +61,7 @@ Cell* createCpuCell(void) {
 
 void changeIsCellPos(Cell* _cell) {  //exeCpuCells 안에 포함됨
 	_cell->lastPos.x = _cell->pos.x;
-	_cell->lastPos.y = -cell->pos.y;
+	_cell->lastPos.y = _cell->pos.y;
 	map[_cell->lastPos.x][_cell->lastPos.y] = False;
 }
 
@@ -90,7 +90,7 @@ void exeCpuCells(void) {
 bestDNA* selectBestArray(bestDNA *_bestDNA) { //졸려서 이 문법이 맞는지도 모르겠다. score 옮기면 DNA가르키는 거도 같이 움직이나
 	Node* n = CPUCells.head;
 	Cell* cell;
-	_bestDNA[0]->score = 0;
+	_bestDNA[0].score = 0;
 	while (n != NULL) {
 		cell = n->pObject;
 
@@ -116,15 +116,14 @@ bestDNA* selectBestArray(bestDNA *_bestDNA) { //졸려서 이 문법이 맞는지도 모르겠
 	return _bestDNA;
 }
 
-
+/*
 void *createNewSet(bestDNA baseDNA, bestDNA base2DNA) { //1등 배열  //2등배열
-	void *tempSet[DNA_LEN]();
+	void *tempSet[DNA_LEN];
 	for (int i = 0; i < 8; i++) {
-		tempSet[i] = Behaviour[parentSet[GetRandom(0, 2)][i]]; ]
+		(tempSet+i) = Behaviour[parentSet[GetRandom(0, 2)][i]];
 	}
-	tempSet[8] = 0; //score?
 }
-
+*/
 
 
 
