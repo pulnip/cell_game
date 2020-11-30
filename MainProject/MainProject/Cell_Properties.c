@@ -37,9 +37,9 @@ BasicInfo ChooseStat()
 	}
 	
 
-	BasicInfo.stat.healthPoint += StabilityAbility(level_S);
-	BasicInfo.stat.attackPoint += AgrresiveAbility(level_A);
-	BasicInfo.stat.defensePoint += DefensiveAbility(level_D);
+	_temp.healthPoint += StabilityAbility(level_S);
+	_temp.attackPoint += AgrresiveAbility(level_A);
+	_temp.defensePoint += DefensiveAbility(level_D);
 
 	return _temp;
 }
