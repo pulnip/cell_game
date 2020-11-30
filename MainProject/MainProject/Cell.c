@@ -3,7 +3,7 @@
 List UserCells;
 List CPUCells;
 
-pBEHAVIOUR_t const BehaviourList[]={
+pBEHAVIOUR_t BehaviourList[]={
     seeEnemy, seeFriend, seeFood,
     moveCloser, moveFurther,
     getFood, getPoint,

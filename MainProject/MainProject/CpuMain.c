@@ -1,6 +1,6 @@
 #include "CpuMain.h"
 
-int initComputer(void) {
+int initCPUCell(void) {
 	initList(&CPUCells);
 	int count = 0;
 	for (int i = 0; i < PROTO_CELL_NUMBER; i++) {  // usercell.c처럼 그냥 createCpuCell()에서 받을까 고민중 나중에 새로 만들때 생각하면 아찔하네
@@ -23,12 +23,20 @@ int initComputer(void) {
 			setCpuMovingSet(newCell);
 		}
 	}
-	if (count == PROTO_CELL_NUMBER) { return 1; } // suc
-	else { return -1; }//fail
+	if (count != PROTO_CELL_NUMBER) return -1; // fail
+	
+	return 0; //success
 }
 
-int updateComputer(void) {  
+int updateCPUCell(void) {  
 	exeCpuCells(); // 
+
+	return 0;
+}
+
+int deleteCPUCell(void){
+
+	return 0;
 }
 
 //Cell create 

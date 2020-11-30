@@ -29,7 +29,7 @@
 #                                                                                                                      #
 #                                                                                                                      #
 3---------------------------------------------------------------------------------------------------------------------+3
-# Tech Tree   [Q]Event On/Off   [E]Event                                                                    [ESC] EXIT #
+# Tech Tree   [Q]Event On/Off   [E]Event                        [BackSpace]Delete                           [ESC] EXIT #
 # [W]                                                                           |                                      #
 # | |                                                                           |                                      #
 # | |                                                                           |                                      #

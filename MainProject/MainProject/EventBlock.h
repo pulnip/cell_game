@@ -15,7 +15,8 @@ typedef struct _Trigger{
     int log;
 } Trigger;
 
-typedef void (*TriggerEvent)(pObject);
+typedef void TriggerEvent(pObject);
+typedef TriggerEvent* pTriggerEvent;
 
 extern List Triggers;
 // all Trigger must be in Triggers.
@@ -43,15 +44,15 @@ int getKey(Trigger*);
 
 Trigger* searchTriggerByVKey(int _vkey);
 
-int appendOnKeyDownEvent(Trigger*, TriggerEvent func);
-int appendKeyDownEvent(Trigger*, TriggerEvent func);
-int appendOnKeyUpEvent(Trigger*, TriggerEvent func);
-int appendKeyUpEvent(Trigger*, TriggerEvent func);
+int appendOnKeyDownEvent(Trigger*, pTriggerEvent func);
+int appendKeyDownEvent(Trigger*, pTriggerEvent func);
+int appendOnKeyUpEvent(Trigger*, pTriggerEvent func);
+int appendKeyUpEvent(Trigger*, pTriggerEvent func);
 
-int removeOnKeyDownEvent(Trigger*, TriggerEvent func);
-int removeKeyDownEvent(Trigger*, TriggerEvent func);
-int removeOnKeyUpEvent(Trigger*, TriggerEvent func);
-int removeKeyUpEvent(Trigger*, TriggerEvent func);
+int removeOnKeyDownEvent(Trigger*, pTriggerEvent func);
+int removeKeyDownEvent(Trigger*, pTriggerEvent func);
+int removeOnKeyUpEvent(Trigger*, pTriggerEvent func);
+int removeKeyUpEvent(Trigger*, pTriggerEvent func);
 
 int checkTriggered(void);
 // check by bKeyDown (call Event once).
@@ -66,10 +67,10 @@ int deleteTrigger(Trigger*);
 StatusFunc deleteTriggers;
 
 // <AnimationEvent>
-void VanillaButtonShowAnimation(void*);
-void VanillaButtonHideAnimation(void*);
+TriggerEvent VanillaButtonShowAnimation;
+TriggerEvent VanillaButtonHideAnimation;
 // just for type conversion
-void ToggleButtonAnimation(void*);
+TriggerEvent ToggleButtonAnimation;
 // </AnimationEvent>
 
 #endif // __INC_EVENT_BLOCK

@@ -209,7 +209,7 @@ int runOnKeyDownEvent(Trigger* t){
     Node* en=t->OnKeyDownEvent.head;
 
     while(en!=NULL){
-        TriggerEvent tbe=en->pObject;
+        pTriggerEvent tbe=en->pObject;
         tbe(t);
 
         en=en->next;
@@ -222,7 +222,7 @@ int runKeyDownEvent(Trigger* t){
     Node* en=t->KeyDownEvent.head;
 
     while(en!=NULL){
-        TriggerEvent tbe=en->pObject;
+        pTriggerEvent tbe=en->pObject;
         tbe(t);
 
         en=en->next;
@@ -235,7 +235,7 @@ int runOnKeyUpEvent(Trigger* t){
     Node* en=t->OnKeyUpEvent.head;
 
     while(en!=NULL){
-        TriggerEvent tbe=en->pObject;
+        pTriggerEvent tbe=en->pObject;
         tbe(t);
 
         en=en->next;
@@ -248,7 +248,7 @@ int runKeyUpEvent(Trigger* t){
     Node* en=t->KeyUpEvent.head;
 
     while(en!=NULL){
-        TriggerEvent tbe=en->pObject;
+        pTriggerEvent tbe=en->pObject;
         tbe(t);
 
         en=en->next;

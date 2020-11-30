@@ -1,46 +1,6 @@
 #include "base.h"
 
 #include <time.h>
-
-// <OnStart()>
-#ifndef __INC_INFRA 
-int initInfra(void)     _INT_FUNC_NOT_IMPLEMENT
-#endif
-#ifndef __INC_GAME
-int initGame(void)     _INT_FUNC_NOT_IMPLEMENT
-#endif
-int initUserCell(void) _INT_FUNC_NOT_IMPLEMENT
-int initCPUCell(void)  _INT_FUNC_NOT_IMPLEMENT
-// </OnStart()>
-
-// <OnUpdate()>
-#ifndef __INC_INFRA
-int FastEscape(void)     _INT_FUNC_NOT_IMPLEMENT
-int updateInfra1(void)   _INT_FUNC_NOT_IMPLEMENT
-#endif
-#ifndef __INC_GAME
-int updateGame(void)     _INT_FUNC_NOT_IMPLEMENT
-#endif
-int updateUserCell(void) _INT_FUNC_NOT_IMPLEMENT
-int updateCPUCell(void)  _INT_FUNC_NOT_IMPLEMENT
-#ifndef __INC_INFRA
-int updateInfra2(void)   _INT_FUNC_NOT_IMPLEMENT
-#endif
-// </OnUpdate>
-
-
-// <OnDestroy()>
-int deleteUserCell(void)     _INT_FUNC_NOT_IMPLEMENT
-int deleteCPUCell(void)      _INT_FUNC_NOT_IMPLEMENT
-#ifndef __INC_GAME
-int deleteGame(void)         _INT_FUNC_NOT_IMPLEMENT
-#endif
-#ifndef __INC_INFRA
-int deleteInfra(void)        _INT_FUNC_NOT_IMPLEMENT
-void waitUntilKeyInput(void) _INT_FUNC_NOT_IMPLEMENT
-#endif
-// </OnDestroy()>
-
 #include <stdio.h>
 
 int main(void){

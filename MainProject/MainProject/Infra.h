@@ -6,11 +6,13 @@
 #include "Screen.h"
 #include "EventBlock.h"
 
+#include "Cell.h"
+
 #include <Windows.h>
 
 typedef struct _KeyState{
-    Bool bKeyDown;
-    Bool bKeyUp;
+    Bool bOnKeyDown;
+    Bool bOnKeyUp;
 
     Bool bPressed;
     Bool bToggled;
@@ -38,6 +40,8 @@ typedef struct _UserInput{
          _doCannibal,
          _divide
     ;
+
+    Bool temp;
 } UserInput;
 
 extern KeyState keys[0x100];
@@ -67,5 +71,24 @@ int printMsgToScreen(char* msg, Coord);
 // Event
 void ScrollUpMsgPos(void*);
 void ScrollDownMsgPos(void*);
+
+Procedure initUserInput;
+
+Procedure setUserInputFalse;
+Procedure updateUserInput;
+
+TriggerEvent setUIDeletion;
+TriggerEvent setUISeeEnemy;
+TriggerEvent setUISeeFriend;
+TriggerEvent setUISeeFood;
+TriggerEvent setUIMoveCloser;
+TriggerEvent setUIMoveFurther;
+TriggerEvent setUIGetFood;
+TriggerEvent setUIGetPoint;
+TriggerEvent setUIDoCannibal;
+TriggerEvent setUIDivide;
+
+extern pTriggerEvent CellBahaviourEvents[BEHAVIOUR_NUMBER];
+
 
 #endif // __INC_INFRA

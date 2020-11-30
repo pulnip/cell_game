@@ -11,7 +11,7 @@ int initInfra(void) {
     initTriggers();
     makeTrigger();
     // initScrollWindow is in makeTrigger
-
+    initUserInput();
     // add ...
 
     waitUntilKeyInput();
@@ -26,6 +26,7 @@ int FastEscape(void) {
 int updateInfra1(void){
     if(FastEscape()) return 1;
     getKBInput();
+    setUserInputFalse();
 
     updateScreen1();
 
@@ -70,8 +71,8 @@ void getKBInput(void) {
 
         Bool isChanged=(lastState.bPressed)^(keys[i].bPressed);
         
-        keys[i].bKeyDown =   keys[i].bPressed & isChanged;
-        keys[i].bKeyUp   = (!keys[i].bPressed)&0x1 & isChanged ;
+        keys[i].bOnKeyDown =   keys[i].bPressed & isChanged;
+        keys[i].bOnKeyUp   = (!keys[i].bPressed)&0x1 & isChanged ;
     }
 }
 
@@ -87,10 +88,10 @@ int checkTriggered(void){
         int key1=(t->key)&0xff;
 
         if(keys[key1].bPressed) {
-            if(keys[key1].bKeyDown)runOnKeyDownEvent(t);
+            if(keys[key1].bOnKeyDown)runOnKeyDownEvent(t);
             runKeyDownEvent(t);}
         else{
-            if(keys[key1].bKeyUp)  runOnKeyUpEvent(t);
+            if(keys[key1].bOnKeyUp)  runOnKeyUpEvent(t);
             runKeyUpEvent(t); 
         }
     }
@@ -121,7 +122,7 @@ int initScrollWindow(Trigger* ut, Trigger* dt){
 
     initList(&(vsw.messageList));
     initList(&(vsw.msgTriggers));
-
+    
     char* msg1="MESSAGE 1";
     char* msg2="MESSAGE 2";
     char* msg3="MESSAGE 3";
@@ -144,13 +145,15 @@ int initScrollWindow(Trigger* ut, Trigger* dt){
     appendNode(msg9, &(vsw.messageList));
     appendNode(msga, &(vsw.messageList));
 
-    Trigger* t1=createVanillaButton((Rect){0, 0, 1, 1}, '1');
-    Trigger* t2=createVanillaButton((Rect){0, 0, 1, 1}, '2');
-    Trigger* t3=createVanillaButton((Rect){0, 0, 1, 1}, '3');
+    Trigger* tback=createVanillaButton((Rect){64, 31, 81, 32}, VK_BACK);
+    appendOnKeyDownEvent(tback, setUIDeletion);
 
-    appendNode(t1, &(vsw.msgTriggers));
-    appendNode(t2, &(vsw.msgTriggers));
-    appendNode(t3, &(vsw.msgTriggers));
+    for(int i=0; i<BEHAVIOUR_NUMBER; ++i){
+        Trigger* t=createVanillaButton((Rect){0, 0, 1, 1}, '1'+i);
+        appendOnKeyDownEvent(t, CellBahaviourEvents[i]);
+
+        appendNode(t, &(vsw.msgTriggers));
+    }
 
     appendOnKeyDownEvent(ut,   ScrollUpMsgPos);
     appendOnKeyDownEvent(dt, ScrollDownMsgPos);
@@ -245,4 +248,129 @@ void ScrollDownMsgPos(void* obj){
     Trigger* t=obj;
 
     if((size_t)vsw.msglistPos+7 < getListLen(&(vsw.messageList))) vsw.msglistPos+=1;
+}
+
+void initUserInput(void){
+    userInput.num=0;
+    setUserInputFalse();
+}
+
+void setUserInputFalse(void){
+    userInput.deletion=False;
+
+    userInput._seeEnemy=False;
+    userInput._seeFriend=False;
+    userInput._seeFood=False;
+    userInput._moveCloser=False;
+    userInput._moveFurther=False;
+    userInput._getFood=False;
+    userInput._getPoint=False;
+    userInput._doCannibal=False;
+    userInput._divide=False;
+
+    userInput.temp=False;
+}
+
+pTriggerEvent CellBehaviourEvents[BEHAVIOUR_NUMBER]={
+    setUISeeEnemy,
+    setUISeeFriend,
+    setUISeeFood,
+    setUIMoveCloser,
+    setUIMoveFurther,
+    setUIGetFood,
+    setUIGetPoint,
+    setUIDoCannibal,
+    setUIDivide
+};
+
+void setUIDeletion(void* pObj){
+    Trigger* t=pObj;
+    userInput.deletion=True;
+
+    if(!(userInput.temp)){
+        userInput.temp=True;
+        userInput.num+=1;
+    }
+}
+
+void setUISeeEnemy(void* pObj){
+    Trigger* t=pObj;
+    userInput._seeEnemy=True;
+
+    if(!(userInput.temp)){
+        userInput.temp=True;
+        userInput.num+=1;
+    }
+}
+void setUISeeFriend(void* pObj){
+    Trigger* t=pObj;
+    userInput._seeFriend=True;
+
+    if(!(userInput.temp)){
+        userInput.temp=True;
+        userInput.num+=1;
+    }
+}
+void setUISeeFood(void* pObj){
+    Trigger* t=pObj;
+    userInput._seeFood=True;
+
+    if(!(userInput.temp)){
+        userInput.temp=True;
+        userInput.num+=1;
+    }
+}
+void setUIMoveCloser(void* pObj){
+    Trigger* t=pObj;
+    userInput._moveCloser=True;
+
+    if(!(userInput.temp)){
+        userInput.temp=True;
+        userInput.num+=1;
+    }
+}
+void setUIMoveFurther(void* pObj){
+    Trigger* t=pObj;
+    userInput._moveFurther=True;
+
+    if(!(userInput.temp)){
+        userInput.temp=True;
+        userInput.num+=1;
+    }
+}
+void setUIGetFood(void* pObj){
+    Trigger* t=pObj;
+    userInput._getFood=True;
+
+    if(!(userInput.temp)){
+        userInput.temp=True;
+        userInput.num+=1;
+    }
+}
+void setUIGetPoint(void* pObj){
+    Trigger* t=pObj;
+    userInput._getPoint=True;
+
+    if(!(userInput.temp)){
+        userInput.temp=True;
+        userInput.num+=1;
+    }
+}
+void setUIDoCannibal(void* pObj){
+    Trigger* t=pObj;
+    userInput._doCannibal=True;
+
+    if(!(userInput.temp)){
+        userInput.temp=True;
+        userInput.num+=1;
+    }
+}
+void setUIDivide(void* pObj){
+    Trigger* t=pObj;
+    userInput._divide=True;
+
+    if(!(userInput.temp)){
+        userInput.temp=True;
+        userInput.num+=1;
+    }
 }
