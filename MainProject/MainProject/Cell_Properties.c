@@ -17,7 +17,7 @@ BasicInfo ChooseStat()
 	int total, num = 0;
 
 	while (!(total == 5)) {
-		
+
 		num = GetRandom(1, 4); //1~3 범위안에서 랜덤으로 하나 숫자뽑아주는
 		if (num == 1)
 		{
