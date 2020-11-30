@@ -141,6 +141,8 @@
   <ItemGroup>
     <ClCompile Include="base.c" />
     <ClCompile Include="Cell.c" />
+    <ClCompile Include="Cell_Properties.c" />
+    <ClCompile Include="CpuMain.c" />
     <ClCompile Include="EventBlock.c" />
     <ClCompile Include="Game.c" />
     <ClCompile Include="infra.c" />
@@ -152,6 +154,8 @@
   <ItemGroup>
     <ClInclude Include="base.h" />
     <ClInclude Include="Cell.h" />
+    <ClInclude Include="Cell_Properties.h" />
+    <ClInclude Include="CpuMain.h" />
     <ClInclude Include="EventBlock.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Infra.h" />

@@ -74,7 +74,7 @@ int readScreenFromFile(){
         size_t bytes=fread(buffer, sizeof(char), sizeof(buffer)/sizeof(char), map_in);
         while(fgetc(map_in) != '\n');
 
-        fprintf(log, "[%d Bytes]: %s\n", bytes, buffer);
+        fprintf(log, "[%d Bytes]: %s\n", (int)bytes, buffer);
 
         for(int j=0; j<CONSOLE_WIDTH; ++j){
             background[i][j].Char.AsciiChar=buffer[j];

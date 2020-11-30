@@ -6,6 +6,8 @@ Pixel map[MAP_HEIGHT][MAP_WIDTH];
 
 int initMap(){
     memset(map, 0, sizeof(Pixel)*MAP_HEIGHT*MAP_WIDTH);
+
+    return 0;
 }
 
 void updateMap(){
