@@ -59,10 +59,15 @@ Cell* createCpuCell(void) {
 	return cell;
 }
 
-void setCpuMovingSet(Cell* cell) {
-	for (int i = 0; i < 8; i++) {
-		cell->DNA[i] = BehaviourList[GetRandom(0, BEHAVIOUR_NUMBER)];
+void setCpuMovingSet(Cell* cell) { // 0,1,2 sensor  3,4 move 5,6,7,8 etc
+	for (int i = 0; i < 6; i+=3) {
+		cell->DNA[i] = BehaviourList[GetRandom(0, 3)];  //sensor
+		cell->DNA[i+1] = BehaviourList[GetRandom(3, 5)]; //movement
+		cell->DNA[i+2] = BehaviourList[GetRandom(5, 9)];	//etc
 	}
+	cell->DNA[6] = BehaviourList[GetRandom(0, BEHAVIOUR_NUMBER)];
+	cell->DNA[7] = BehaviourList[GetRandom(0, BEHAVIOUR_NUMBER)];
+
 }
 
 
