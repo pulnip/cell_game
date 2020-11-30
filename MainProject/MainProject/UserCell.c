@@ -1,13 +1,11 @@
 #include "UserCell.h"
-#include "Cell.h"
-#include "Cell_Properties.h""
 
-#define PROTO_CPU_CELL_NUMBER 2
+#define PROTO_USER_CELL_NUMBER 20
 
 int initUserCell(void){
     initList(&UserCells);
 
-    for(int i=0; i<PROTO_CELL_NUMBER; ++i){
+    for(int i=0; i<PROTO_USER_CELL_NUMBER; ++i){
         Cell* cell = createUserCell();
     }
     UserCellDNA();
@@ -41,9 +39,9 @@ Cell* createUserCell(){
 
     cell->turnDNA=0;
 
-    cell->healthPoint = DEFAULT_HP;
-    cell->attackPoint = DEFAULT_AP;
-    cell->defensePoint = DEFAULT_DP;
+    cell->stat.healthPoint = DEFAULT_HP;
+    cell->stat.attackPoint = DEFAULT_AP;
+    cell->stat.defensePoint = DEFAULT_DP;
 
     cell->forward.x=cell->pos.x;
     cell->forward.x=cell->pos.y;
