@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "base.h"
-#include "CellBehaviours.h"
 #include "Game.h"
-#include "CPU_cell_notice.h"
 #include "Cell.h"
 #include "Cell_Properties.h"
 #include "CpuMain.h"
@@ -18,12 +16,6 @@ struct Cell;
 //1.세포의 유전 정보 테크트리
 //2.세포 특성의 상호작용
 
-
-
-
-#define AgrresiveAbility
-#define StabilityAbility
-#define DefensiveAbility
 
 
 //기본 세포의 정보
