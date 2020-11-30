@@ -91,19 +91,19 @@ int AgrresiveAbility(int level)//레벨을 입력하세요
 	switch (level)
 	{
 	case 1 :
-		attackpoint += level1_AG_ability;
+		attackPoint += level1_AG_ability;
 		break;
 	case 2:
-		attackpoint += level2_AG_ability;
+		attackPoint += level2_AG_ability;
 		break;
 	case 3:
-		attackpoint += level3_AG_ability;
+		attackPoint += level3_AG_ability;
 		break;
 	case 4:
-		attackpoint += level4_AG_ability;
+		attackPoint += level4_AG_ability;
 		break;
 	case 5:
-		attackpoint += level5_AG_ability;
+		attackPoint += level5_AG_ability;
 		break;
 	default:
 		break;
@@ -130,19 +130,19 @@ int StabilityAbility(int level)//레벨을 입력하세요
 	switch (level)
 	{
 	case 1:
-		healthpoint += level1_ST_ability;
+		healthPoint += level1_ST_ability;
 		break;
 	case 2:
-		healthpoint += level2_ST_ability;
+		healthPoint += level2_ST_ability;
 		break;
 	case 3:
-		healthpoint += level3_ST_ability;
+		healthPoint += level3_ST_ability;
 		break;
 	case 4:
-		healthpoint += level4_ST_ability;
+		healthPoint += level4_ST_ability;
 		break;
 	case 5:
-		healthpoint += level5_ST_ability;
+		healthPoint += level5_ST_ability;
 		break;
 	default:
 
@@ -152,7 +152,7 @@ int StabilityAbility(int level)//레벨을 입력하세요
 	
 	//체력 유전정보
 
-	return healthpoint;
+	return healthPoint;
 }
 
 int DefensiveAbility(int level)//레벨을 입력하세요
@@ -170,19 +170,19 @@ int DefensiveAbility(int level)//레벨을 입력하세요
 	switch (level)
 	{
 	case 1:
-		defensepoint += level1_DE_ability;
+		defensePoint += level1_DE_ability;
 		break;
 	case 2:
-		defensepoint += level2_DE_ability;
+		defensePoint += level2_DE_ability;
 		break;
 	case 3:
-		defensepoint += level3_DE_ability;
+		defensePoint += level3_DE_ability;
 		break;
 	case 4:
-		defensepoint += level4_DE_ability;
+		defensePoint += level4_DE_ability;
 		break;
 	case 5:
-		defensepoint += level5_DE_ability;
+		defensePoint += level5_DE_ability;
 		break;
 	default:
 
@@ -192,16 +192,16 @@ int DefensiveAbility(int level)//레벨을 입력하세요
 
 	//방어력 유전정보
 
-		return defensepoint;
+		return defensePoint;
 }
 
 
 
 
 //공격
-int Attack(int attackpoint, int defensepoint) //공격 포인트는 공격하는 사람의 것 방어 포인트는 방어 하는 사람의 것
+int Attack(int attackpoint, int defensePoint) //공격 포인트는 공격하는 사람의 것 방어 포인트는 방어 하는 사람의 것
 {
-	attackpoint -= defensepoint;
+	attackpoint -= defensePoint;
 	return attackpoint;
 }
 
