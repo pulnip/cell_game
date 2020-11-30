@@ -1,13 +1,15 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include "base.h"
-#include "CellBehaviours.h"
+#ifndef __INC_CELL_PROPERTIES
+#define __INC_CELL_PROPERTIES
+
+#include "SuperHeader.h"
+
 #include "Game.h"
 #include "CPU_cell_notice.h"
 #include "Cell.h"
 
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 void BasicCellInformation();
 
 
@@ -22,5 +24,4 @@ void BeAttacked(int health_point, int defense_point); //공격 받음
 void Starve(int health_point, int starve_minus_health_point); //한 턴 지나서 허기로 인해 체력 깎이는 행동
 
 
-
-
+#endif // __INC_CELL_PROPERTIES

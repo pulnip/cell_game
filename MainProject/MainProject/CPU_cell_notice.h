@@ -1,4 +1,6 @@
-#include "base.h" // Cell 구조체를 쓰기위한 선언 하지만 폴더가 달라서 지금은 적용안됨
+#ifndef __INC_CPU_CELL_NOTICE
+#define __INC_CPU_CELL_NOTICE
+
 /*
 세트를 받아서 DNA를 생성하는건 onstart에 있고
 세트에 따라 행동해서 맵업데이트 + 점수부여
@@ -38,3 +40,5 @@ typedef struct Get_Set_Information {
 void Get_Set_Information();	//세트의 정보를 가져오는 함수
 
 typedef 
+
+#endif // __INC_CPU_CELL_NOTICE

@@ -1,12 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include "base.h"
-#include "Infra.h"
-#include "CellBehaviours.h"
 #include "Game.h"
 #include "CPU_cell_notice.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 //질문은 맨 위에 써 놓을께
 //#####아 그리고 생각이 난 건데 우리 맵에 대한 공통적인 파일도 만들어야 하지 않을까#####
 //공통 맵 파일 하나에 각자 업데이트 할 중간 단계의 맵 파일을 하나 씩 달고 있는 게 좋을 듯
