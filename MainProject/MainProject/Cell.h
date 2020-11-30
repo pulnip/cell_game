@@ -29,6 +29,8 @@ typedef struct _Cell{
 extern List UserCells;
 extern List CPUCells;
 
+extern int SkillPoint;
+
 typedef void (BEHAVIOUR_t)(Cell*);
 typedef BEHAVIOUR_t* pBEHAVIOUR_t;
 //DNA is Array of pBEHAVIOUR

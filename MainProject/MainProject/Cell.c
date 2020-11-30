@@ -3,6 +3,8 @@
 List UserCells;
 List CPUCells;
 
+int SkillPoint;
+
 pBEHAVIOUR_t BehaviourList[]={
     seeEnemy, seeFriend, seeFood,
     moveCloser, moveFurther,
@@ -13,20 +15,28 @@ pBEHAVIOUR_t BehaviourList[]={
 
 // <Sensoring>
 
-void seeEnemy(Cell* const pCell){
+void seeEnemy(Cell* pCell){
     Coord const _pos=pCell->pos;
-    isCell const EnemyId=3-pCell->id;
 
-    for(    int _y=_pos.y-MAX_SIGHT; _y<=_pos.y+MAX_SIGHT; ++_y){
-        if(     (0<=_y) && (_y<CONSOLE_HEIGHT) ) 
+    for(        int _y=_pos.y-MAX_SIGHT; _y<=_pos.y+MAX_SIGHT; ++_y){
+        if(         (0<=_y) && (_y<CONSOLE_HEIGHT) ) 
         {
             for(int _x=_pos.x-MAX_SIGHT; _x<=_pos.x+MAX_SIGHT; ++_x){
                 if( (0<=_x) && (_x<CONSOLE_WIDTH ) ) 
                 {
-                    if(map[_y][_x].isCPUCell){
-                        pCell->forward.x=_x;
-                        pCell->forward.y=_y;
-                        break;
+                    if(pCell->id==CPUCell){
+                        if(map[_y][_x].isUserCell){
+                            pCell->forward.x=_x;
+                            pCell->forward.y=_y;
+                            break;
+                        }
+                    }
+                    else if(pCell->id==UserCell){
+                        if(map[_y][_x].isCPUCell){
+                            pCell->forward.x=_x;
+                            pCell->forward.y=_y;
+                            break;
+                        }
                     }
                 }
             }
@@ -34,20 +44,28 @@ void seeEnemy(Cell* const pCell){
     }
 }
 
-void seeFriend(Cell* const pCell){
+void seeFriend(Cell* pCell){
     Coord const _pos=pCell->pos;
-    isCell const FriendId=pCell->id;
 
-    for (int _y = _pos.y - MAX_SIGHT; _y <= _pos.y + MAX_SIGHT; ++_y) {
-        if ((0 <= _y) && (_y < CONSOLE_HEIGHT))
+    for (         int _y = _pos.y - MAX_SIGHT; _y <= _pos.y + MAX_SIGHT; ++_y) {
+        if(         (0 <= _y) && (_y < CONSOLE_HEIGHT))
         {
-            for (int _x = _pos.x - MAX_SIGHT; _x <= _pos.x + MAX_SIGHT; ++_x) {
-                if ((0 <= _x) && (_x < CONSOLE_WIDTH))
+            for ( int _x = _pos.x - MAX_SIGHT; _x <= _pos.x + MAX_SIGHT; ++_x) {
+                if( (0 <= _x) && (_x < CONSOLE_WIDTH))
                 {
-                    if (map[_y][_x].isUserCell) {
-                        pCell->forward.x = _x;
-                        pCell->forward.y = _y;
-                        break;
+                    if(pCell->id==CPUCell){
+                        if(map[_y][_x].isCPUCell){
+                            pCell->forward.x=_x;
+                            pCell->forward.y=_y;
+                            break;
+                        }
+                    }
+                    else if(pCell->id==UserCell){
+                        if(map[_y][_x].isUserCell){
+                            pCell->forward.x=_x;
+                            pCell->forward.y=_y;
+                            break;
+                        }
                     }
                 }
             }
@@ -55,7 +73,7 @@ void seeFriend(Cell* const pCell){
     }
 }
 
-void seeFood(Cell* const pCell){
+void seeFood(Cell* pCell){
     Coord const _pos=pCell->pos;
 
     Coord FoodPos=_pos;
@@ -87,13 +105,57 @@ void seeFood(Cell* const pCell){
 // <movement>
 // it is about the Sight.
 
-void moveCloser(Cell* const pCell) _VOID_FUNC_NOT_IMPLEMENT
-void moveFurther(Cell* const pCell) _VOID_FUNC_NOT_IMPLEMENT
+void moveCloser(Cell* pCell) {
+    int dx=0, dy=0;
+    if( (pCell->forward.x-pCell->pos.x) > 0) dx=1;
+    else if( (pCell->forward.x-pCell->pos.x) < 0) dx=-1;
+
+    if( (pCell->forward.y-pCell->pos.y) > 0) dy=1;
+    else if( (pCell->forward.y-pCell->pos.y) < 0) dy=-1;
+
+    if( (0 <= pCell->pos.x+dx) && (pCell->pos.x+dx < MAP_WIDTH ) )pCell->pos.x+=dx;
+    if( (0 <= pCell->pos.y+dy) && (pCell->pos.y+dy < MAP_HEIGHT) )pCell->pos.y+=dy;
+}
+void moveFurther(Cell* const pCell){
+    int dx=0, dy=0;
+    if( (pCell->forward.x-pCell->pos.x) > 0) dx=-1;
+    else if( (pCell->forward.x-pCell->pos.x) < 0) dx=1;
+
+    if( (pCell->forward.y-pCell->pos.y) > 0) dy=-1;
+    else if( (pCell->forward.y-pCell->pos.y) < 0) dy=1;
+
+    if( (0 <= pCell->pos.x+dx) && (pCell->pos.x+dx < MAP_WIDTH ) )pCell->pos.x+=dx;
+    if( (0 <= pCell->pos.y+dy) && (pCell->pos.y+dy < MAP_HEIGHT) )pCell->pos.y+=dy;
+}
 // </movement>
 
-void getFood(Cell* const pCell) _VOID_FUNC_NOT_IMPLEMENT
-void getPoint(Cell* const pCell) _VOID_FUNC_NOT_IMPLEMENT
-void doCannibal(Cell* const pCell) _VOID_FUNC_NOT_IMPLEMENT
+void getFood(Cell* pCell){
+    Pixel* p=&(map[pCell->pos.y][pCell->pos.x]);
+    if(p->Food>0){
+        p->Food-=1;
+
+        pCell->stat.healthPoint+=10;
+    }
+}
+void getPoint(Cell* const pCell) {
+    Pixel* p=&(map[pCell->pos.y][pCell->pos.x]);
+
+    if(p->Point>0){
+        SkillPoint+=p->Point;
+
+        p->Point=0;
+    }
+}
+void doCannibal(Cell* pCell){
+    Pixel* p=&(map[pCell->pos.y][pCell->pos.x]);
+    isCell id=pCell->id;
+
+    Cell* otherCell=searchCellByPos(pCell->pos, id);
+    if(otherCell==NULL) return;
+
+    otherCell->stat.healthPoint-=10;
+    pCell->stat.healthPoint+=10;
+}
 
 void divide(Cell* const pCell) _VOID_FUNC_NOT_IMPLEMENT
 

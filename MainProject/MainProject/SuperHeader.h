@@ -6,7 +6,6 @@
 #define _INT_FUNC_NOT_IMPLEMENT { return 0; }
 #define _VOID_FUNC_NOT_IMPLEMENT { }
 
-#define LOCAL static
 typedef int (StatusFunc)(void);
 typedef void (Procedure)(void);
 
