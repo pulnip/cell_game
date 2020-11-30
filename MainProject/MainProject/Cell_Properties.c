@@ -47,8 +47,13 @@ BasicInfo ChooseStat()
 void SelectBestTech(time_t ElapsedTime)
 {
 	updateCPUCell(ElapsedTime);
+	BasicInfo _temp;
+	_temp.healthPoint = DEFAULT_HP;
+	_temp.attackPoint = DEFAULT_AP;
+	_temp.defensePoint = DEFAULT_DP;
 
-	if (time_t ElapsedTime > 100) //시간이 100이 넘어갔을 때 cpu의 스펙 업
+
+	if (ElapsedTime > 100) //시간이 100이 넘어갔을 때 cpu의 스펙 업
 	{
 		_temp.healthPoint += 100;
 		_temp.attackPoint += 10;
@@ -73,7 +78,10 @@ void SelectBestTech(time_t ElapsedTime)
 
 int AgrresiveAbility(int level)//레벨을 입력하세요
 {
-	int attackpoint = BasicInfo.stat.attackPoint;
+	BasicInfo _temp;
+	_temp.healthPoint = DEFAULT_HP;
+	_temp.attackPoint = DEFAULT_AP;
+	_temp.defensePoint = DEFAULT_DP;
 	int level1_AG_ability=100;
 	int level2_AG_ability=200;
 	int level3_AG_ability=300;
@@ -109,7 +117,10 @@ int AgrresiveAbility(int level)//레벨을 입력하세요
 
 int StabilityAbility(int level)//레벨을 입력하세요
 {
-	int healthpoint = BasicInfo.stat.healthpoint;
+	BasicInfo _temp;
+	_temp.healthPoint = DEFAULT_HP;
+	_temp.attackPoint = DEFAULT_AP;
+	_temp.defensePoint = DEFAULT_DP;
 	int level1_ST_ability=200;
 	int level2_ST_ability=400;
 	int level3_ST_ability=600;
@@ -146,7 +157,10 @@ int StabilityAbility(int level)//레벨을 입력하세요
 
 int DefensiveAbility(int level)//레벨을 입력하세요
 {
-	int defensepoint = BasicInfo.stat.defensepoint;
+	BasicInfo _temp;
+	_temp.healthPoint = DEFAULT_HP;
+	_temp.attackPoint = DEFAULT_AP;
+	_temp.defensePoint = DEFAULT_DP;
 	int level1_DE_ability=40;
 	int level2_DE_ability=80;
 	int level3_DE_ability=120;
