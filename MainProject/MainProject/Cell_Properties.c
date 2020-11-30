@@ -48,23 +48,27 @@ void SelectBestTech(time_t ElapsedTime)
 {
 	updateCPUCell(ElapsedTime);
 
-	if (time_t ElapsedTime > 100) //시간이 100이 넘어갔을 때 cpu의 스펙 업
+	BasicInfo _temp;
+	_temp.healthPoint = DEFAULT_HP;
+	_temp.attackPoint = DEFAULT_AP;
+	_temp.defensePoint = DEFAULT_DP;
+	if (ElapsedTime > 100) //시간이 100이 넘어갔을 때 cpu의 스펙 업
 	{
-		BasicInfo.stat.healthPoint += 100;
-		BasicInfo.stat.attackPoint += 10;
-		BasicInfo.stat.defensePoint += 1;
+		_temp.healthPoint += 100;
+		_temp.attackPoint += 10;
+		_temp.defensePoint += 1;
 	}
-	else if (time_t ElapsedTime > 500) //시간이 500이 넘어갔을 때 cpu의 스펙 업
+	else if (ElapsedTime > 500) //시간이 500이 넘어갔을 때 cpu의 스펙 업
 	{
-		BasicInfo.stat.healthPoint += 200;
-		BasicInfo.stat.attackPoint += 20;
-		BasicInfo.stat.defensePoint += 2;
+		_temp.healthPoint += 200;
+		_temp.attackPoint += 20;
+		_temp.defensePoint += 2;
 	}
-	else if (time_t ElapsedTime > 1000) //시간이 1000이 넘어갔을 때 cpu의 스펙 업
+	else if (ElapsedTime > 1000) //시간이 1000이 넘어갔을 때 cpu의 스펙 업
 	{
-		BasicInfo.stat.healthPoint += 300;
-		BasicInfo.stat.attackPoint += 30;
-		BasicInfo.stat.defensePoint += 3;
+		_temp.healthPoint += 300;
+		_temp.attackPoint += 30;
+		_temp.defensePoint += 3;
 	}
 
 	
@@ -73,7 +77,11 @@ void SelectBestTech(time_t ElapsedTime)
 
 int AgrresiveAbility(int level)//레벨을 입력하세요
 {
-	int attackpoint = BasicInfo.stat.attackPoint;
+	BasicInfo _temp;
+	_temp.healthPoint = DEFAULT_HP;
+	_temp.attackPoint = DEFAULT_AP;
+	_temp.defensePoint = DEFAULT_DP;
+	int attackpoint = _temp.attackPoint;
 	int level1_AG_ability=100;
 	int level2_AG_ability=200;
 	int level3_AG_ability=300;
@@ -109,7 +117,12 @@ int AgrresiveAbility(int level)//레벨을 입력하세요
 
 int StabilityAbility(int level)//레벨을 입력하세요
 {
-	int healthpoint = BasicInfo.stat.healthpoint;
+
+	BasicInfo _temp;
+	_temp.healthPoint = DEFAULT_HP;
+	_temp.attackPoint = DEFAULT_AP;
+	_temp.defensePoint = DEFAULT_DP;
+	int healthpoint = _temp.healthpoint;
 	int level1_ST_ability=200;
 	int level2_ST_ability=400;
 	int level3_ST_ability=600;
@@ -146,7 +159,12 @@ int StabilityAbility(int level)//레벨을 입력하세요
 
 int DefensiveAbility(int level)//레벨을 입력하세요
 {
-	int defensepoint = BasicInfo.stat.defensepoint;
+
+	BasicInfo _temp;
+	_temp.healthPoint = DEFAULT_HP;
+	_temp.attackPoint = DEFAULT_AP;
+	_temp.defensePoint = DEFAULT_DP;
+	int defensepoint = _temp.defensepoint;
 	int level1_DE_ability=40;
 	int level2_DE_ability=80;
 	int level3_DE_ability=120;
