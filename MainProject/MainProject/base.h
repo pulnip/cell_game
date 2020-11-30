@@ -5,7 +5,7 @@
 
 #include "Infra.h"
 #include "Game.h"
-// #include "CpuMain.h"
+#include "CpuMain.h"
 // #include "UserCell.h"
 
 StatusFunc OnStart;
@@ -36,7 +36,7 @@ int updateInfra1(void)   _INT_FUNC_NOT_IMPLEMENT
 int updateGame(void)     _INT_FUNC_NOT_IMPLEMENT
 #endif
 #ifndef __INC_USER_CELL
-int updateUserCell(void) _INT_FUNC_NOT_IMPLEMENT
+int updateUserCell(time_t ElapsedTime) _INT_FUNC_NOT_IMPLEMENT
 #endif
 #ifndef __INC_CPU_MAIN
 int updateCPUCell(void)  _INT_FUNC_NOT_IMPLEMENT
