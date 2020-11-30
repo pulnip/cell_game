@@ -4,23 +4,10 @@ int initCPUCell(void) {
 	initList(&CPUCells);
 	int count = 0;
 	for (int i = 0; i < PROTO_CELL_NUMBER; i++) {  // usercell.c처럼 그냥 createCpuCell()에서 받을까 고민중 나중에 새로 만들때 생각하면 아찔하네
-		Cell _temp;
-		BasicInfo _tempStat;
-		_temp.id = CPUCell;  //Cell->id , isCell = 1
-		_temp.pos.x = GetRandom(0, MAP_WIDTH);  
-		_temp.pos.y = GetRandom(0, MAP_HEIGHT);
-		_temp.turnDNA = 0;
-		_temp.forward.x = _temp.pos.x;
-		_temp.forward.y = _temp.pos.y;
-		_tempStat = ChooseStat();
-		_temp.stat.healthPoint = _tempStat.stat.healthPoint;
-		_temp.stat.defensePoint = _tempStat.stat.defensePoint;
-		_temp.stat.attackPoint = _tempStat.stat.attackPoint;
 		
-		Cell* newCell = createCpuCell(_temp);
+		Cell* newCell = createCpuCell(void);
 		if (!(newCell == NULL)) {
 			count++;
-			setCpuMovingSet(newCell);
 		}
 	}
 	if (count != PROTO_CELL_NUMBER) return -1; // fail
@@ -40,15 +27,29 @@ int deleteCPUCell(void){
 }
 
 //Cell create 
-Cell* createCpuCell(Cell _temp) {
+Cell* createCpuCell(void) {
 	Cell* cell = malloc(sizeof(Cell));
+	BasicInfo _tempStat;
+	cell->id = CPUCell;
 
-	cell->hp = _temp.hp;
-	cell->id = _temp.id;
-	cell->pos = _temp.pos;
-	cell->forward = _temp.forward;;
+	cell->lastPos.x = cell->pos.x = GetRandom(0, MAP_WIDTH);
+	cell->lastPos.y = cell->pos.y = GetRandom(0, MAP_HEIGHT);
+
+	cell->turnDNA = 0;
+
+	_tempStat = ChooseStat();
+	cell->stat.healthPoint = _tempStat.stat.healthPoint;
+	cell->stat.defensePoint = _tempStat.stat.defensePoint;
+	cell->stat.attackPoint = _tempStat.stat.attackPoint;
+
+	cell->forward.x = cell->pos.x;
+	cell->forward.y = cell->pos.y;
+
+	cell->score = 0;
 	// DNA는 이 함수 밖에서 만듬
 	appendNode(cell, &CPUcells);
+
+	setCpuMovingSet(cell);
 
 	return cell;
 } //나중에 destroyed 필요
