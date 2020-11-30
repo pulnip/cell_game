@@ -26,7 +26,7 @@ void exeCpuCells(void);
 bestDNA* selectBestArray(bestDNA* _bestDNA);
 void* createNewSet(bestDNA baseDNA, bestDNA base2DNA);
 
-BasicInfo ChooseStat();
+void ChooseStat(BasicInfo*);
 void SelectBestTech(time_t ElapsedTime);
 int AgrresiveAbility(int level);
 int StabilityAbility(int level);
