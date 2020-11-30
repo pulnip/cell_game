@@ -71,7 +71,7 @@ void setCpuMovingSet(Cell* cell) {   //행동을 담당하는 세트만 만드는 함수
 
 
 void exeCpuCells(void) {
-	Node* n = Cells.head;
+	Node* n = CPUCells.head;
 	while (n != NULL) {
 		Cell* cell = n->pObject;
 		cell->DNA[cell->turnDNA](cell); //Do 필요없는건가
@@ -84,22 +84,32 @@ void exeCpuCells(void) {
 	}
 }
 
-void selectBestArray(bestDNA* bestDNA, int _ListLen) { //졸려서 이 문법이 맞는지도 모르겠다. score 옮기면 DNA가르키는 거도 같이 움직이나
+void selectBestArray(void) { //졸려서 이 문법이 맞는지도 모르겠다. score 옮기면 DNA가르키는 거도 같이 움직이나
+	Node* n = CPUCells.head;
 	bestDNA* _bestDNA[2];
-	_bestDNA[0]->score = bestDNA->score;
-	for (int i = 0; i < _ListLen; i++) {
-		if (_bestDNA[0]->score == (bestDNA + i)->score) { 
-			_bestDNA[1]->score = (bestDNA + i)->score; 
-			_bestDNA[1]->DNA = (bestDNA + i)->DNA; //가능?
-		}
-		if (_bestDNA[0]->score < (bestDNA + i)->score) { 
-			_bestDNA[0]->score = (bestDNA + i)->score; 
-			_bestDNA[0]->DNA = (bestDNA + i)->DNA; 
+	Cell* cell;
+	_bestDNA[0]->score = 0;
+	while (n != NULL) {
+		cell = n->pObject;
+
+		if (_bestDNA[0]->score <= cell->score) {
+			_bestDNA[1]->score = _bestDNA[0]->score;
+			for (int i = 0; i < 8; i++) {
+				_bestDNA[1]->DNA[i] = _bestDNA[0]->DNA[i];
+			}
+			_bestDNA[0]->score = cell->score;
+			for (int i = 0; i < 8; i++) {
+				_bestDNA[1]->DNA[i] = _bestDNA[0]->DNA[i];
+			}
 		}
 		else if
-			(_bestDNA[1]->score < bestDNA->score) {
-			_bestDNA[1]->score = bestDNA->score;
+			(_bestDNA[1]->score < cell->score) {
+			_bestDNA[1]->score = cell->score;
+			for (int i = 0; i < 8; i++) {
+				_bestDNA[1]->DNA[i] = _bestDNA[0]->DNA[i];
+			}
 		}
+		n = n->next;
 	}
 }
 
