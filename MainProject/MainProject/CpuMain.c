@@ -84,9 +84,8 @@ void exeCpuCells(void) {
 	}
 }
 
-bestDNA* selectBestArray(void) { //졸려서 이 문법이 맞는지도 모르겠다. score 옮기면 DNA가르키는 거도 같이 움직이나
+bestDNA* selectBestArray(bestDNA *_bestDNA) { //졸려서 이 문법이 맞는지도 모르겠다. score 옮기면 DNA가르키는 거도 같이 움직이나
 	Node* n = CPUCells.head;
-	bestDNA _bestDNA[2];
 	Cell* cell;
 	_bestDNA[0]->score = 0;
 	while (n != NULL) {
