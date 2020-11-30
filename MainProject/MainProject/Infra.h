@@ -88,7 +88,6 @@ TriggerEvent setUIGetPoint;
 TriggerEvent setUIDoCannibal;
 TriggerEvent setUIDivide;
 
-extern pTriggerEvent CellBahaviourEvents[BEHAVIOUR_NUMBER];
-
+extern pTriggerEvent CellBahaviourEvents[];
 
 #endif // __INC_INFRA

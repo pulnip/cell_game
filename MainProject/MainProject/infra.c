@@ -5,6 +5,18 @@ VerticalScrollWindow vsw;
 
 UserInput userInput;
 
+pTriggerEvent CellBahaviourEvents[BEHAVIOUR_NUMBER]={
+    setUISeeEnemy,
+    setUISeeFriend,
+    setUISeeFood,
+    setUIMoveCloser,
+    setUIMoveFurther,
+    setUIGetFood,
+    setUIGetPoint,
+    setUIDoCannibal,
+    setUIDivide
+};
+
 int initInfra(void) {
     initScreen();
 
@@ -123,16 +135,15 @@ int initScrollWindow(Trigger* ut, Trigger* dt){
     initList(&(vsw.messageList));
     initList(&(vsw.msgTriggers));
     
-    char* msg1="MESSAGE 1";
-    char* msg2="MESSAGE 2";
-    char* msg3="MESSAGE 3";
-    char* msg4="MESSAGE 4";
-    char* msg5="MESSAGE 5";
-    char* msg6="MESSAGE 6";
-    char* msg7="MESSAGE 7";
-    char* msg8="MESSAGE 8";
-    char* msg9="MESSAGE 9";
-    char* msga="MESSAGE 10";
+    char* msg1="add SeeEnemy";
+    char* msg2="add SeeFriend";
+    char* msg3="add SeeFood";
+    char* msg4="add MoveCloser";
+    char* msg5="add MoveFurther";
+    char* msg6="add GetFood";
+    char* msg7="add GetPoint";
+    char* msg8="add DoCannibal";
+    char* msg9="add Divide";
 
     appendNode(msg1, &(vsw.messageList));
     appendNode(msg2, &(vsw.messageList));
@@ -143,7 +154,6 @@ int initScrollWindow(Trigger* ut, Trigger* dt){
     appendNode(msg7, &(vsw.messageList));
     appendNode(msg8, &(vsw.messageList));
     appendNode(msg9, &(vsw.messageList));
-    appendNode(msga, &(vsw.messageList));
 
     Trigger* tback=createVanillaButton((Rect){64, 31, 81, 32}, VK_BACK);
     appendOnKeyDownEvent(tback, setUIDeletion);
@@ -270,18 +280,6 @@ void setUserInputFalse(void){
 
     userInput.temp=False;
 }
-
-pTriggerEvent CellBehaviourEvents[BEHAVIOUR_NUMBER]={
-    setUISeeEnemy,
-    setUISeeFriend,
-    setUISeeFood,
-    setUIMoveCloser,
-    setUIMoveFurther,
-    setUIGetFood,
-    setUIGetPoint,
-    setUIDoCannibal,
-    setUIDivide
-};
 
 void setUIDeletion(void* pObj){
     Trigger* t=pObj;

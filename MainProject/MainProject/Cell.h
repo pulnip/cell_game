@@ -8,6 +8,13 @@
 
 #define DNA_LEN 8
 
+typedef struct _BasicInfo
+{
+    int healthPoint; //= 1000;   //체력
+    int attackPoint; //= 100;       //공격력
+    int defensePoint; //= 20;       //방어력
+} BasicInfo;
+
 typedef struct _Cell{
     isCell id;
     void (*DNA[DNA_LEN])(struct _Cell);
@@ -25,14 +32,6 @@ extern List CPUCells;
 typedef void (BEHAVIOUR_t)(Cell*);
 typedef BEHAVIOUR_t* pBEHAVIOUR_t;
 //DNA is Array of pBEHAVIOUR
-
-typedef struct _BasicInfo
-{
-    int healthPoint; //= 1000;   //체력
-    int attackPoint; //= 100;       //공격력
-    int defensePoint; //= 20;       //방어력
-} BasicInfo;
-
 
 #define PROTO_CELL_NUMBER 20
 
