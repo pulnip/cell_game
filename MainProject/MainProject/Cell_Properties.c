@@ -85,7 +85,7 @@ BasicInfo ChooseStat()
 
 void SelectBestTech(int a, int b, int c)
 {
-	int Tech[] = {};
+	
 	selectBestArray(bestDNA * _bestDNA);
 }
 
