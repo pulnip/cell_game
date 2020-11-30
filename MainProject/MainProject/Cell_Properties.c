@@ -73,6 +73,7 @@ void SelectBestTech(time_t ElapsedTime)
 
 int AgrresiveAbility(int level)//레벨을 입력하세요
 {
+	int attackpoint = BasicInfo.stat.attackPoint;
 	int level1_AG_ability=100;
 	int level2_AG_ability=200;
 	int level3_AG_ability=300;
@@ -108,6 +109,7 @@ int AgrresiveAbility(int level)//레벨을 입력하세요
 
 int StabilityAbility(int level)//레벨을 입력하세요
 {
+	int healthpoint = BasicInfo.stat.healthpoint;
 	int level1_ST_ability=200;
 	int level2_ST_ability=400;
 	int level3_ST_ability=600;
@@ -144,6 +146,7 @@ int StabilityAbility(int level)//레벨을 입력하세요
 
 int DefensiveAbility(int level)//레벨을 입력하세요
 {
+	int defensepoint = BasicInfo.stat.defensepoint;
 	int level1_DE_ability=40;
 	int level2_DE_ability=80;
 	int level3_DE_ability=120;
