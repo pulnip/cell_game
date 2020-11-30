@@ -23,6 +23,7 @@ typedef struct _Cell{
     Coord pos;
     Coord forward;
     BasicInfo stat;
+    int score;  //only for CPU
     // The location coordinates of the searched
 } Cell;
 

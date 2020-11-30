@@ -44,7 +44,7 @@ Cell* createUserCell(){
     cell->stat.defensePoint = DEFAULT_DP;
 
     cell->forward.x=cell->pos.x;
-    cell->forward.x=cell->pos.y;
+    cell->forward.y=cell->pos.y;
 
     appendNode(cell, &UserCells);
 
