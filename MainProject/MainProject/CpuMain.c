@@ -84,33 +84,34 @@ void exeCpuCells(void) {
 	}
 }
 
-void selectBestArray(void) { //졸려서 이 문법이 맞는지도 모르겠다. score 옮기면 DNA가르키는 거도 같이 움직이나
+bestDNA* selectBestArray(void) { //졸려서 이 문법이 맞는지도 모르겠다. score 옮기면 DNA가르키는 거도 같이 움직이나
 	Node* n = CPUCells.head;
-	bestDNA* _bestDNA[2];
+	bestDNA _bestDNA[2];
 	Cell* cell;
 	_bestDNA[0]->score = 0;
 	while (n != NULL) {
 		cell = n->pObject;
 
-		if (_bestDNA[0]->score <= cell->score) {
-			_bestDNA[1]->score = _bestDNA[0]->score;
+		if (_bestDNA[0].score <= cell->score) {
+			_bestDNA[1].score = _bestDNA[0].score;
 			for (int i = 0; i < 8; i++) {
-				_bestDNA[1]->DNA[i] = _bestDNA[0]->DNA[i];
+				_bestDNA[1].DNA[i] = _bestDNA[0].DNA[i];
 			}
-			_bestDNA[0]->score = cell->score;
+			_bestDNA[0].score = cell->score;
 			for (int i = 0; i < 8; i++) {
-				_bestDNA[1]->DNA[i] = _bestDNA[0]->DNA[i];
+				_bestDNA[1].DNA[i] = _bestDNA[0].DNA[i];
 			}
 		}
 		else if
-			(_bestDNA[1]->score < cell->score) {
-			_bestDNA[1]->score = cell->score;
+			(_bestDNA[1].score <= cell->score) {
+			_bestDNA[1].score = cell->score;
 			for (int i = 0; i < 8; i++) {
-				_bestDNA[1]->DNA[i] = _bestDNA[0]->DNA[i];
+				_bestDNA[1].DNA[i] = _bestDNA[0].DNA[i];
 			}
 		}
 		n = n->next;
 	}
+	return _bestDNA;
 }
 
 
