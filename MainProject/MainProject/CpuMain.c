@@ -74,8 +74,7 @@ void exeCpuCells(void) {
 	while (n != NULL) {
 
 		cell->DNA[cell->turnDNA](cell); //Do 필요없는건가
-		changeIsCellPos(cell);
-		
+
 		//print
 		map[cell->pos.x][cell->pos.y].isCPUCell = True;
 		cell->lastPos.x = cell->pos.x;
