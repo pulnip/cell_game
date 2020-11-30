@@ -13,7 +13,7 @@ int initGame(void)     _INT_FUNC_NOT_IMPLEMENT
 #ifndef __INC_USER_CELL
 int initUserCell(void) _INT_FUNC_NOT_IMPLEMENT
 #endif
-#ifndef __INC_CPU_MAIN
+#ifndef __INC_CPU_CELL
 int initCPUCell(void)  _INT_FUNC_NOT_IMPLEMENT
 #endif
 // </OnStart()>
@@ -24,13 +24,13 @@ int FastEscape(void)     _INT_FUNC_NOT_IMPLEMENT
 int updateInfra1(void)   _INT_FUNC_NOT_IMPLEMENT
 #endif
 #ifndef __INC_GAME
-int updateGame(void)     _INT_FUNC_NOT_IMPLEMENT
+int updateGame(time_t ElapsedTime)     _INT_FUNC_NOT_IMPLEMENT
 #endif
 #ifndef __INC_USER_CELL
 int updateUserCell(time_t ElapsedTime) _INT_FUNC_NOT_IMPLEMENT
 #endif
-#ifndef __INC_CPU_MAIN
-int updateCPUCell(void)  _INT_FUNC_NOT_IMPLEMENT
+#ifndef __INC_CPU_CELL
+int updateCPUCell(time_t ElapsedTime)  _INT_FUNC_NOT_IMPLEMENT
 #endif
 #ifndef __INC_INFRA
 int updateInfra2(void)   _INT_FUNC_NOT_IMPLEMENT
@@ -42,7 +42,7 @@ int updateInfra2(void)   _INT_FUNC_NOT_IMPLEMENT
 #ifndef __INC_USER_CELL
 int deleteUserCell(void)     _INT_FUNC_NOT_IMPLEMENT
 #endif
-#ifndef __INC_CPU_MAIN
+#ifndef __INC_CPU_CELL
 int deleteCPUCell(void)      _INT_FUNC_NOT_IMPLEMENT
 #endif
 #ifndef __INC_GAME

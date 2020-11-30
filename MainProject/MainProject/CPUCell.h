@@ -1,9 +1,8 @@
-#ifndef __INC_CPU_MAIN
-#define __INC_CPU_MAIN
+#ifndef __INC_CPU_CELL
+#define __INC_CPU_CELL
 
 #include "SuperHeader.h"
 
-#include "Cell_Properties.h"
 #include "Cell.h"
 #include "Map.h"
 
@@ -20,14 +19,18 @@ StatusFunc initCPUCell;
 int updateCPUCell(time_t ElapsedTime);
 StatusFunc deleteCPUCell;
 
-void setCpuMovingSet(Cell* cell);
-
-
 Cell* createCpuCell();
-//cell base data
+void setCpuMovingSet(Cell* cell);
 
 void exeCpuCells(void);
 bestDNA* selectBestArray(bestDNA* _bestDNA);
-void* createNewSet(bestDNA baseDNA, bestDNA base2DNA);//alsdhkstjd
+void* createNewSet(bestDNA baseDNA, bestDNA base2DNA);
 
-#endif // __INC_CPU_MAIN
+BasicInfo ChooseStat();
+void SelectBestTech(time_t ElapsedTime);
+int AgrresiveAbility(int level);
+int StabilityAbility(int level);
+int DefensiveAbility(int level);
+int Attack(int attackpoint, int defensepoint);
+
+#endif

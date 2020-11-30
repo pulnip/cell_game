@@ -39,10 +39,7 @@
     <ClCompile Include="Map.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cell_Properties.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CpuMain.c">
+    <ClCompile Include="CPUCell.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,10 +71,7 @@
     <ClInclude Include="Map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Cell_Properties.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CpuMain.h">
+    <ClInclude Include="CPUCell.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
