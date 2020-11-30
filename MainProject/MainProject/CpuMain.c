@@ -15,7 +15,10 @@ int initCPUCell(void) {
 	return 0; //success
 }
 
-int updateCPUCell(void) {  
+int updateCPUCell(time_t ElapsedTime) {
+	static time_t timer=0;
+	timer+=ElapsedTime;
+
 	exeCpuCells(); // 
 
 	return 0;

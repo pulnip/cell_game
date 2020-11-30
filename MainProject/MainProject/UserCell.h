@@ -9,10 +9,12 @@
 
 #include "Infra.h"
 
+#include <time.h>
+
 #define PROTO_USER_CELL_NUMBER 20
 
 StatusFunc initUserCell;
-StatusFunc updateUserCell;
+int updateUserCell(time_t ElapsedTime);
 StatusFunc deleteUserCell;
 
 

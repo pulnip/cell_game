@@ -9,6 +9,7 @@
 #include "Game.h"
 
 #include <string.h>
+#include <time.h>
 
 typedef void(*DO)();
 
@@ -18,7 +19,7 @@ typedef struct _bestDNA {
 }bestDNA;
 
 StatusFunc initCPUCell;
-StatusFunc updateCPUCell;
+int updateCPUCell(time_t ElapsedTime);
 StatusFunc deleteCPUCell;
 
 int initComputer(void);

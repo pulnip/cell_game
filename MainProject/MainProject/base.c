@@ -34,10 +34,10 @@ int OnStart(){
 
 int OnUpdate(time_t ElapsedTime){
     if( (
-        updateInfra1()          ||
-        updateGame(ElapsedTime) ||
-        updateUserCell()        ||
-        updateCPUCell()         ||
+        updateInfra1()              ||
+        updateGame(ElapsedTime)     ||
+        updateUserCell(ElapsedTime) ||
+        updateCPUCell(ElapsedTime)  ||
         updateInfra2()
         // add ...
     ) ) return 1;

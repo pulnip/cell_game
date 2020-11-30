@@ -12,7 +12,9 @@ int initUserCell(void){
     return 0;
 }
 
-int updateUserCell(void){
+int updateUserCell(time_t ElapsedTime){
+    static time_t timer=0;
+    timer+=ElapsedTime;
     // 체력 깎이면 감소 (공격력 - 방어력 만큼)
     // 먹이 먹으면 피가 증가
     // 먹이 안먹으로 피 감소
