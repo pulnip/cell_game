@@ -7,8 +7,13 @@
 #include "Cell.h"
 #include "Map.h"
 
+#include "Infra.h"
+
+#define PROTO_USER_CELL_NUMBER 20
+
 StatusFunc initUserCell;
 StatusFunc updateUserCell;
 StatusFunc deleteUserCell;
+
 
 #endif // __INC_USER_CELL

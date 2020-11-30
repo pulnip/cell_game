@@ -59,5 +59,6 @@ BEHAVIOUR_t divide;
 Cell* searchCellByPos(Coord pos, isCell id);
 
 #define BEHAVIOUR_NUMBER 9
+extern pBEHAVIOUR_t const BehaviourList[BEHAVIOUR_NUMBER];
 
 #endif // __INC_CELL

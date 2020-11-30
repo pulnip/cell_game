@@ -1,6 +1,6 @@
 #include "UserCell.h"
 
-#define PROTO_USER_CELL_NUMBER 20
+UserInput userInput;
 
 int initUserCell(void){
     initList(&UserCells);

@@ -25,8 +25,23 @@ typedef struct _VerticalScrollWindow{
     int msglistPos;
 } VerticalScrollWindow;
 
+typedef struct _UserInput{
+    int num;
+    Bool deletion;
+    Bool _seeEnemy,
+         _seeFriend,
+         _seeFood,
+         _moveCloser,
+         _moveFurther,
+         _getFood,
+         _getPoint,
+         _doCannibal,
+         _divide
+    ;
+} UserInput;
 
 extern KeyState keys[0x100];
+extern UserInput userInput;
 
 StatusFunc initInfra;
 

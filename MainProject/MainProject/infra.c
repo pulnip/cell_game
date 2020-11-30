@@ -3,6 +3,8 @@
 KeyState keys[0x100];
 VerticalScrollWindow vsw;
 
+UserInput userInput;
+
 int initInfra(void) {
     initScreen();
 
