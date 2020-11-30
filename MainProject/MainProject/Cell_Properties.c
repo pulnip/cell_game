@@ -14,7 +14,7 @@ BasicInfo ChooseStat()
 	_temp.healthPoint = DEFAULT_HP;
 	_temp.attackPoint = DEFAULT_AP;
 	_temp.defensePoint = DEFAULT_DP;
-	int total, num = 0;
+	int total=0, num = 0;
 
 	while (!(total == 5)) {
 		
@@ -46,7 +46,6 @@ BasicInfo ChooseStat()
 
 void SelectBestTech(time_t ElapsedTime)
 {
-	updateCPUCell(ElapsedTime);
 	BasicInfo _temp;
 	_temp.healthPoint = DEFAULT_HP;
 	_temp.attackPoint = DEFAULT_AP;

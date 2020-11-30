@@ -33,6 +33,7 @@ int deleteCPUCell(void){
 //Cell create 
 Cell* createCpuCell(void) {
 	Cell* cell = malloc(sizeof(Cell));
+	if (cell == NULL) return NULL;
 	BasicInfo _tempStat;
 	cell->id = CPUCell;
 
@@ -63,18 +64,17 @@ Cell* createCpuCell(void) {
 
 void setCpuMovingSet(Cell* cell) {   //행동을 담당하는 세트만 만드는 함수  
 	for (int i = 0; i < 8; i++) { //sensoring movement doing
-		cell->DNA[i] = BehaviourList[GetRandom(0, sizeof(BehaviourList) / 4)];
+		cell->DNA[i] = BehaviourList[GetRandom(0, BEHAVIOUR_NUMBER)];
 	}
 }
 
 
 void exeCpuCells(void) {
 	Node* n = CPUCells.head;
-	Cell* cell;
 	while (n != NULL) {
+		Cell* cell = n->pObject;
 
-		cell->DNA[cell->turnDNA](cell); //Do 필요없는건가
-		changeIsCellPos(cell);
+		cell->DNA[cell->turnDNA](cell);
 		
 		//print
 		map[cell->pos.x][cell->pos.y].isCPUCell = True;
@@ -84,7 +84,6 @@ void exeCpuCells(void) {
 
 		cell->turnDNA = ((cell->turnDNA) + 1) % 8; // 1~8까지의 세트 안에서만 
 		n = n->next;
-		updateGame(200); //2000/200 == 10 == 0.1초?
 	}
 }
 

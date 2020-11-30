@@ -17,7 +17,7 @@ typedef struct _BasicInfo
 
 typedef struct _Cell{
     isCell id;
-    void (*DNA[DNA_LEN])(struct _Cell);
+    void (*DNA[DNA_LEN])(struct _Cell*);
     int turnDNA;
     Coord lastPos;
     Coord pos;

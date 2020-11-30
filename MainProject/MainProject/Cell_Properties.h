@@ -2,11 +2,9 @@
 #define __INC_CELL_PROPERTIES
 
 #include "SuperHeader.h"
-#include "Game.h"
+
 #include "Cell.h"
-#include "CpuMain.h"
 #include "Map.h"
-#include "base.h"
 
 BasicInfo ChooseStat();
 int AgrresiveAbility(int level);
