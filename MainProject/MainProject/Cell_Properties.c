@@ -74,7 +74,6 @@ BasicInfo ChooseStat()
 		
 	}
 	
-	SelectBestTech(level_A, level_S, level_D);
 
 	BasicInfo.stat.healthPoint += StabilityAbility(level_S);
 	BasicInfo.stat.attackPoint += AgrresiveAbility(level_A);
@@ -83,7 +82,7 @@ BasicInfo ChooseStat()
 	return _temp;
 }
 
-void SelectBestTech(int a, int b, int c)
+void SelectBestTech(time_t ElapsedTime)
 {
 	updateCPUCell(time_t ElapsedTime);
 
