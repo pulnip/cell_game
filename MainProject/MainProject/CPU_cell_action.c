@@ -67,8 +67,3 @@ void Get_User_Cell_information(int )
 
 	
 }
-
-int main(void)
-{
-
-}
