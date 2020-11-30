@@ -14,7 +14,8 @@ BasicInfo ChooseStat()
 	_temp.healthPoint = DEFAULT_HP;
 	_temp.attackPoint = DEFAULT_AP;
 	_temp.defensePoint = DEFAULT_DP;
-	int total, num = 0;
+	int total = 0;
+	int num = 0;
 
 	while (!(total == 5)) {
 
