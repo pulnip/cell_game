@@ -1,12 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include "base.h"
-#include "Game.h"
-#include "Cell.h"
 #include "Cell_Properties.h"
-#include "CpuMain.h"
-
 
 
 //0.기본세포의 정보

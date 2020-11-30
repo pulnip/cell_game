@@ -10,6 +10,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "CpuMain.h"
+#include "base.h"
+
+
 void BasicCellInformation();
 
 
