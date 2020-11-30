@@ -23,9 +23,6 @@ StatusFunc deleteCPUCell;
 int initComputer(void);
 int updateComputer(void);
 
-
-void changeIsCellPos(Cell* _cell);
-
 void setCpuMovingSet(Cell* cell);
 
 

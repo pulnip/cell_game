@@ -8,7 +8,7 @@
 #include "Map.h"
 #include "base.h"
 
-
+BasicInfo ChooseStat();
 int AgrresiveAbility(int level);
 int StabilityAbility(int level);
 int DefensiveAbility(int level);
