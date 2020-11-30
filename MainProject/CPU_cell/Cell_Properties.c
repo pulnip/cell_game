@@ -7,6 +7,7 @@
 #include "CPU_cell_notice.h"
 #include "Cell.h"
 #include "Cell_Properties.h"
+#include "CpuMain.h"
 
 
 struct Coord;
@@ -79,6 +80,12 @@ BasicInfo ChooseStat()
 
 	return _temp;
 }
+
+void SelectBestTech()
+{
+	char Tech []
+}
+
 
 //세포 유전 정보 테크트리
 
