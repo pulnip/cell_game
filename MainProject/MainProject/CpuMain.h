@@ -35,7 +35,7 @@ Cell* createCpuCell(Cell temp);
 //cell base data
 
 void exeCpuCells(void);
-void selectBestArray(bestDNA* bestDNA, int _ListLen);
+bestDNA* selectBestArray(bestDNA* _bestDNA);
 void* createNewSet(bestDNA baseDNA, bestDNA base2DNA);//alsdhkstjd
 
 #endif // __INC_CPU_MAIN
