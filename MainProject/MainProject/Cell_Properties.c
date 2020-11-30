@@ -1,5 +1,10 @@
 #include "Cell_Properties.h"
 
+int healthPoint = 0;
+int attackPoint = 0;
+int defensePoint = 0;
+
+
 BasicInfo ChooseStat() 
 {
 	BasicInfo _temp;
@@ -41,7 +46,7 @@ BasicInfo ChooseStat()
 
 void SelectBestTech(time_t ElapsedTime)
 {
-	updateCPUCell(time_t ElapsedTime);
+	updateCPUCell(ElapsedTime);
 
 	if (time_t ElapsedTime > 100) //시간이 100이 넘어갔을 때 cpu의 스펙 업
 	{
@@ -74,22 +79,22 @@ int AgrresiveAbility(int level)//레벨을 입력하세요
 	int level4_AG_ability=400;
 	int level5_AG_ability=700;
 
-	switch case(level)
+	switch (level)
 	{
 	case 1 :
-		attack_point += level1_AG_ability;
+		attackpoint += level1_AG_ability;
 		break;
 	case 2:
-		attack_point += level2_AG_ability;
+		attackpoint += level2_AG_ability;
 		break;
 	case 3:
-		attack_point += level3_AG_ability;
+		attackpoint += level3_AG_ability;
 		break;
 	case 4:
-		attack_point += level4_AG_ability;
+		attackpoint += level4_AG_ability;
 		break;
 	case 5:
-		attack_point += level5_AG_ability;
+		attackpoint += level5_AG_ability;
 		break;
 	default:
 		break;
@@ -109,22 +114,22 @@ int StabilityAbility(int level)//레벨을 입력하세요
 	int level4_ST_ability=800;
 	int level5_ST_ability=1500;
 
-	switch case(level)
+	switch (level)
 	{
 	case 1:
-		health_point += level1_ST_ability;
+		healthpoint += level1_ST_ability;
 		break;
 	case 2:
-		health_point += level2_ST_ability;
+		healthpoint += level2_ST_ability;
 		break;
 	case 3:
-		health_point += level3_ST_ability;
+		healthpoint += level3_ST_ability;
 		break;
 	case 4:
-		health_point += level4_ST_ability;
+		healthpoint += level4_ST_ability;
 		break;
 	case 5:
-		health_point += level5_ST_ability;
+		healthpoint += level5_ST_ability;
 		break;
 	default:
 
@@ -134,7 +139,7 @@ int StabilityAbility(int level)//레벨을 입력하세요
 	
 	//체력 유전정보
 
-	return health_point;
+	return healthpoint;
 }
 
 int DefensiveAbility(int level)//레벨을 입력하세요
@@ -145,22 +150,22 @@ int DefensiveAbility(int level)//레벨을 입력하세요
 	int level4_DE_ability=160;
 	int level5_DE_ability=200;
 
-	switch case(level)
+	switch (level)
 	{
 	case 1:
-		defense_point += level1_DE_ability;
+		defensepoint += level1_DE_ability;
 		break;
 	case 2:
-		defense_point += level2_DE_ability;
+		defensepoint += level2_DE_ability;
 		break;
 	case 3:
-		defense_point += level3_DE_ability;
+		defensepoint += level3_DE_ability;
 		break;
 	case 4:
-		defense_point += level4_DE_ability;
+		defensepoint += level4_DE_ability;
 		break;
 	case 5:
-		defense_point += level5_DE_ability;
+		defensepoint += level5_DE_ability;
 		break;
 	default:
 
@@ -170,24 +175,24 @@ int DefensiveAbility(int level)//레벨을 입력하세요
 
 	//방어력 유전정보
 
-		return defense_point;
+		return defensepoint;
 }
 
 
 
 
 //공격
-int Attack(int attack_point, int defense_point) //공격 포인트는 공격하는 사람의 것 방어 포인트는 방어 하는 사람의 것
+int Attack(int attackpoint, int defensepoint) //공격 포인트는 공격하는 사람의 것 방어 포인트는 방어 하는 사람의 것
 {
-	attack_point -= defense_point;
-	return attack_point;
+	attackpoint -= defensepoint;
+	return attackpoint;
 }
 
 
 //공격 받음
-int BeAttacked(int health_point,int defense_point)
+int BeAttacked(int healthpoint,int defensepoint, int attackpoint)
 {
-	health_point = health_point - Attack()+defense_point;
-	return health_point;
+	healthpoint = healthpoint - Attack(attackpoint, defensepoint)+defensepoint;
+	return healthpoint;
 }
 
