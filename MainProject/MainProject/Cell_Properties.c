@@ -8,9 +8,6 @@
 #include "CpuMain.h"
 
 
-struct Coord;
-struct Pixel;
-struct Cell;
 
 //0.기본세포의 정보
 //1.세포의 유전 정보 테크트리
