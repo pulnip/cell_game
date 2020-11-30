@@ -22,6 +22,7 @@ int updateCPUCell(void) {
 }
 
 int deleteCPUCell(void){
+	eraseHeapObjectList(&CPUCells);
 
 	return 0;
 }
